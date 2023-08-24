@@ -1,14 +1,13 @@
-import ScoreTab from './components/ScoreTab'
-import CssBaseline from "@mui/material/CssBaseline";
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-
   return (
-    <>
-      <CssBaseline/>
-      <ScoreTab />
-    </>
-  )
+    <div className="App">
+      
+    </div>
+  );
 }
 
-export default App
+export default App;
