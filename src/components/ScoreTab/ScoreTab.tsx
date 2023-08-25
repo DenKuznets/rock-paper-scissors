@@ -1,4 +1,5 @@
 import { Container, Box, Typography } from "@mui/material";
+import { colors } from "../../ts/colors";
 
 export const SCORETAB_TESTIDS = {
     SCORETAB_CONTAINER: "scoretab-container",
