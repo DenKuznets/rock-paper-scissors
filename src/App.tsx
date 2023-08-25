@@ -1,5 +1,6 @@
-import { ScoreTab }  from "./components";
 import "./App.css";
+import { ScoreTab } from "./components";
+
 
 function App() {
     return (
