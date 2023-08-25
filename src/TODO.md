@@ -1,0 +1,1 @@
+Остановился на добавлении цветовой схемы mui в app.tsx , закоменченая секция createTheme. Нужно добавить цвета и градиент из style-guide.md. Хочу добавить mainGradient для бэкграунда, но typescript ругается на кастомные переменные в схеме. https://mui.com/material-ui/customization/theming/#custom-variables здесь написано как добавлять.
