@@ -6,11 +6,17 @@ import {
 } from "@mui/material";
 import { ScoreTab } from "./components";
 import { gradients } from "./ts/colors";
+import Choose from "./components/Choose/Choose";
 
 const theme = createTheme({
     typography: {
         fontFamily: ["Barlow Semi Condensed", "sans-serif"].join(","),
     },
+    palette: {
+        text: {
+            primary:"white"
+        }
+    }
 });
 
 function App() {
@@ -22,10 +28,11 @@ function App() {
                     sx={{
                         background: gradients.backgroundGradient,
                         height: "100vh",
-                        padding:"2rem"
+                        padding: "2rem",
                     }}
                 >
                     <ScoreTab />
+                    <Choose />
                 </Container>
             </ThemeProvider>
         </div>

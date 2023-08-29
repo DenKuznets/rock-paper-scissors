@@ -26,7 +26,6 @@ const ScoreTab = () => {
                 data-testid={SCORETAB_TESTIDS.SCORETAB_HEADER}
                 variant="h6"
                 sx={{ lineHeight: "0.8" }}
-                color="white"
             >
                 ROCK <br />
                 PAPER <br />
