@@ -11,30 +11,63 @@ export const SCORETAB_TESTIDS = {
 
 const ScoreTab = () => {
     return (
-        <Container data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}>
+        <Box
+            sx={{
+                outline: `3px solid ${colors.headerOutline}`,
+                padding: "0.6rem 0.6rem 0.6rem 1.5rem",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems:'center',
+                borderRadius: "4px",
+            }}
+            data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
+        >
             <Typography
                 data-testid={SCORETAB_TESTIDS.SCORETAB_HEADER}
-                variant="h1"
+                variant="h6"
+                sx={{ lineHeight: "0.8" }}
+                color="white"
             >
                 ROCK <br />
                 PAPER <br />
                 SCISSORS
             </Typography>
-            <Box data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY}>
+            <Box
+                sx={{
+                    backgroundColor: "white",
+                    padding: "0.8rem",
+                    borderRadius: "4px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    minWidth: "5rem",
+                    minHeight: "4.55rem",
+                }}
+                data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY}
+            >
                 <Typography
                     data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY_LABEL}
-                    variant="body1"
-                    color="initial"
+                    variant="body2"
+                    color={colors.scoreText}
+                    fontSize="0.6rem"
+                    fontWeight="700"
+                    letterSpacing="1.5px"
                 >
                     SCORE
                 </Typography>
-                <span
+                <Typography
+                    color={colors.darkText}
+                    variant="body1"
                     data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY_SCORE}
+                    fontSize="2.3rem"
+                    lineHeight="0.8"
+                    fontWeight="700"
                 >
                     0
-                </span>
+                </Typography>
             </Box>
-        </Container>
+        </Box>
     );
 };
 
