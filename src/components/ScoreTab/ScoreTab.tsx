@@ -12,11 +12,12 @@ export const SCORETAB_TESTIDS = {
 const ScoreTab = () => {
     return (
         <Box
+            data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
             sx={{
                 outline: `3px solid ${colors.headerOutline}`,
                 padding: {
                     xs: "0.7rem",
-                    md: "1.1rem",
+                    md: "1.1rem 1.5rem",
                 },
                 display: "flex",
                 justifyContent: "space-between",
@@ -27,14 +28,13 @@ const ScoreTab = () => {
                 width: "100%",
                 minHeight: { xs: "5.9rem", md: "9.2rem" },
             }}
-            data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
         >
             <Box
                 data-testid={SCORETAB_TESTIDS.SCORETAB_HEADER}
                 sx={{
                     lineHeight: "0.8",
                     fontSize: { xs: "1.3rem", md: "2.5rem" },
-                    marginLeft: { xs: "0.9rem", md: "2rem" },
+                    marginLeft: { xs: "0.9rem", md: "0.7rem" },
                 }}
             >
                 ROCK <br />
@@ -42,36 +42,36 @@ const ScoreTab = () => {
                 SCISSORS
             </Box>
             <Box
+                data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY}
                 sx={{
                     backgroundColor: "white",
                     padding: { xs: "0.8rem", md: "1rem" },
-                    borderRadius: "4px",
+                    borderRadius: { xs: "4px", md: "10px" },
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    minWidth: "5rem",
+                    minWidth: { xs: "5rem", md: "9.5rem" },
                     minHeight: "100%",
                 }}
-                data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY}
             >
                 <Box
                     data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY_LABEL}
                     color={colors.scoreText}
-                    fontSize="0.6rem"
+                    sx={{ fontSize: { xs: "0.6rem", md: "1rem" } }}
                     fontWeight="700"
                     letterSpacing="1.5px"
                 >
                     SCORE
                 </Box>
                 <Box
-                    color={colors.darkText}
                     data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY_SCORE}
-                    fontSize="2.3rem"
+                    color={colors.darkText}
+                    sx={{ fontSize: { xs: "2.3rem", md: "4rem" } }}
                     lineHeight="1"
                     fontWeight="700"
                 >
-                    12
+                    0
                 </Box>
             </Box>
         </Box>
