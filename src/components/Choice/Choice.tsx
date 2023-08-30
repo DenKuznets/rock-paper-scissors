@@ -46,13 +46,16 @@ const Choice = ({ role }: { role: string }) => {
             data-testid={CHOICE_TESTIDS.CHOICE_CONTAINER}
             sx={{
                 background: gradient,
-                height: "8rem",
-                width: "8rem",
+                height: { xs: "8rem", md: "12rem" },
+                width: { xs: "8rem", md: "12rem" },
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "50%",
-                boxShadow: `0 7px 2px 0px ${shadowColor}`,
+                boxShadow: {
+                    xs: `0 7px 2px 0px ${shadowColor}`,
+                    md: `0 11px 2px 0px ${shadowColor}`,
+                },
                 filter: "drop-shadow(0px 0px 3px black)",
             }}
         >
@@ -61,11 +64,14 @@ const Choice = ({ role }: { role: string }) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: "6rem",
-                    width: "6rem",
+                    height: { xs: "6rem", md: "9rem" },
+                    width: { xs: "6rem", md: "9rem" },
                     borderRadius: "50%",
                     backgroundColor: "white",
-                    boxShadow: "inset 0px 5px 2px rgba(0,0,0,0.2)",
+                    boxShadow: {
+                        xs: "inset 0px 5px 2px rgba(0,0,0,0.2)",
+                        md: "inset 0px 9px 3px rgba(0,0,0,0.2)",
+                    },
                 }}
             >
                 <img
