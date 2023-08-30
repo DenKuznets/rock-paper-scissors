@@ -1,4 +1,4 @@
-import { Container, Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { colors } from "../../ts/colors";
 
 export const SCORETAB_TESTIDS = {
@@ -14,60 +14,65 @@ const ScoreTab = () => {
         <Box
             sx={{
                 outline: `3px solid ${colors.headerOutline}`,
-                padding: "0.6rem 0.6rem 0.6rem 1.5rem",
+                padding: {
+                    xs: "0.7rem",
+                    md: "1.1rem",
+                },
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems:'center',
-                borderRadius: "4px",
+                alignItems: "center",
+                borderRadius: { xs: "4px", md: "18px" },
                 minWidth: "19rem",
-                // maxWidth: "19rem",
-                
+                maxWidth: "44rem",
+                width: "100%",
+                minHeight: { xs: "5.9rem", md: "9.2rem" },
             }}
             data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
         >
-            <Typography
+            <Box
                 data-testid={SCORETAB_TESTIDS.SCORETAB_HEADER}
-                variant="h6"
-                sx={{ lineHeight: "0.8" }}
+                sx={{
+                    lineHeight: "0.8",
+                    fontSize: { xs: "1.3rem", md: "2.5rem" },
+                    marginLeft: { xs: "0.9rem", md: "2rem" },
+                }}
             >
                 ROCK <br />
                 PAPER <br />
                 SCISSORS
-            </Typography>
+            </Box>
             <Box
                 sx={{
                     backgroundColor: "white",
-                    padding: "0.8rem",
+                    padding: { xs: "0.8rem", md: "1rem" },
                     borderRadius: "4px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     alignItems: "center",
                     minWidth: "5rem",
-                    minHeight: "4.55rem",
+                    minHeight: "100%",
                 }}
                 data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY}
             >
-                <Typography
+                <Box
                     data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY_LABEL}
-                    variant="body2"
                     color={colors.scoreText}
                     fontSize="0.6rem"
                     fontWeight="700"
                     letterSpacing="1.5px"
                 >
                     SCORE
-                </Typography>
-                <Typography
+                </Box>
+                <Box
                     color={colors.darkText}
-                    variant="body1"
                     data-testid={SCORETAB_TESTIDS.SCORETAB_SCORE_DISPLAY_SCORE}
                     fontSize="2.3rem"
-                    lineHeight="0.8"
+                    lineHeight="1"
                     fontWeight="700"
                 >
-                    0
-                </Typography>
+                    12
+                </Box>
             </Box>
         </Box>
     );

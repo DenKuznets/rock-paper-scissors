@@ -49,14 +49,20 @@ function App() {
         <div className="App">
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Container
+                <Box
                     sx={{
-                        background: gradients.backgroundGradient,
-                        // height: "100vh",
-                        padding: "2rem",
+                        backgroundImage: gradients.backgroundGradient,
+                        height: "100vh",
+                        minHeight: { xs: "740px", md: "600px" },
+                        padding: { xs: "2rem", md: "3rem" },
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
+                        position: "relative",
+                        // outline: "1px solid red",
+                        // backgroundColor:"red",
+                        // width:"100vw"
+                        
                     }}
                 >
                     <ScoreTab />
@@ -66,15 +72,20 @@ function App() {
                     <Button
                         sx={{
                             marginTop: "13rem",
+                            marginRight: { md: "2rem" },
+                            marginBottom: { md: "2rem" },
+                            position: { md: "absolute" },
+                            right: { md: "0" },
+                            bottom: { md: "0" },
                         }}
                         variant="outlined"
                         onClick={() => {
-                            console.log('rules btn click');
+                            console.log("rules btn click");
                         }}
                     >
                         RULES
                     </Button>
-                </Container>
+                </Box>
             </ThemeProvider>
         </div>
     );
