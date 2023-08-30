@@ -19,6 +19,9 @@ const ScoreTab = () => {
                 justifyContent: "space-between",
                 alignItems:'center',
                 borderRadius: "4px",
+                minWidth: "19rem",
+                // maxWidth: "19rem",
+                
             }}
             data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
         >

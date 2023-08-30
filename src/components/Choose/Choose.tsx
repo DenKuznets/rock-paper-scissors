@@ -14,8 +14,9 @@ const Choose = () => {
                 sx={{
                     margin: "0 auto",
                     height: "9.7rem",
-                    width: "11.1rem",
-                    // outline: "1px solid red",
+                    width: "100%",
+                    maxWidth: "11.1rem",
+                    minWidth: "11.1rem",
                     backgroundImage: `url("./images/bg-triangle.svg")`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
@@ -25,7 +26,6 @@ const Choose = () => {
             >
                 <Box
                     sx={{
-                        // outline: "1px solid yellow",
                         position: "absolute",
                         height: 0,
                         width: 0,
@@ -40,7 +40,6 @@ const Choose = () => {
                 </Box>
                 <Box
                     sx={{
-                        // outline: "1px solid yellow",
                         position: "absolute",
                         height: 0,
                         width: 0,
@@ -48,7 +47,7 @@ const Choose = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         bottom: 0,
-                        left: '50%',
+                        left: "50%",
                     }}
                 >
                     <Box sx={{ flex: "1 0 auto" }}>
@@ -57,14 +56,13 @@ const Choose = () => {
                 </Box>
                 <Box
                     sx={{
-                        // outline: "1px solid yellow",
                         position: "absolute",
                         height: 0,
                         width: 0,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        right:0,
+                        right: 0,
                     }}
                 >
                     <Box sx={{ flex: "1 0 auto" }}>
