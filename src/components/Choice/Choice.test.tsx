@@ -17,4 +17,14 @@ describe("Choice", () => {
         const rockImage = screen.getByAltText(CHOICE_ROLES.CHOICE_ROCK);
         expect(rockImage).toBeInTheDocument();
     });
+    test("renders correct picture if role paper prop passed to it", () => {
+        render(<Choice role={CHOICE_ROLES.CHOICE_PAPER} />);
+        const rockImage = screen.getByAltText(CHOICE_ROLES.CHOICE_PAPER);
+        expect(rockImage).toBeInTheDocument();
+    });
+    test("renders correct picture if role scissors prop passed to it", () => {
+        render(<Choice role={CHOICE_ROLES.CHOICE_SCISSORS} />);
+        const rockImage = screen.getByAltText(CHOICE_ROLES.CHOICE_SCISSORS);
+        expect(rockImage).toBeInTheDocument();
+    });
 });
