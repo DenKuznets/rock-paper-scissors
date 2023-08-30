@@ -57,6 +57,7 @@ const Choice = ({ role }: { role: string }) => {
                     md: `0 11px 2px 0px ${shadowColor}`,
                 },
                 filter: "drop-shadow(0px 0px 3px black)",
+                opacity:"0.2",
             }}
         >
             <Box
