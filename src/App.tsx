@@ -59,14 +59,10 @@ function App() {
                         flexDirection: "column",
                         alignItems: "center",
                         position: "relative",
-                        // outline: "1px solid red",
-                        // backgroundColor:"red",
-                        // width:"100vw"
-                        
                     }}
                 >
                     <ScoreTab />
-                    <Box sx={{ marginTop: "10.5rem" }}>
+                    <Box sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" }, }}>
                         <Choose />
                     </Box>
                     <Button

@@ -13,10 +13,11 @@ const Choose = () => {
                 data-testid={CHOOSE_TESTIDS.CHOOSE_CONNECTING_LINE}
                 sx={{
                     margin: "0 auto",
-                    height: "9.7rem",
+                    height: { xs: "9.7rem", md: "14.5rem" },
                     width: "100%",
-                    maxWidth: "11.1rem",
-                    minWidth: "11.1rem",
+                    // maxWidth: { xs: "11.1rem", md: "15rem" },
+                    minWidth: { xs: "11.1rem", md: "17.5rem" },
+                    // outline:"1px solid red",
                     backgroundImage: `url("./images/bg-triangle.svg")`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",

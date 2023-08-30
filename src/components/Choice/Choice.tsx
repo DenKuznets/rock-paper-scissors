@@ -64,8 +64,8 @@ const Choice = ({ role }: { role: string }) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: { xs: "6rem", md: "9rem" },
-                    width: { xs: "6rem", md: "9rem" },
+                    height: { xs: "6rem", md: "9.5rem" },
+                    width: { xs: "6rem", md: "9.5rem" },
                     borderRadius: "50%",
                     backgroundColor: "white",
                     boxShadow: {
