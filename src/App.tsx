@@ -3,6 +3,7 @@ import {
     createTheme,
     ThemeProvider,
     Container,
+    Box,
 } from "@mui/material";
 import { ScoreTab } from "./components";
 import { gradients } from "./ts/colors";
@@ -14,9 +15,9 @@ const theme = createTheme({
     },
     palette: {
         text: {
-            primary:"white"
-        }
-    }
+            primary: "white",
+        },
+    },
 });
 
 function App() {
@@ -32,7 +33,9 @@ function App() {
                     }}
                 >
                     <ScoreTab />
-                    <Choose />
+                    <Box sx={{ marginTop: "10.5rem" }}>
+                        <Choose />
+                    </Box>
                 </Container>
             </ThemeProvider>
         </div>
