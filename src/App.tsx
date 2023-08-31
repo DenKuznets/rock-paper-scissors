@@ -62,7 +62,7 @@ function App() {
                     }}
                 >
                     <ScoreTab />
-                    <Box sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" }, }}>
+                    <Box sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" } }}>
                         <Choose />
                     </Box>
                     <Button
