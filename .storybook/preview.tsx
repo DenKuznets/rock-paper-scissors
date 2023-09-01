@@ -1,10 +1,10 @@
 import type { Preview } from "@storybook/react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-styling";
-import {Theme} from '../src/theme'
+import { Theme } from "../src/theme";
 import "@fontsource/barlow-semi-condensed/600.css";
 import "@fontsource/barlow-semi-condensed/700.css";
-
+import { INITIAL_VIEWPORTS, DEFAULT_VIEWPORT } from "@storybook/addon-viewport";
 /* TODO: update import for your custom Material UI themes */
 // import { lightTheme, darkTheme } from '../path/to/themes';
 
@@ -20,6 +20,10 @@ const preview: Preview = {
                 date: /Date$/,
             },
         },
+        viewport: {
+          viewports: INITIAL_VIEWPORTS,
+          defaultViewport: DEFAULT_VIEWPORT,
+        },
     },
 };
 
@@ -30,10 +34,10 @@ export const decorators = [
         // Uncomment for theme switching
         Provider: ThemeProvider,
         themes: {
-        // Provide your custom themes here
-          light: Theme,
-          // dark: darkTheme,
+            // Provide your custom themes here
+            light: Theme,
+            // dark: darkTheme,
         },
-        defaultTheme: 'light',
+        defaultTheme: "light",
     }),
 ];
