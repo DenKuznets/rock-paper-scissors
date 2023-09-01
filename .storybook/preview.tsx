@@ -21,8 +21,8 @@ const preview: Preview = {
             },
         },
         viewport: {
-          viewports: INITIAL_VIEWPORTS,
-          defaultViewport: DEFAULT_VIEWPORT,
+            viewports: INITIAL_VIEWPORTS,
+            // defaultViewport: DEFAULT_VIEWPORT,
         },
     },
 };
@@ -41,3 +41,5 @@ export const decorators = [
         defaultTheme: "light",
     }),
 ];
+
+export default preview;
