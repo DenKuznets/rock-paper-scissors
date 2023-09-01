@@ -12,6 +12,25 @@ import "@storybook/addon-console";
 // Import your fontface CSS files here
 // Don't have any? We recommend installing and using @fontsource/roboto
 
+const customViewports = {
+    FHD: {
+        name: "FHD",
+        styles: {
+            width: "1920px",
+            height: "1080px",
+        },
+    },
+    Desktop: {
+        name: "Desktop",
+        styles: {
+            width: "1366px",
+            height: "768px",
+        },
+    },
+    
+};
+
+
 const preview: Preview = {
     parameters: {
         actions: { argTypesRegex: "^on[A-Z].*" },
@@ -22,9 +41,11 @@ const preview: Preview = {
             },
         },
         viewport: {
-            viewports: INITIAL_VIEWPORTS,
+            viewports: { ...INITIAL_VIEWPORTS, ...customViewports },
             // defaultViewport: DEFAULT_VIEWPORT,
         },
+        // layout: "centered",
+        layout: "fullscreen",
     },
 };
 
