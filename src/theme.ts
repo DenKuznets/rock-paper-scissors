@@ -14,6 +14,7 @@ export const Theme = createTheme({
             styleOverrides: {
                 body: {
                     // overflow: "hidden",
+                    // fontFamily: `'Barlow Semi Condensed', sans-serif`,
                 },
                 img: {
                     userSelect: "none",
