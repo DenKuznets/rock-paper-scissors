@@ -1,5 +1,6 @@
 import { Box, BoxProps } from "@mui/material";
 import Choice, { CHOICE_ROLES } from "../Choice/Choice";
+import React, { useRef } from "react";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
@@ -23,7 +24,7 @@ const ChoiceSocket: React.FC<BoxProps> = (props) => {
                 right: props.right,
                 left: props.left,
             }}
-            onClick={(e) => console.log(e.target)}
+            onClick={props.onClick}
         >
             <Box sx={{ flex: "1 0 auto" }}>{props.children}</Box>
         </Box>
@@ -31,12 +32,20 @@ const ChoiceSocket: React.FC<BoxProps> = (props) => {
 };
 
 const Choose = () => {
+    const container = useRef<HTMLElement>();
+    const handleChoiceClick = () => {
+        if (container.current) {
+            container.current.style.opacity = "0";
+        }
+    };
     return (
         <Box
             data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
             sx={{
                 opacity: 1,
+                transition: "all 1s ease-in"
             }}
+            ref={container}
         >
             <Box
                 data-testid={CHOOSE_TESTIDS.CHOOSE_CONNECTING_LINE}
@@ -44,7 +53,6 @@ const Choose = () => {
                     margin: "0 auto",
                     height: { xs: "9.7rem", md: "14.5rem" },
                     width: "100%",
-                    // maxWidth: { xs: "11.1rem", md: "15rem" },
                     minWidth: { xs: "11.1rem", md: "17.5rem" },
                     // outline:"1px solid red",
                     backgroundImage: `url("./images/bg-triangle.svg")`,
@@ -54,15 +62,19 @@ const Choose = () => {
                     position: "relative",
                 }}
             >
-                <ChoiceSocket>
+                <ChoiceSocket onClick={handleChoiceClick}>
                     <Choice role={CHOICE_ROLES.CHOICE_PAPER} />
                 </ChoiceSocket>
 
-                <ChoiceSocket bottom={0} left={"50%"}>
+                <ChoiceSocket
+                    bottom={0}
+                    left={"50%"}
+                    onClick={handleChoiceClick}
+                >
                     <Choice role={CHOICE_ROLES.CHOICE_ROCK} />
                 </ChoiceSocket>
 
-                <ChoiceSocket right={0}>
+                <ChoiceSocket right={0} onClick={handleChoiceClick}>
                     <Choice role={CHOICE_ROLES.CHOICE_SCISSORS} />
                 </ChoiceSocket>
             </Box>

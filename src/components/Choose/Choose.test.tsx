@@ -33,11 +33,11 @@ describe("Choose", () => {
     test("fades out then choice socket is clicked", async () => {
         const user = userEvent.setup();
         render(<Choose />);
-        const choiceSocket = screen.getByTestId(CHOOSE_TESTIDS.CHOICE_SOCKET);
+        const choiceSockets = screen.getAllByTestId(CHOOSE_TESTIDS.CHOICE_SOCKET);
         const chooseContainer = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONTAINER
         );
-        await user.click(choiceSocket);
+        await user.click(choiceSockets[0]);
 
         expect(chooseContainer).toHaveStyle("opacity:0");
     });
