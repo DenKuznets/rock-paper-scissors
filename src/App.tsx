@@ -13,13 +13,19 @@ function App() {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div className="App">
+        <Box
+            sx={{
+                backgroundImage: gradients.backgroundGradient,
+                minHeight: "770px",
+            }}
+            className="App"
+        >
             <Box
                 sx={{
-                    backgroundImage: gradients.backgroundGradient,
                     height: "100vh",
                     minHeight: { xs: "740px", md: "600px" },
                     padding: { xs: "2rem", md: "3rem" },
+
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -71,7 +77,7 @@ function App() {
                     }}
                 />
             </Box>
-        </div>
+        </Box>
     );
 }
 

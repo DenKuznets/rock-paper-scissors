@@ -17,3 +17,7 @@ type Story = StoryObj<typeof Rules>;
 export const Main: Story = {
     render: () => <Rules />,
 };
+
+export const WithCloseBtn: Story = {
+    render: () => <Rules onCloseButtonClick={() => null} />,
+};
