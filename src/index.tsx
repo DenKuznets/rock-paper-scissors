@@ -1,23 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Theme } from "./theme";
-import { store } from "./store";
-import { Provider } from "react-redux";
+import { AppProviders } from "./app/app-providers";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <ThemeProvider theme={Theme}>
-                <CssBaseline />
-                <App />
-            </ThemeProvider>
-        </Provider>
+        <AppProviders>
+            <App />
+        </AppProviders>
     </React.StrictMode>
 );
 

@@ -1,6 +1,8 @@
 import { Box, BoxProps } from "@mui/material";
 import Choice, { CHOICE_ROLES } from "../Choice/Choice";
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { setUserChoice } from "../../app/appSlice";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
@@ -33,17 +35,25 @@ const ChoiceSocket: React.FC<BoxProps> = (props) => {
 
 const Choose = () => {
     const container = useRef<HTMLElement>();
+    const dispatch = useDispatch();
     const handleChoiceClick = () => {
         if (container.current) {
             container.current.style.opacity = "0";
         }
+        dispatch(
+            setUserChoice({
+                role: CHOICE_ROLES.CHOICE_PAPER,
+                posX: 4,
+                posY: 10,
+            })
+        );
     };
     return (
         <Box
             data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
             sx={{
                 opacity: 1,
-                transition: "all 1s ease-in"
+                transition: "all 1s ease-in",
             }}
             ref={container}
         >

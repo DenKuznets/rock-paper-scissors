@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+interface userChoiceType {
+    role: string;
+    posX: number;
+    posY: number;
+}
+
 export interface AppState {
-    userChoice: {
-        role: string;
-        posX: number;
-        posY: number;
-    };
+    userChoice: userChoiceType;
 }
 
 const initialState: AppState = {
@@ -21,11 +23,9 @@ export const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        // decrement: (state) => {
-        //     state.value -= 1;
-        // },
-        setUserChoice: (state, action: PayloadAction<AppState>) =>
-            action.payload,
+        setUserChoice: (state, action: PayloadAction<userChoiceType>) => {
+            state.userChoice = action.payload;
+        },
     },
 });
 

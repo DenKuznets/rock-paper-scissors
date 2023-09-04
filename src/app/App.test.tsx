@@ -1,14 +1,15 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import App from "./App";
-import { SCORETAB_TESTIDS } from "./components/ScoreTab/ScoreTab";
-import { CHOOSE_TESTIDS } from "./components/Choose/Choose";
-import { RULES_TESTIDS } from "./components/Rules/Rules";
+import { SCORETAB_TESTIDS } from "../components/ScoreTab/ScoreTab";
+import { CHOOSE_TESTIDS } from "../components/Choose/Choose";
+import { RULES_TESTIDS } from "../components/Rules/Rules";
 import { APP_TESTIDS } from "./App";
 import userEvent from "@testing-library/user-event";
+import { renderWithProviders } from "../ts/utils-for-tests";
 
 describe("App", () => {
     test("renders correctly", () => {
-        render(<App />);
+        renderWithProviders(<App />);
 
         const ScoreTabElement = screen.getByTestId(
             SCORETAB_TESTIDS.SCORETAB_CONTAINER
@@ -33,7 +34,7 @@ describe("App", () => {
 
     test("rules button click displays rules component and prevents document scroll", async () => {
         const user = userEvent.setup();
-        render(<App />);
+        renderWithProviders(<App />);
         const appModal = screen.getByTestId(APP_TESTIDS.APP_MODAL);
         const rulesButton = screen.getByRole("button", { name: /rules/i });
         await user.click(rulesButton);
@@ -44,7 +45,7 @@ describe("App", () => {
     });
     test("rules close button closes modal and restores document scroll", async () => {
         const user = userEvent.setup();
-        render(<App />);
+        renderWithProviders(<App />);
         const appModal = screen.getByTestId(APP_TESTIDS.APP_MODAL);
         const rulesCloseBtn = screen.getByTestId(RULES_TESTIDS.RULES_CLOSE_BTN);
         await user.click(rulesCloseBtn);

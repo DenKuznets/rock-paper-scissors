@@ -2,10 +2,17 @@ import { render, screen } from "@testing-library/react";
 import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { CHOICE_ROLES } from "../Choice/Choice";
 import userEvent from "@testing-library/user-event";
+import { store } from "../../app/store";
+import { Provider } from "react-redux";
+import { renderWithProviders } from "../../ts/utils-for-tests";
 
 describe("Choose", () => {
     test("renders correctly", () => {
-        render(<Choose />);
+        render(
+            <Provider store={store}>
+                <Choose />
+            </Provider>
+        );
 
         const chooseContainer = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONTAINER
@@ -32,8 +39,10 @@ describe("Choose", () => {
 
     test("fades out then choice socket is clicked", async () => {
         const user = userEvent.setup();
-        render(<Choose />);
-        const choiceSockets = screen.getAllByTestId(CHOOSE_TESTIDS.CHOICE_SOCKET);
+        renderWithProviders(<Choose />);
+        const choiceSockets = screen.getAllByTestId(
+            CHOOSE_TESTIDS.CHOICE_SOCKET
+        );
         const chooseContainer = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONTAINER
         );

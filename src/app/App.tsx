@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
-import { ScoreTab } from "./components";
-import { gradients } from "./ts/colors";
-import Choose from "./components/Choose/Choose";
-import Rules from "./components/Rules/Rules";
+import { ScoreTab } from "../components";
+import { gradients } from "../ts/colors";
+import Choose from "../components/Choose/Choose";
+import Rules from "../components/Rules/Rules";
 import { useState } from "react";
 
 export const APP_TESTIDS = {
