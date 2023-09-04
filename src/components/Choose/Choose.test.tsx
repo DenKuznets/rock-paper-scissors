@@ -41,12 +41,4 @@ describe("Choose", () => {
 
         expect(chooseContainer).toHaveStyle("opacity:0");
     });
-
-    // const paperElement = screen.getByAltText(CHOICE_ROLES.CHOICE_PAPER);
-    // const scissorsElement = screen.getByAltText(
-    //     CHOICE_ROLES.CHOICE_SCISSORS
-    // );
-
-    // await user.click(paperElement);
-    // await user.click(scissorsElement);
 });
