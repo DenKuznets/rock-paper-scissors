@@ -23,8 +23,8 @@ const Rules = ({ onCloseButtonClick }: { onCloseButtonClick?: () => void }) => {
                 minHeight: { xs: "30rem", md: "15rem" },
                 height: "100vh",
                 width: "100%",
-                maxWidth: { xs: "100vw", md: "30rem" },
-                maxHeight: { xs: "100vh", md: "30rem" },
+                maxWidth: { xs: "100vw", md: "26rem" },
+                maxHeight: { xs: "100vh", md: "26rem" },
             }}
         >
             <Box
