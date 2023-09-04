@@ -2,14 +2,16 @@ import { Box, IconButton } from "@mui/material";
 import { colors } from "../../ts/colors";
 
 export const RULES_TESTIDS = {
+    RULES_CONTAINER: "rules-container",
     RULES_HEADER: "rules-header",
     RULES_CLOSE_BTN: "rules-close-btn",
     RULES_IMG: "rules-img",
 };
 
-const Rules = () => {
+const Rules = ({ onCloseButtonClick }: { onCloseButtonClick?: () => void }) => {
     return (
         <Box
+            data-testid={RULES_TESTIDS.RULES_CONTAINER}
             sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -26,6 +28,7 @@ const Rules = () => {
             }}
         >
             <Box
+                data-testid={RULES_TESTIDS.RULES_HEADER}
                 sx={{
                     mt: { xs: "14vh", md: "0" },
                     fontSize: { xs: "2rem" },
@@ -36,36 +39,36 @@ const Rules = () => {
                     left: { md: "2rem" },
                 }}
                 color={colors.darkText}
-                data-testid={RULES_TESTIDS.RULES_HEADER}
             >
                 RULES
             </Box>
             <Box
+                data-testid={RULES_TESTIDS.RULES_IMG}
                 sx={{
                     mt: { xs: "14vh", md: "0" },
                     position: { xs: "static", md: "absolute" },
                     bottom: { md: "2rem" },
                 }}
-                data-testid={RULES_TESTIDS.RULES_IMG}
             >
                 <img src="./images/image-rules.svg" alt="rules description" />
             </Box>
-            <IconButton
-                data-testid={RULES_TESTIDS.RULES_CLOSE_BTN}
-                sx={{
-                    position: "absolute",
-                    bottom: { xs: "2rem", md: "unset" },
-                    top: { md: "2rem" },
-                    right: { md: "2rem" },
-                }}
-                aria-label=""
-                onClick={() => {
-                    console.log("close btn click");
-                    // return;
-                }}
-            >
-                <img src="./images/icon-close.svg" alt="close btn" />
-            </IconButton>
+            {onCloseButtonClick && (
+                <IconButton
+                    data-testid={RULES_TESTIDS.RULES_CLOSE_BTN}
+                    sx={{
+                        position: "absolute",
+                        bottom: { xs: "2rem", md: "unset" },
+                        top: { md: "2rem" },
+                        right: { md: "2rem" },
+                    }}
+                    aria-label=""
+                    onClick={() => {
+                        onCloseButtonClick();
+                    }}
+                >
+                    <img src="./images/icon-close.svg" alt="close btn" />
+                </IconButton>
+            )}
         </Box>
     );
 };
