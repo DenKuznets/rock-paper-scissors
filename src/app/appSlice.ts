@@ -11,7 +11,7 @@ export interface AppState {
     userChoice: userChoiceType;
 }
 
-const initialState: AppState = {
+export const initialState: AppState = {
     userChoice: {
         role: "",
         posX: 0,

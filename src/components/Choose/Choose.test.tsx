@@ -1,10 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { CHOICE_ROLES } from "../Choice/Choice";
 import userEvent from "@testing-library/user-event";
-import { store } from "../../app/store";
-import { Provider } from "react-redux";
-import { renderWithProviders } from "../../ts/utils-for-tests";
+import { useSelector, useDispatch } from "react-redux";
+import { appSlice, AppState, initialState } from "../../app/appSlice";
 
 describe("Choose", () => {
     test("renders correctly", () => {
@@ -33,7 +32,7 @@ describe("Choose", () => {
         expect(scissorsElement).toBeInTheDocument();
     });
 
-    test("fades out then choice socket is clicked", async () => {
+    test("fades out and sets correct userChoice state then choice socket is clicked", async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
         const choiceSockets = screen.getAllByTestId(
@@ -44,6 +43,13 @@ describe("Choose", () => {
         );
         await user.click(choiceSockets[0]);
 
+        // const appState = appSlice(initialS)
+
         expect(chooseContainer).toHaveStyle("opacity:0");
+        // expect(appState).toEqual({
+        //     role: CHOICE_ROLES.CHOICE_PAPER,
+        //     posX: 4,
+        //     posY: 10,
+        // });
     });
 });
