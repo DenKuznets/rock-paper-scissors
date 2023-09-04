@@ -8,11 +8,7 @@ import { renderWithProviders } from "../../ts/utils-for-tests";
 
 describe("Choose", () => {
     test("renders correctly", () => {
-        render(
-            <Provider store={store}>
-                <Choose />
-            </Provider>
-        );
+        renderWithProviders(<Choose />);
 
         const chooseContainer = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONTAINER
