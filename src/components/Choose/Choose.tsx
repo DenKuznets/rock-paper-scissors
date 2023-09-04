@@ -1,14 +1,43 @@
-import { Box } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 import Choice, { CHOICE_ROLES } from "../Choice/Choice";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
+    CHOICE_SOCKET: "choice-socket",
     CHOOSE_CONNECTING_LINE: "choose-connecting-line",
+};
+
+const ChoiceSocket: React.FC<BoxProps> = (props) => {
+    return (
+        <Box
+            data-testid={CHOOSE_TESTIDS.CHOICE_SOCKET}
+            sx={{
+                position: "absolute",
+                height: 0,
+                width: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bottom: props.bottom,
+                top: props.top,
+                right: props.right,
+                left: props.left,
+            }}
+            onClick={(e) => console.log(e.target)}
+        >
+            <Box sx={{ flex: "1 0 auto" }}>{props.children}</Box>
+        </Box>
+    );
 };
 
 const Choose = () => {
     return (
-        <Box data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}>
+        <Box
+            data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
+            sx={{
+                opacity: 1,
+            }}
+        >
             <Box
                 data-testid={CHOOSE_TESTIDS.CHOOSE_CONNECTING_LINE}
                 sx={{
@@ -25,51 +54,17 @@ const Choose = () => {
                     position: "relative",
                 }}
             >
-                <Box
-                    sx={{
-                        position: "absolute",
-                        height: 0,
-                        width: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Box sx={{ flex: "1 0 auto" }}>
-                        <Choice role={CHOICE_ROLES.CHOICE_PAPER} />
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        position: "absolute",
-                        height: 0,
-                        width: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        bottom: 0,
-                        left: "50%",
-                    }}
-                >
-                    <Box sx={{ flex: "1 0 auto" }}>
-                        <Choice role={CHOICE_ROLES.CHOICE_ROCK} />
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        position: "absolute",
-                        height: 0,
-                        width: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        right: 0,
-                    }}
-                >
-                    <Box sx={{ flex: "1 0 auto" }}>
-                        <Choice role={CHOICE_ROLES.CHOICE_SCISSORS} />
-                    </Box>
-                </Box>
+                <ChoiceSocket>
+                    <Choice role={CHOICE_ROLES.CHOICE_PAPER} />
+                </ChoiceSocket>
+
+                <ChoiceSocket bottom={0} left={"50%"}>
+                    <Choice role={CHOICE_ROLES.CHOICE_ROCK} />
+                </ChoiceSocket>
+
+                <ChoiceSocket right={0}>
+                    <Choice role={CHOICE_ROLES.CHOICE_SCISSORS} />
+                </ChoiceSocket>
             </Box>
         </Box>
     );

@@ -7,7 +7,9 @@ describe("Choose", () => {
     test("renders correctly", () => {
         render(<Choose />);
 
-        const container = screen.getByTestId(CHOOSE_TESTIDS.CHOOSE_CONTAINER);
+        const chooseContainer = screen.getByTestId(
+            CHOOSE_TESTIDS.CHOOSE_CONTAINER
+        );
         const connectingLine = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONNECTING_LINE
         );
@@ -16,18 +18,35 @@ describe("Choose", () => {
         const scissorsElement = screen.getByAltText(
             CHOICE_ROLES.CHOICE_SCISSORS
         );
+        const choiceSockets = screen.getAllByTestId(
+            CHOOSE_TESTIDS.CHOICE_SOCKET
+        );
 
-        expect(container).toBeInTheDocument();
+        expect(chooseContainer).toBeInTheDocument();
         expect(connectingLine).toBeInTheDocument();
+        expect(choiceSockets).toHaveLength(3);
         expect(rockElement).toBeInTheDocument();
         expect(paperElement).toBeInTheDocument();
         expect(scissorsElement).toBeInTheDocument();
     });
-    test.skip("click on choice element selects correct choice element", async () => {
+
+    test("fades out then choice socket is clicked", async () => {
         const user = userEvent.setup();
-        const handleClick = jest.fn();
-        render(<Choose onClick={handleClick} />);
+        render(<Choose />);
+        const choiceSocket = screen.getByTestId(CHOOSE_TESTIDS.CHOICE_SOCKET);
+        const chooseContainer = screen.getByTestId(
+            CHOOSE_TESTIDS.CHOOSE_CONTAINER
+        );
+        await user.click(choiceSocket);
 
-
+        expect(chooseContainer).toHaveStyle("opacity:0");
     });
+
+    // const paperElement = screen.getByAltText(CHOICE_ROLES.CHOICE_PAPER);
+    // const scissorsElement = screen.getByAltText(
+    //     CHOICE_ROLES.CHOICE_SCISSORS
+    // );
+
+    // await user.click(paperElement);
+    // await user.click(scissorsElement);
 });
