@@ -31,25 +31,18 @@ describe("Choose", () => {
         expect(paperElement).toBeInTheDocument();
         expect(scissorsElement).toBeInTheDocument();
     });
-
-    test("fades out and sets correct userChoice state then choice socket is clicked", async () => {
-        const user = userEvent.setup();
+    test("changes clicked socket position to the middle left", async () => {
         renderWithProviders(<Choose />);
         const choiceSockets = screen.getAllByTestId(
             CHOOSE_TESTIDS.CHOICE_SOCKET
         );
-        const chooseContainer = screen.getByTestId(
-            CHOOSE_TESTIDS.CHOOSE_CONTAINER
-        );
-        await user.click(choiceSockets[0]);
-
-        // const appState = appSlice(initialS)
-
-        expect(chooseContainer).toHaveStyle("opacity:0");
-        // expect(appState).toEqual({
-        //     role: CHOICE_ROLES.CHOICE_PAPER,
-        //     posX: 4,
-        //     posY: 10,
-        // });
+        const randomSocket =
+            choiceSockets[Math.floor(Math.random() * choiceSockets.length)];
+        expect(randomSocket).toHaveStyle(`
+            left: 0;
+            top:50%;
+            right: initial;
+            bottom: initial;
+        `);
     });
 });

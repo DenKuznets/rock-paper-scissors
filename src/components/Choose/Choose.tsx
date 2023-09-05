@@ -3,6 +3,8 @@ import Choice, { CHOICE_ROLES } from "../Choice/Choice";
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setUserChoice } from "../../app/appSlice";
+import CoordsSet from "../../ts/coordsSet";
+import ChooseChoiceSocket from "./ChooseChoiceSocket";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
@@ -10,44 +12,39 @@ export const CHOOSE_TESTIDS = {
     CHOOSE_CONNECTING_LINE: "choose-connecting-line",
 };
 
-const ChoiceSocket: React.FC<BoxProps> = (props) => {
-    return (
-        <Box
-            data-testid={CHOOSE_TESTIDS.CHOICE_SOCKET}
-            sx={{
-                position: "absolute",
-                height: 0,
-                width: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                bottom: props.bottom,
-                top: props.top,
-                right: props.right,
-                left: props.left,
-            }}
-            onClick={props.onClick}
-        >
-            <Box sx={{ flex: "1 0 auto" }}>{props.children}</Box>
-        </Box>
-    );
-};
-
 const Choose = () => {
     const container = useRef<HTMLElement>();
-    const dispatch = useDispatch();
-    const handleChoiceClick = () => {
-        if (container.current) {
-            container.current.style.opacity = "0";
+    const handleChoiceClick = (
+        e: React.MouseEvent<HTMLElement, MouseEvent>
+    ) => {};
+
+    const sockets: JSX.Element[] = [];
+
+    Object.keys(CHOICE_ROLES).forEach((role, index) => {
+        let coordsSet;
+        switch (index) {
+            case 1:
+                coordsSet = CoordsSet.topLeft;
+                break;
+            case 2:
+                coordsSet = CoordsSet.topRight;
+                break;
+            default:
+                coordsSet = CoordsSet.bottomMiddle;
+                break;
         }
-        dispatch(
-            setUserChoice({
-                role: CHOICE_ROLES.CHOICE_PAPER,
-                posX: 4,
-                posY: 10,
-            })
+        sockets.push(
+            <ChooseChoiceSocket
+                data-testid={CHOOSE_TESTIDS.CHOICE_SOCKET}
+                coordsSet={coordsSet}
+                onClick={(e) => handleChoiceClick(e)}
+                key={index}
+            >
+                <Choice role={role} />
+            </ChooseChoiceSocket>
         );
-    };
+    });
+
     return (
         <Box
             data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
@@ -72,21 +69,7 @@ const Choose = () => {
                     position: "relative",
                 }}
             >
-                <ChoiceSocket onClick={handleChoiceClick}>
-                    <Choice role={CHOICE_ROLES.CHOICE_PAPER} />
-                </ChoiceSocket>
-
-                <ChoiceSocket
-                    bottom={0}
-                    left={"50%"}
-                    onClick={handleChoiceClick}
-                >
-                    <Choice role={CHOICE_ROLES.CHOICE_ROCK} />
-                </ChoiceSocket>
-
-                <ChoiceSocket right={0} onClick={handleChoiceClick}>
-                    <Choice role={CHOICE_ROLES.CHOICE_SCISSORS} />
-                </ChoiceSocket>
+                {sockets}
             </Box>
         </Box>
     );

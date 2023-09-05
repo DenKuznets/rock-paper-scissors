@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { CHOICE_ROLES } from "../components/Choice/Choice";
 
 interface userChoiceType {
-    role: string;
-    posX: number;
-    posY: number;
+    role: string | null;
+    posX: number | null;
+    posY: number | null;
 }
 
 export interface AppState {
@@ -13,9 +14,9 @@ export interface AppState {
 
 export const initialState: AppState = {
     userChoice: {
-        role: "",
-        posX: 0,
-        posY: 0,
+        role: null,
+        posX: null,
+        posY: null,
     },
 };
 

@@ -6,9 +6,9 @@ export const CHOICE_TESTIDS = {
 };
 
 export const CHOICE_ROLES = {
-    CHOICE_ROCK: "choice-rock",
-    CHOICE_PAPER: "choice-paper",
-    CHOICE_SCISSORS: "choice-scissors",
+    CHOICE_ROCK: "CHOICE_ROCK",
+    CHOICE_PAPER: "CHOICE_PAPER",
+    CHOICE_SCISSORS: "CHOICE_SCISSORS",
 };
 
 const Choice = ({ role }: { role: string }) => {
@@ -44,6 +44,7 @@ const Choice = ({ role }: { role: string }) => {
     return (
         <Box
             data-testid={CHOICE_TESTIDS.CHOICE_CONTAINER}
+            data-role={role}
             sx={{
                 background: gradient,
                 height: { xs: "8rem", md: "12rem" },

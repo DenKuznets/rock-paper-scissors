@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-styling";
-import { Theme } from "../src/theme";
+import { Theme } from "../src/ts/theme";
 import "@fontsource/barlow-semi-condensed/600.css";
 import "@fontsource/barlow-semi-condensed/700.css";
 import { INITIAL_VIEWPORTS, DEFAULT_VIEWPORT } from "@storybook/addon-viewport";
@@ -27,9 +27,7 @@ const customViewports = {
             height: "768px",
         },
     },
-    
 };
-
 
 const preview: Preview = {
     parameters: {
