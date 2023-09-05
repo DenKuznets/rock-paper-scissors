@@ -1,4 +1,4 @@
-import { Box, BoxProps } from "@mui/material";
+import { Box } from "@mui/material";
 import Choice, { CHOICE_ROLES } from "../Choice/Choice";
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
@@ -16,7 +16,13 @@ const Choose = () => {
     const container = useRef<HTMLElement>();
     const handleChoiceClick = (
         e: React.MouseEvent<HTMLElement, MouseEvent>
-    ) => {};
+    ) => {
+        // console.log(e.currentTarget);
+        e.currentTarget.style.right = CoordsSet.userChoice.right;
+        e.currentTarget.style.bottom = CoordsSet.userChoice.bottom;
+        e.currentTarget.style.left = CoordsSet.userChoice.left;
+        e.currentTarget.style.top = CoordsSet.userChoice.top;
+    };
 
     const sockets: JSX.Element[] = [];
 

@@ -26,7 +26,7 @@ const ChooseChoiceSocket: React.FC<ChoiceSocketType> = (props) => {
                 right: props.coordsSet.right,
                 left: props.coordsSet.left,
                 cursor: "pointer",
-                transition: "all 0.1s ease-in",
+                transition: "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s",
                 ":hover": {
                     transform: "scale(1.05)",
                 },

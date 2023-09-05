@@ -32,17 +32,21 @@ describe("Choose", () => {
         expect(scissorsElement).toBeInTheDocument();
     });
     test("changes clicked socket position to the middle left", async () => {
+        const user = userEvent.setup();
         renderWithProviders(<Choose />);
         const choiceSockets = screen.getAllByTestId(
             CHOOSE_TESTIDS.CHOICE_SOCKET
         );
-        const randomSocket =
-            choiceSockets[Math.floor(Math.random() * choiceSockets.length)];
-        expect(randomSocket).toHaveStyle(`
-            left: 0;
-            top:50%;
-            right: initial;
-            bottom: initial;
-        `);
+        // const randomSocket =
+        //     choiceSockets[Math.floor(Math.random() * choiceSockets.length)];
+        const randomSocket = choiceSockets[0];
+        console.debug(randomSocket);
+        await user.click(randomSocket);
+        expect(randomSocket).toHaveStyle({
+            left: "0",
+            right:"100%",
+            top: "50%",
+            bottom:"50%"
+        });
     });
 });

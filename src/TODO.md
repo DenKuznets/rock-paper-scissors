@@ -1,5 +1,1 @@
-I. Handle Choose click
-    1.set userChoice state (role. posX, posY)
-    2. как протестировать текущее состояние??
-   
-II. Add mock store to Choose stories
+добавить в choosechoicesocket проп selected и с ним менять координату и ховер поведение
