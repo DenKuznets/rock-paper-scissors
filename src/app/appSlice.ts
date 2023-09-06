@@ -1,31 +1,60 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { CHOICE_ROLES } from "../components/Choice/Choice";
+import Roles from "../utils/roles";
+import CoordsSet from "../utils/coordsSet";
 
-interface userChoiceType {
-    role: string | null;
-    posX: number | null;
-    posY: number | null;
+interface Choice {
+    role: string;
+    coords: {
+        top: string;
+        left: string;
+        right: string;
+        bottom: string;
+    };
+    chosen: boolean;
 }
 
 export interface AppState {
-    userChoice: userChoiceType;
+    choices: Choice[];
 }
 
 export const initialState: AppState = {
-    userChoice: {
-        role: null,
-        posX: null,
-        posY: null,
-    },
+    choices: [
+        {
+            role: Roles.ROCK,
+            coords: CoordsSet.topLeft,
+            chosen: false,
+        },
+        {
+            role: Roles.PAPER,
+            coords: CoordsSet.topRight,
+            chosen: false,
+        },
+        {
+            role: Roles.SCISSORS,
+            coords: CoordsSet.bottomMiddle,
+            chosen: false,
+        },
+    ],
 };
 
 export const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        setUserChoice: (state, action: PayloadAction<userChoiceType>) => {
-            state.userChoice = action.payload;
+        setUserChoice: (state, action: PayloadAction<string>) => {
+            // for (let obj of state.choices) {
+            //     if (obj.role === action.payload) {
+            //         obj.chosen = true;
+            //         obj.coords = CoordsSet.userChoice;
+            //     }
+            // }
+
+            state.choices.map((obj) => {
+                return obj.role === action.payload
+                    ? { ...obj, chosen: true, coords: CoordsSet.userChoice }
+                    : obj;
+            });
         },
     },
 });

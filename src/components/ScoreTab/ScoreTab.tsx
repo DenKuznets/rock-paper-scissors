@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { colors } from "../../ts/colors";
+import { colors } from "../../utils/colors";
 
 export const SCORETAB_TESTIDS = {
     SCORETAB_CONTAINER: "scoretab-container",
@@ -9,7 +9,7 @@ export const SCORETAB_TESTIDS = {
     SCORETAB_SCORE_DISPLAY_SCORE: "scoretab-score-display-score",
 };
 
-const ScoreTab = () => {
+const ScoreTab = ({ score = 0 }: { score?: number }) => {
     return (
         <Box
             data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
@@ -71,7 +71,7 @@ const ScoreTab = () => {
                     lineHeight="1"
                     fontWeight="700"
                 >
-                    0
+                    {score}
                 </Box>
             </Box>
         </Box>

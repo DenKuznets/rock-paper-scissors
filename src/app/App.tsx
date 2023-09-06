@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
 import { ScoreTab } from "../components";
-import { gradients } from "../ts/colors";
-import Choose from "../components/Choose/Choose";
-import Rules from "../components/Rules/Rules";
+import { gradients } from "../utils/colors";
+// import Choose from "../components/Choose/Choose";
+// import Rules from "../components/Rules/Rules";
 import { useState } from "react";
 
 export const APP_TESTIDS = {
@@ -34,7 +34,7 @@ function App() {
             >
                 <ScoreTab />
                 <Box sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" } }}>
-                    <Choose />
+                    {/* <Choose /> */}
                 </Box>
                 <Button
                     sx={{
@@ -70,12 +70,12 @@ function App() {
                     alignItems: "center",
                 }}
             >
-                <Rules
+                {/* <Rules
                     onCloseButtonClick={() => {
                         setShowModal(false);
                         document.body.style.overflow = "auto";
                     }}
-                />
+                /> */}
             </Box>
         </Box>
     );

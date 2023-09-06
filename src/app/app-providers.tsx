@@ -1,5 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Theme } from "../ts/theme";
+import { Theme } from "../utils/theme";
 import { store } from "./store";
 import { Provider } from "react-redux";
 
