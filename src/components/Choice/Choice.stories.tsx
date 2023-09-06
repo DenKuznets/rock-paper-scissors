@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
-import Choice, { CHOICE_ROLES } from "./Choice";
+import { Roles } from "../../ts/roles";
+import Choice from "./Choice";
 
 const meta: Meta<typeof Choice> = {
     title: "Choice",
@@ -11,16 +11,32 @@ const meta: Meta<typeof Choice> = {
     },
     argTypes: {
         role: {
-            options: [
-                CHOICE_ROLES.CHOICE_PAPER,
-                CHOICE_ROLES.CHOICE_ROCK,
-                CHOICE_ROLES.CHOICE_SCISSORS,
-            ],
+            options: [Roles.PAPER, Roles.ROCK, Roles.SCISSORS],
             control: {
                 type: "select",
             },
         },
     },
+    decorators: [
+        (Story) => (
+            <div
+                style={{
+                    margin: "3em",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "150px",
+                    height: "150px",
+                    position: "relative",
+                }}
+            >
+                <div style={{ position: "relative" }}>
+                    <Story />
+                </div>
+                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+            </div>
+        ),
+    ],
 };
 
 export default meta;
@@ -28,16 +44,16 @@ type Story = StoryObj<typeof Choice>;
 
 export const Rock: Story = {
     args: {
-        role: CHOICE_ROLES.CHOICE_ROCK,
+        role: Roles.ROCK,
     },
 };
 export const Paper: Story = {
     args: {
-        role: CHOICE_ROLES.CHOICE_PAPER,
+        role: Roles.PAPER,
     },
 };
 export const Scissors: Story = {
     args: {
-        role: CHOICE_ROLES.CHOICE_SCISSORS,
+        role: Roles.SCISSORS,
     },
 };

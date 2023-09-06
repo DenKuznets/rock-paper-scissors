@@ -15,7 +15,7 @@ function App() {
     return (
         <Box
             sx={{
-                backgroundImage: gradients.backgroundGradient,
+                background: gradients.backgroundGradient,
                 minHeight: "770px",
             }}
             className="App"
