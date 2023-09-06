@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Choose from "./Choose";
-import { Box } from "@mui/material";
 import { gradients } from "../../ts/colors";
 
 const meta: Meta<typeof Choose> = {

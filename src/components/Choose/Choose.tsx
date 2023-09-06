@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
-    // CHOOSE_CONNECTING_LINE: "choose-ch",
 };
 
 const Choose = () => {
@@ -33,11 +32,19 @@ const Choose = () => {
                 transition: "all 1s ease-in",
                 // backgroundColor: "white",
                 margin: "0 auto",
-                height: { xs: "9.7rem", md: "14.5rem" },
                 width: "100%",
-                minWidth: { xs: "11.1rem", md: "17.5rem" },
+                height: {
+                    xs: "9.7rem",
+                    md: userChoice ? "19.4rem" : "14.5rem",
+                },
+                minWidth: {
+                    xs: "11.1rem",
+                    md: userChoice ? "23.8rem" : "17.5rem",
+                },
                 outline: "1px solid red",
-                backgroundImage: `url("./images/bg-triangle.svg")`,
+                backgroundImage: userChoice
+                    ? ""
+                    : `url("./images/bg-triangle.svg")`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 position: "relative",

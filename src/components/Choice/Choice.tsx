@@ -83,7 +83,7 @@ const Choice = ({
                 transition:
                     "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s",
                 ":hover": {
-                    transform: chosen ? "scale(1.15)" : "scale(1.05)",
+                    transform: chosen ? "scale(1.55)" : "scale(1.05)",
                 },
             }}
             onClick={handleClick}

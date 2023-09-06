@@ -61,7 +61,7 @@ describe("Choice", () => {
             right: "50%",
         });
         await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.15)");
+        expect(choiceContainer).toHaveStyle("transform: scale(1.55)");
         expect(choiceContainer).toHaveStyle({
             top: "50%",
             bottom: "50%",
@@ -69,7 +69,7 @@ describe("Choice", () => {
             right: "100%",
         });
         await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.15)");
+        expect(choiceContainer).toHaveStyle("transform: scale(1.55)");
         expect(choiceContainer).toHaveStyle({
             top: "50%",
             bottom: "50%",
