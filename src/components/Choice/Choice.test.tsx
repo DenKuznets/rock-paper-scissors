@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import Choice, { CHOICE_TESTIDS } from "./Choice";
+import Choice, { CHOICE_TESTIDS, coords } from "./Choice";
 import { Roles } from "../../ts/roles";
 import userEvent from "@testing-library/user-event";
+import { chosenChoiceScale } from "../Choice/Choice";
 
 describe("Choice", () => {
     test("renders correctly", () => {
@@ -55,26 +56,30 @@ describe("Choice", () => {
         );
 
         expect(choiceContainer).toHaveStyle({
-            top: "100%",
-            left: "50%",
-            bottom: "0",
-            right: "50%",
+            top: coords.bottomMiddle.top,
+            left: coords.bottomMiddle.left,
+            bottom: coords.bottomMiddle.bottom,
+            right: coords.bottomMiddle.right,
         });
         await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.55)");
+        expect(choiceContainer).toHaveStyle(
+            `transform: scale(${chosenChoiceScale})`
+        );
         expect(choiceContainer).toHaveStyle({
-            top: "50%",
-            bottom: "50%",
-            left: "0",
-            right: "100%",
+            top: coords.userChoice.top,
+            bottom: coords.userChoice.bottom,
+            left: coords.userChoice.left,
+            right: coords.userChoice.right,
         });
         await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.55)");
+        expect(choiceContainer).toHaveStyle(
+            `transform: scale(${chosenChoiceScale})`
+        );
         expect(choiceContainer).toHaveStyle({
-            top: "50%",
-            bottom: "50%",
-            left: "0",
-            right: "100%",
+            top: coords.userChoice.top,
+            bottom: coords.userChoice.bottom,
+            left: coords.userChoice.left,
+            right: coords.userChoice.right,
         });
     });
 });

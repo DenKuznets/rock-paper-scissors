@@ -2,6 +2,41 @@ import { Box } from "@mui/material";
 import { Roles } from "../../ts/roles";
 import { useState } from "react";
 
+export const chosenChoiceScale = 1.55;
+
+export const coords = {
+    topLeft: {
+        top: "0",
+        left: "0",
+        bottom: "100%",
+        right: "100%",
+    },
+    topRight: {
+        top: "0",
+        left: "100%",
+        bottom: "100%",
+        right: "0",
+    },
+    bottomMiddle: {
+        top: "100%",
+        left: "50%",
+        bottom: "0",
+        right: "50%",
+    },
+    userChoice: {
+        top: "50%",
+        left: "0",
+        bottom: "50%",
+        right: "100%",
+    },
+    houseChoice: {
+        top: "50%",
+        left: "100%",
+        bottom: "50%",
+        right: "0",
+    },
+};
+
 export const CHOICE_TESTIDS = {
     CHOICE_CONTAINER: "choice-container",
     CHOICE_COLORED_BORDER: "choice-colored-border",
@@ -31,10 +66,10 @@ const Choice = ({
             shadowColor =
                 "hsl(229.65517241379308, 47.933884297520656%, 47.45098039215686%)";
             icon += "icon-paper.svg";
-            initialTop = "0";
-            initialLeft = "0";
-            initialBottom = "100%";
-            initialRight = "100%";
+            initialTop = coords.topLeft.top;
+            initialLeft = coords.topLeft.left;
+            initialBottom = coords.topLeft.bottom;
+            initialRight = coords.topLeft.right;
             break;
         case Roles.ROCK:
             gradient =
@@ -42,20 +77,20 @@ const Choice = ({
             shadowColor =
                 "hsl(348.94736842105266, 56.43564356435643%, 39.6078431372549%)";
             icon += "icon-rock.svg";
-            initialTop = "0";
-            initialLeft = "100%";
-            initialBottom = "100%";
-            initialRight = "0";
+            initialTop = coords.topRight.top;
+            initialLeft = coords.topRight.left;
+            initialBottom = coords.topRight.bottom;
+            initialRight = coords.topRight.right;
             break;
         case Roles.SCISSORS:
             gradient = "linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%))";
             shadowColor =
                 "hsl(40.12269938650307, 90.05524861878453%, 35.490196078431374%)";
             icon += "icon-scissors.svg";
-            initialTop = "100%";
-            initialLeft = "50%";
-            initialBottom = "0";
-            initialRight = "50%";
+            initialTop = coords.bottomMiddle.top;
+            initialLeft = coords.bottomMiddle.left;
+            initialBottom = coords.bottomMiddle.bottom;
+            initialRight = coords.bottomMiddle.right;
             break;
     }
 
@@ -74,16 +109,18 @@ const Choice = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                top: chosen ? "50%" : initialTop,
-                bottom: chosen ? "50%" : initialBottom,
-                right: chosen ? "100%" : initialRight,
-                left: chosen ? 0 : initialLeft,
+                top: chosen ? coords.userChoice.top : initialTop,
+                bottom: chosen ? coords.userChoice.bottom : initialBottom,
+                right: chosen ? coords.userChoice.right : initialRight,
+                left: chosen ? coords.userChoice.left : initialLeft,
                 cursor: chosen ? "default" : "pointer",
-                transform: chosen ? "scale(1.15)" : "none",
+                transform: chosen ? `scale(${chosenChoiceScale})` : "none",
                 transition:
                     "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s",
                 ":hover": {
-                    transform: chosen ? "scale(1.55)" : "scale(1.05)",
+                    transform: chosen
+                        ? `scale(${chosenChoiceScale})`
+                        : "scale(1.05)",
                 },
             }}
             onClick={handleClick}
