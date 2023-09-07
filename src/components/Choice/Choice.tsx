@@ -7,18 +7,11 @@ import getChoiceTestIds from "./choiceTestIds";
 
 export const chosenChoiceScale = 1.55;
 
-export const CHOICE_TESTIDS = {
-    CHOICE_CONTAINER: "choice-container",
-    CHOICE_COLORED_BORDER: "choice-colored-border",
-    CHOICE_IMAGE_BACKGROUND: "choice-image-background",
-    CHOICE_IMAGE: "choice-image",
-};
-
 export const CHOICE_TESTID_SUFFIXES = {
-    container: "_CONTAINER",
-    coloredBorder: "_COLORED_BORDER",
-    imageBackground: "_IMAGE_BACKGROUND",
-    image: "_IMAGE",
+    container: "CHOICE_CONTAINER",
+    coloredBorder: "CHOICE_COLORED_BORDER",
+    imageBackground: "CHOICE_IMAGE_BACKGROUND",
+    image: "CHOICE_IMAGE",
 };
 
 const Choice = ({

@@ -4,8 +4,9 @@ import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 import getChoiceTestIds from "../Choice/choiceTestIds";
 import coords from "../../ts/coords";
 import { CHOICE_TESTID_SUFFIXES } from "../Choice/Choice";
+import { Roles } from "../../ts/roles";
 
-const testChoicePosition = async (role: string) => {
+export const testChoicePosition = async (role: string) => {
     return test(role, async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
@@ -25,4 +26,26 @@ const testChoicePosition = async (role: string) => {
     });
 };
 
-export default testChoicePosition;
+export const testRemoveOtherChoices = async (role: string) =>
+    test(role, async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Choose />);
+        const clickedElement = screen.getByTestId(
+            `${role}${CHOICE_TESTID_SUFFIXES.container}`
+        );
+        const allElements = screen.getAllByTestId(
+            CHOICE_TESTID_SUFFIXES.container,
+            {
+                exact: false,
+            }
+        );
+
+        expect(allElements).toHaveLength(Object.keys(Roles).length);
+
+        await user.click(clickedElement);
+
+        for (let elem of allElements) {
+            if (elem === clickedElement) expect(elem).toBeInTheDocument();
+            else expect(elem).not.toBeInTheDocument();
+        }
+    });
