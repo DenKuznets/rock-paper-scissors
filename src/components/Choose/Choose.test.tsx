@@ -2,7 +2,7 @@ import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { Roles } from "../../ts/roles";
 import userEvent from "@testing-library/user-event";
-import testChoicePosition from "./choiceTestFunctions";
+import testChoicePosition from "./chooseTestFunctions";
 
 describe("Choose", () => {
     test("renders correctly", () => {
@@ -11,14 +11,12 @@ describe("Choose", () => {
         const chooseContainer = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONTAINER
         );
-        const rockElement = screen.getByAltText(Roles.ROCK);
-        const paperElement = screen.getByAltText(Roles.PAPER);
-        const scissorsElement = screen.getByAltText(Roles.SCISSORS);
-
         expect(chooseContainer).toBeInTheDocument();
-        expect(rockElement).toBeInTheDocument();
-        expect(paperElement).toBeInTheDocument();
-        expect(scissorsElement).toBeInTheDocument();
+
+        for (let role in Roles) {
+            const roleElement = screen.getByAltText(role);
+            expect(roleElement).toBeInTheDocument();
+        }
     });
     test("removes other choices then one choice is clicked", async () => {
         const user = userEvent.setup();
