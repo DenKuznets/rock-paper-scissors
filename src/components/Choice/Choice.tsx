@@ -3,6 +3,7 @@ import { Roles } from "../../ts/roles";
 import { useState } from "react";
 import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
+import getChoiceTestIds from "./choiceTestIds";
 
 export const chosenChoiceScale = 1.55;
 
@@ -11,6 +12,13 @@ export const CHOICE_TESTIDS = {
     CHOICE_COLORED_BORDER: "choice-colored-border",
     CHOICE_IMAGE_BACKGROUND: "choice-image-background",
     CHOICE_IMAGE: "choice-image",
+};
+
+export const CHOICE_TESTID_SUFFIXES = {
+    container: "_CONTAINER",
+    coloredBorder: "_COLORED_BORDER",
+    imageBackground: "_IMAGE_BACKGROUND",
+    image: "_IMAGE",
 };
 
 const Choice = ({
@@ -28,9 +36,13 @@ const Choice = ({
         if (onClick) onClick(role);
     };
 
+    const testids = getChoiceTestIds(role);
+    // console.log(testids);
+    // console.log(testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]);
+
     return (
         <Box
-            data-testid={CHOICE_TESTIDS.CHOICE_CONTAINER}
+            data-testid={testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]}
             sx={{
                 position: "absolute",
                 height: 0,
@@ -57,7 +69,11 @@ const Choice = ({
             onClick={handleClick}
         >
             <Box
-                data-testid={CHOICE_TESTIDS.CHOICE_COLORED_BORDER}
+                data-testid={
+                    testids[
+                        `${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.coloredBorder}`
+                    ]
+                }
                 data-role={role}
                 sx={{
                     flex: "1 0 auto",
@@ -77,7 +93,11 @@ const Choice = ({
                 }}
             >
                 <Box
-                    data-testid={CHOICE_TESTIDS.CHOICE_IMAGE_BACKGROUND}
+                    data-testid={
+                        testids[
+                            `${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.imageBackground}`
+                        ]
+                    }
                     sx={{
                         display: "flex",
                         alignItems: "center",
@@ -93,7 +113,11 @@ const Choice = ({
                     }}
                 >
                     <img
-                        data-testid={CHOICE_TESTIDS.CHOICE_IMAGE}
+                        data-testid={
+                            testids[
+                                `${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.image}`
+                            ]
+                        }
                         src={roleCss.icon}
                         alt={role}
                         height="auto"

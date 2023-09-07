@@ -2,7 +2,7 @@ import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { Roles } from "../../ts/roles";
 import userEvent from "@testing-library/user-event";
-
+import { CHOICE_TESTIDS } from "../Choice/Choice";
 
 describe("Choose", () => {
     test("renders correctly", () => {
@@ -32,5 +32,12 @@ describe("Choose", () => {
         expect(rockElement).toBeInTheDocument();
         expect(paperElement).not.toBeInTheDocument();
         expect(scissorsElement).not.toBeInTheDocument();
+    });
+    test("paper choice gets into user choice position after being clicked", async () => {
+        // const rockContainer = screen.getAllByTestId(CHOICE_TESTIDS.CHOICE_CONTAINER).filter((container) => {
+        //     container.getalt
+        // })
+        // const rockImage = screen.getByAltText(Roles.ROCK);
+        
     });
 });

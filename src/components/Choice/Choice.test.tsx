@@ -1,22 +1,26 @@
 import { render, screen } from "@testing-library/react";
-import Choice, { CHOICE_TESTIDS } from "./Choice";
+import Choice, { CHOICE_TESTID_SUFFIXES } from "./Choice";
 import { Roles } from "../../ts/roles";
 import userEvent from "@testing-library/user-event";
 import { chosenChoiceScale } from "../Choice/Choice";
 import coords from "../../ts/coords";
+import getChoiceTestIds from "./choiceTestIds";
 
 describe("Choice", () => {
     test("renders correctly", () => {
         render(<Choice role={Roles.PAPER} />);
+        const testids = getChoiceTestIds(Roles.PAPER);
         const choiceContainer = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_CONTAINER
+            testids[`${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.container}`]
         );
-        const choiceImage = screen.getByTestId(CHOICE_TESTIDS.CHOICE_IMAGE);
+        const choiceImage = screen.getByTestId(
+            testids[`${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.image}`]
+        );
         const choiceColoredBorder = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_COLORED_BORDER
+            testids[`${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.coloredBorder}`]
         );
         const choiceImageBG = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_IMAGE_BACKGROUND
+            testids[`${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.imageBackground}`]
         );
 
         expect(choiceContainer).toBeInTheDocument();
@@ -27,10 +31,10 @@ describe("Choice", () => {
 
     test("renders picture of rock in the top right position if role rock prop passed to it", () => {
         render(<Choice role={Roles.ROCK} />);
-
+        const testids = getChoiceTestIds(Roles.ROCK);
         const rockImage = screen.getByAltText(Roles.ROCK);
         const choiceContainer = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_CONTAINER
+            testids[`${Roles.ROCK}${CHOICE_TESTID_SUFFIXES.container}`]
         );
 
         expect(rockImage).toBeInTheDocument();
@@ -45,8 +49,9 @@ describe("Choice", () => {
     test("renders picture of paper in the top left position if role paper prop passed to it", () => {
         render(<Choice role={Roles.PAPER} />);
         const paperImage = screen.getByAltText(Roles.PAPER);
+        const testids = getChoiceTestIds(Roles.PAPER);
         const choiceContainer = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_CONTAINER
+            testids[`${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.container}`]
         );
 
         expect(paperImage).toBeInTheDocument();
@@ -62,8 +67,9 @@ describe("Choice", () => {
         render(<Choice role={Roles.SCISSORS} />);
 
         const scissorsImage = screen.getByAltText(Roles.SCISSORS);
+        const testids = getChoiceTestIds(Roles.SCISSORS);
         const choiceContainer = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_CONTAINER
+            testids[`${Roles.SCISSORS}${CHOICE_TESTID_SUFFIXES.container}`]
         );
 
         expect(scissorsImage).toBeInTheDocument();
@@ -78,10 +84,10 @@ describe("Choice", () => {
     test("gets bigger then hovered", async () => {
         const user = userEvent.setup();
         render(<Choice role={Roles.SCISSORS} />);
+        const testids = getChoiceTestIds(Roles.SCISSORS);
         const choiceContainer = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_CONTAINER
+            testids[`${Roles.SCISSORS}${CHOICE_TESTID_SUFFIXES.container}`]
         );
-
         await user.hover(choiceContainer);
         expect(choiceContainer).toHaveStyle("transform: scale(1.05)");
     });
@@ -89,8 +95,9 @@ describe("Choice", () => {
     test("Scissors element changes position to the userChoice coords and gets bigger then clicked for the first time", async () => {
         const user = userEvent.setup();
         render(<Choice role={Roles.SCISSORS} />);
+        const testids = getChoiceTestIds(Roles.SCISSORS);
         const choiceContainer = screen.getByTestId(
-            CHOICE_TESTIDS.CHOICE_CONTAINER
+            testids[`${Roles.SCISSORS}${CHOICE_TESTID_SUFFIXES.container}`]
         );
 
         await user.click(choiceContainer);

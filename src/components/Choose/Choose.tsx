@@ -14,11 +14,11 @@ const Choose = () => {
         .filter((role) => {
             return userChoice ? role === userChoice : role;
         })
-        .map((role, index) => {
+        .map((role) => {
             return (
                 <Choice
-                    onClick={(role) => setUserChoice(role)}
-                    key={index}
+                    onClick={(choiceRole) => setUserChoice(choiceRole)}
+                    key={role}
                     role={role}
                 />
             );
@@ -51,22 +51,7 @@ const Choose = () => {
                 backgroundPosition: "center",
             }}
         >
-            {/* {sockets} */}
-            <Choice
-                onClick={(role) => setUserChoice(role)}
-                // key={index}
-                role={Roles.ROCK}
-            />
-            <Choice
-                onClick={(role) => setUserChoice(role)}
-                // key={index}
-                role={Roles.PAPER}
-            />
-            <Choice
-                onClick={(role) => setUserChoice(role)}
-                // key={index}
-                role={Roles.SCISSORS}
-            />
+            {sockets}
         </Box>
     );
 };
