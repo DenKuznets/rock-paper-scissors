@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import Choice, { CHOICE_TESTIDS } from "./Choice";
 import { Roles } from "../../ts/roles";
 import userEvent from "@testing-library/user-event";
+import { chosenChoiceScale } from "../Choice/Choice";
+import coords from "../../ts/coords";
 
 describe("Choice", () => {
     test("renders correctly", () => {
@@ -22,21 +24,57 @@ describe("Choice", () => {
         expect(choiceImageBG).toBeInTheDocument();
         expect(choiceColoredBorder).toBeInTheDocument();
     });
-    test("renders picture of rock if role rock prop passed to it", () => {
+
+    test("renders picture of rock in the top right position if role rock prop passed to it", () => {
         render(<Choice role={Roles.ROCK} />);
+
         const rockImage = screen.getByAltText(Roles.ROCK);
+        const choiceContainer = screen.getByTestId(
+            CHOICE_TESTIDS.CHOICE_CONTAINER
+        );
+
         expect(rockImage).toBeInTheDocument();
+        expect(choiceContainer).toHaveStyle({
+            top: coords.topRight.top,
+            left: coords.topRight.left,
+            bottom: coords.topRight.bottom,
+            right: coords.topRight.right,
+        });
     });
-    test("renders picture of paper if role paper prop passed to it", () => {
+
+    test("renders picture of paper in the top left position if role paper prop passed to it", () => {
         render(<Choice role={Roles.PAPER} />);
-        const rockImage = screen.getByAltText(Roles.PAPER);
-        expect(rockImage).toBeInTheDocument();
+        const paperImage = screen.getByAltText(Roles.PAPER);
+        const choiceContainer = screen.getByTestId(
+            CHOICE_TESTIDS.CHOICE_CONTAINER
+        );
+
+        expect(paperImage).toBeInTheDocument();
+        expect(choiceContainer).toHaveStyle({
+            top: coords.topLeft.top,
+            left: coords.topLeft.left,
+            bottom: coords.topLeft.bottom,
+            right: coords.topLeft.right,
+        });
     });
-    test("renders picture of scissors if role scissors prop passed to it", () => {
+
+    test("renders picture of scissors in the middle bottom position if role scissors prop passed to it", () => {
         render(<Choice role={Roles.SCISSORS} />);
-        const rockImage = screen.getByAltText(Roles.SCISSORS);
-        expect(rockImage).toBeInTheDocument();
+
+        const scissorsImage = screen.getByAltText(Roles.SCISSORS);
+        const choiceContainer = screen.getByTestId(
+            CHOICE_TESTIDS.CHOICE_CONTAINER
+        );
+
+        expect(scissorsImage).toBeInTheDocument();
+        expect(choiceContainer).toHaveStyle({
+            top: coords.bottomMiddle.top,
+            left: coords.bottomMiddle.left,
+            bottom: coords.bottomMiddle.bottom,
+            right: coords.bottomMiddle.right,
+        });
     });
+
     test("gets bigger then hovered", async () => {
         const user = userEvent.setup();
         render(<Choice role={Roles.SCISSORS} />);
@@ -47,34 +85,23 @@ describe("Choice", () => {
         await user.hover(choiceContainer);
         expect(choiceContainer).toHaveStyle("transform: scale(1.05)");
     });
-    test("changes position and gets bigger then clicked first time and does nothing then clicked more", async () => {
+
+    test("Scissors element changes position to the userChoice coords and gets bigger then clicked for the first time", async () => {
         const user = userEvent.setup();
         render(<Choice role={Roles.SCISSORS} />);
         const choiceContainer = screen.getByTestId(
             CHOICE_TESTIDS.CHOICE_CONTAINER
         );
 
-        expect(choiceContainer).toHaveStyle({
-            top: "100%",
-            left: "50%",
-            bottom: "0",
-            right: "50%",
-        });
         await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.15)");
+        expect(choiceContainer).toHaveStyle(
+            `transform: scale(${chosenChoiceScale})`
+        );
         expect(choiceContainer).toHaveStyle({
-            top: "50%",
-            bottom: "50%",
-            left: "0",
-            right: "100%",
-        });
-        await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.15)");
-        expect(choiceContainer).toHaveStyle({
-            top: "50%",
-            bottom: "50%",
-            left: "0",
-            right: "100%",
+            top: coords.userChoice.top,
+            bottom: coords.userChoice.bottom,
+            left: coords.userChoice.left,
+            right: coords.userChoice.right,
         });
     });
 });

@@ -1,6 +1,10 @@
 import { Box } from "@mui/material";
 import { Roles } from "../../ts/roles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import coords from "../../ts/coords";
+import getRoleCss from "./roleCss";
+
+export const chosenChoiceScale = 1.55;
 
 export const CHOICE_TESTIDS = {
     CHOICE_CONTAINER: "choice-container",
@@ -17,52 +21,29 @@ const Choice = ({
     onClick?: (role: string) => void;
 }) => {
     const [chosen, setChosen] = useState(false);
-    let gradient;
-    let shadowColor;
-    let icon = "./images/";
-    let initialTop;
-    let initialLeft;
-    let initialBottom;
-    let initialRight;
-    switch (role) {
-        case Roles.PAPER:
-            gradient =
-                "linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%))";
-            shadowColor =
-                "hsl(229.65517241379308, 47.933884297520656%, 47.45098039215686%)";
-            icon += "icon-paper.svg";
-            initialTop = "0";
-            initialLeft = "0";
-            initialBottom = "100%";
-            initialRight = "100%";
-            break;
-        case Roles.ROCK:
-            gradient =
-                "linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%))";
-            shadowColor =
-                "hsl(348.94736842105266, 56.43564356435643%, 39.6078431372549%)";
-            icon += "icon-rock.svg";
-            initialTop = "0";
-            initialLeft = "100%";
-            initialBottom = "100%";
-            initialRight = "0";
-            break;
-        case Roles.SCISSORS:
-            gradient = "linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%))";
-            shadowColor =
-                "hsl(40.12269938650307, 90.05524861878453%, 35.490196078431374%)";
-            icon += "icon-scissors.svg";
-            initialTop = "100%";
-            initialLeft = "50%";
-            initialBottom = "0";
-            initialRight = "50%";
-            break;
-    }
+    const [roleCss, setRoleCss] = useState(getRoleCss(role));
 
     const handleClick = () => {
-        if (!chosen) setChosen(true);
+        console.log("before", chosen);
+        if (!chosen) {
+            console.log("setting chosen");
+            setChosen(true);
+        }
+        console.log("after", chosen);
         if (onClick) onClick(role);
     };
+
+    useEffect(() => {
+        if (chosen) {
+            setRoleCss({
+                ...roleCss,
+                initialTop: coords.userChoice.top,
+                initialBottom: coords.userChoice.bottom,
+                initialRight: coords.userChoice.right,
+                initialLeft: coords.userChoice.left,
+            });
+        }
+    }, [chosen]);
 
     return (
         <Box
@@ -74,16 +55,20 @@ const Choice = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                top: chosen ? "50%" : initialTop,
-                bottom: chosen ? "50%" : initialBottom,
-                right: chosen ? "100%" : initialRight,
-                left: chosen ? 0 : initialLeft,
+                top: chosen ? coords.userChoice.top : roleCss.initialTop,
+                bottom: chosen
+                    ? coords.userChoice.bottom
+                    : roleCss.initialBottom,
+                right: chosen ? coords.userChoice.right : roleCss.initialRight,
+                left: chosen ? coords.userChoice.left : roleCss.initialLeft,
                 cursor: chosen ? "default" : "pointer",
-                transform: chosen ? "scale(1.15)" : "none",
+                transform: chosen ? `scale(${chosenChoiceScale})` : "none",
                 transition:
                     "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s",
                 ":hover": {
-                    transform: chosen ? "scale(1.15)" : "scale(1.05)",
+                    transform: chosen
+                        ? `scale(${chosenChoiceScale})`
+                        : "scale(1.05)",
                 },
             }}
             onClick={handleClick}
@@ -93,7 +78,7 @@ const Choice = ({
                 data-role={role}
                 sx={{
                     flex: "1 0 auto",
-                    background: gradient,
+                    background: roleCss.gradient,
                     height: { xs: "8rem", md: "12rem" },
                     width: { xs: "8rem", md: "12rem" },
                     display: "flex",
@@ -101,8 +86,8 @@ const Choice = ({
                     justifyContent: "center",
                     borderRadius: "50%",
                     boxShadow: {
-                        xs: `0 7px 2px 0px ${shadowColor}`,
-                        md: `0 11px 2px 0px ${shadowColor}`,
+                        xs: `0 7px 2px 0px ${roleCss.shadowColor}`,
+                        md: `0 11px 2px 0px ${roleCss.shadowColor}`,
                     },
                     filter: "drop-shadow(0px 0px 3px black)",
                     // opacity:"0.2",
@@ -126,7 +111,7 @@ const Choice = ({
                 >
                     <img
                         data-testid={CHOICE_TESTIDS.CHOICE_IMAGE}
-                        src={icon}
+                        src={roleCss.icon}
                         alt={role}
                         height="auto"
                         width="45%"
