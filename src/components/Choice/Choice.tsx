@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Roles } from "../../ts/roles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
 
@@ -21,29 +21,12 @@ const Choice = ({
     onClick?: (role: string) => void;
 }) => {
     const [chosen, setChosen] = useState(false);
-    const [roleCss, setRoleCss] = useState(getRoleCss(role));
+    const roleCss = getRoleCss(role);
 
     const handleClick = () => {
-        console.log("before", chosen);
-        if (!chosen) {
-            console.log("setting chosen");
-            setChosen(true);
-        }
-        console.log("after", chosen);
+        if (!chosen) setChosen(true);
         if (onClick) onClick(role);
     };
-
-    useEffect(() => {
-        if (chosen) {
-            setRoleCss({
-                ...roleCss,
-                initialTop: coords.userChoice.top,
-                initialBottom: coords.userChoice.bottom,
-                initialRight: coords.userChoice.right,
-                initialLeft: coords.userChoice.left,
-            });
-        }
-    }, [chosen]);
 
     return (
         <Box
