@@ -1,4 +1,4 @@
-const CoordsSet = {
+const coords = {
     topLeft: {
         top: "0",
         left: "0",
@@ -31,4 +31,4 @@ const CoordsSet = {
     },
 };
 
-export default CoordsSet;
+export default coords;
