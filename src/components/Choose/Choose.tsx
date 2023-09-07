@@ -51,7 +51,22 @@ const Choose = () => {
                 backgroundPosition: "center",
             }}
         >
-            {sockets}
+            {/* {sockets} */}
+            <Choice
+                onClick={(role) => setUserChoice(role)}
+                // key={index}
+                role={Roles.ROCK}
+            />
+            <Choice
+                onClick={(role) => setUserChoice(role)}
+                // key={index}
+                role={Roles.PAPER}
+            />
+            <Choice
+                onClick={(role) => setUserChoice(role)}
+                // key={index}
+                role={Roles.SCISSORS}
+            />
         </Box>
     );
 };
