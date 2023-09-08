@@ -5,41 +5,40 @@ import { gradients } from "../../ts/colors";
 import { Roles } from "../../ts/roles";
 import getChoiceTestIds from "../Choice/choiceTestIds";
 import { CHOICE_TESTID_SUFFIXES } from "../Choice/Choice";
+import { userChoice } from "./chooseStorybookFunctions";
+import { Box } from "@mui/material";
 
 const meta: Meta<typeof Choose> = {
     title: "Choose",
     component: Choose,
     parameters: {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
-        layout: "fullscreen",
+        layout: "centered",
     },
-    argTypes: {
-        userChoice: {
-            options: [Roles.PAPER, Roles.ROCK, Roles.SCISSORS, null],
-            control: {
-                type: "select",
-            },
-        },
-    },
+
     decorators: [
         (Story) => (
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100vw",
-                    height: "100vh",
-                    position: "relative",
+            <Box
+                sx={{
                     background: gradients.backgroundGradient,
+                    // minHeight: "770px",
                 }}
+                className="App"
             >
-                <div style={{ position: "relative" }}>
+                <Box
+                    sx={{
+                        // height: "100vh",
+                        // minHeight: { xs: "740px", md: "600px" },
+                        padding: { xs: "2rem", md: "3rem" },
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        position: "relative",
+                    }}
+                >
                     <Story />
-                </div>
-                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-            </div>
+                </Box>
+            </Box>
         ),
     ],
 };
@@ -48,17 +47,6 @@ export default meta;
 type Story = StoryObj<typeof Choose>;
 
 export const Main: Story = {};
-
-const userChoice =
-    (role: string) =>
-        async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-            const canvas = within(canvasElement);
-            const testids = getChoiceTestIds(role);
-            const rockElement = canvas.getByTestId(
-                testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]
-            );
-            await userEvent.click(rockElement);
-        };
 
 export const UserChoiceRock: Story = {
     play: userChoice(Roles.ROCK),

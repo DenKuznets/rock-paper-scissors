@@ -6,6 +6,8 @@ import Rules from "../components/Rules/Rules";
 import { useState } from "react";
 
 export const APP_TESTIDS = {
+    APP_CONTAINER: "app-container",
+    APP_CHOOSE_CONTAINER: "app-choose-container",
     APP_MODAL: "app-modal",
 };
 
@@ -21,11 +23,11 @@ function App() {
             className="App"
         >
             <Box
+                data-testis={APP_TESTIDS.APP_CONTAINER}
                 sx={{
                     height: "100vh",
                     minHeight: { xs: "740px", md: "600px" },
-                    padding: { xs: "2rem", md: "3rem" },
-
+                    padding: { xs: "2rem", md: "3rem" },                    
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -33,9 +35,7 @@ function App() {
                 }}
             >
                 <ScoreTab />
-                <Box sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" } }}>
-                    <Choose />
-                </Box>
+                <Choose sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" } }} />
                 <Button
                     sx={{
                         marginTop: "13rem",

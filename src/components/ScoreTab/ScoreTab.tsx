@@ -23,7 +23,7 @@ const ScoreTab = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 borderRadius: { xs: "4px", md: "18px" },
-                minWidth: "19rem",
+                minWidth: { xs: "19rem", md: "33rem" },
                 maxWidth: { xs: "30rem", md: "44rem" },
                 width: "100%",
                 minHeight: { xs: "5.9rem", md: "9.2rem" },
