@@ -35,9 +35,9 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 width: "100%",
             }}
         >
-            <div style={{ fontSize: "1rem" }}></div>
             <Box
                 sx={{
+                    outline: "1px solid green",
                     opacity: 1,
                     transition: "all 1s ease-in",
                     // backgroundColor: "white",
@@ -71,14 +71,55 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             </Box>
             <Box
                 sx={{
+                    outline: "1px solid yellow",
                     display: "flex",
                     textTransform: "uppercase",
                     fontSize: { xs: "1rem" },
-                    width: "100%",
+                    // width: "100%",
+                    justifyContent: "space-between",
+                    letterSpacing: "2px",
+                    width: {
+                        xs: "11.1rem",
+                        md: userChoice ? "23.8rem" : "17.5rem",
+                    },
+                    maxWidth: {
+                        xs: "11.1rem",
+                        md: userChoice ? "23.8rem" : "17.5rem",
+                    },
+                    minWidth: {
+                        xs: "11.1rem",
+                        md: userChoice ? "23.8rem" : "17.5rem",
+                    },
                 }}
             >
-                <span>you picked</span>
-                <span>the house picked</span>
+                <span
+                    style={{
+                        position: "absolute",
+                        height: 0,
+                        width: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        overflow: "visible",
+                        whiteSpace: "nowrap",
+                    }}
+                >
+                    you picked
+                </span>
+                <span
+                    style={{
+                        position: "absolute",
+                        height: 0,
+                        width: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        overflow: "visible",
+                        whiteSpace: "nowrap",
+                    }}
+                >
+                    the house picked
+                </span>
             </Box>
         </Box>
     );

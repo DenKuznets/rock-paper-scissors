@@ -5,6 +5,9 @@ import {
     testChoicePosition,
     testRemoveOtherChoices,
 } from "./chooseTestFunctions";
+import getChoiceTestIds from "../Choice/choiceTestIds";
+import { CHOICE_TESTID_SUFFIXES } from "../Choice/Choice";
+import userEvent from "@testing-library/user-event";
 
 describe("Choose", () => {
     test("renders correctly", () => {
@@ -29,5 +32,18 @@ describe("Choose", () => {
         for (let role in Roles) {
             testChoicePosition(role);
         }
+    });
+    test("shows picked text when userChoice has value", async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Choose />);
+        const role = Roles.ROCK;
+        const testids = getChoiceTestIds(role);
+        const choice = screen.getByTestId(
+            testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]
+        );
+        await user.click(choice);
+
+        expect(screen.getByText("you picked")).toBeInTheDocument();
+        expect(screen.getByText("the house picked")).toBeInTheDocument();
     });
 });
