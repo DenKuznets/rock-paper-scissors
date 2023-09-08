@@ -50,13 +50,17 @@ const Choice = ({
                 right: chosen ? coords.userChoice.right : roleCss.initialRight,
                 left: chosen ? coords.userChoice.left : roleCss.initialLeft,
                 cursor: chosen ? "default" : "pointer",
-                transform: chosen ? `scale(${chosenChoiceScale})` : "none",
+                transform: {
+                    md: chosen ? `scale(${chosenChoiceScale})` : "none",
+                },
                 transition:
                     "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s",
                 ":hover": {
-                    transform: chosen
-                        ? `scale(${chosenChoiceScale})`
-                        : "scale(1.05)",
+                    transform: {
+                        md: chosen
+                            ? `scale(${chosenChoiceScale})`
+                            : "scale(1.05)",
+                    },
                 },
             }}
             onClick={handleClick}

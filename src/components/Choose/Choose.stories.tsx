@@ -15,10 +15,10 @@ const meta: Meta<typeof Choose> = {
         (Story) => (
             <div
                 style={{
-                    // margin: "3em",
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent:"center",
                     width: "100vw",
                     height: "100vh",
                     position: "relative",

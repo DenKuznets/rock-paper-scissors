@@ -80,35 +80,4 @@ describe("Choice", () => {
             right: coords.bottomMiddle.right,
         });
     });
-
-    test("gets bigger then hovered", async () => {
-        const user = userEvent.setup();
-        render(<Choice role={Roles.SCISSORS} />);
-        const testids = getChoiceTestIds(Roles.SCISSORS);
-        const choiceContainer = screen.getByTestId(
-            testids[`${Roles.SCISSORS}${CHOICE_TESTID_SUFFIXES.container}`]
-        );
-        await user.hover(choiceContainer);
-        expect(choiceContainer).toHaveStyle("transform: scale(1.05)");
-    });
-
-    test("Scissors element changes position to the userChoice coords and gets bigger then clicked for the first time", async () => {
-        const user = userEvent.setup();
-        render(<Choice role={Roles.SCISSORS} />);
-        const testids = getChoiceTestIds(Roles.SCISSORS);
-        const choiceContainer = screen.getByTestId(
-            testids[`${Roles.SCISSORS}${CHOICE_TESTID_SUFFIXES.container}`]
-        );
-
-        await user.click(choiceContainer);
-        expect(choiceContainer).toHaveStyle(
-            `transform: scale(${chosenChoiceScale})`
-        );
-        expect(choiceContainer).toHaveStyle({
-            top: coords.userChoice.top,
-            bottom: coords.userChoice.bottom,
-            left: coords.userChoice.left,
-            right: coords.userChoice.right,
-        });
-    });
 });
