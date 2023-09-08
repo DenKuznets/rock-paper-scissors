@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
+import { within, userEvent } from "@storybook/testing-library";
 import Choose from "./Choose";
 import { gradients } from "../../ts/colors";
 import { Roles } from "../../ts/roles";
+import getChoiceTestIds from "../Choice/choiceTestIds";
+import { CHOICE_TESTID_SUFFIXES } from "../Choice/Choice";
 
 const meta: Meta<typeof Choose> = {
     title: "Choose",
@@ -46,3 +48,14 @@ export default meta;
 type Story = StoryObj<typeof Choose>;
 
 export const Main: Story = {};
+
+export const UserChoiceRock: Story = {
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+        const testids = getChoiceTestIds(Roles.ROCK);
+        const rockElement = await canvas.getByTestId(
+            testids[`${Roles.ROCK}${CHOICE_TESTID_SUFFIXES.container}`]
+        );
+        await userEvent.click(rockElement);
+    },
+};

@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { Roles } from "../../ts/roles";
-import { useState } from "react";
 import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
 import getChoiceTestIds from "./choiceTestIds";
@@ -8,24 +7,27 @@ import getChoiceTestIds from "./choiceTestIds";
 export const chosenChoiceScale = 1.55;
 
 export const CHOICE_TESTID_SUFFIXES = {
-    container: "CHOICE_CONTAINER",
-    coloredBorder: "CHOICE_COLORED_BORDER",
-    imageBackground: "CHOICE_IMAGE_BACKGROUND",
-    image: "CHOICE_IMAGE",
+    container: "_CHOICE_CONTAINER",
+    coloredBorder: "_CHOICE_COLORED_BORDER",
+    imageBackground: "_CHOICE_IMAGE_BACKGROUND",
+    image: "_CHOICE_IMAGE",
 };
 
 const Choice = ({
     role = Roles.PAPER,
     onClick,
+    userChoice = null,
 }: {
     role?: string;
     onClick?: (role: string) => void;
+    userChoice: string | null,
 }) => {
-    const [chosen, setChosen] = useState(false);
+    // const [chosen, setChosen] = useState(false);
+    const chosen = userChoice === role;
     const roleCss = getRoleCss(role);
 
     const handleClick = () => {
-        if (!chosen) setChosen(true);
+        // if (!chosen) setChosen(true);
         if (onClick) onClick(role);
     };
 

@@ -20,6 +20,7 @@ const Choose = () => {
                     onClick={(choiceRole) => setUserChoice(choiceRole)}
                     key={role}
                     role={role}
+                    userChoice={userChoice}
                 />
             );
         });
