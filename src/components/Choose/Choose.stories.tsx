@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Choose from "./Choose";
 import { gradients } from "../../ts/colors";
+import { Roles } from "../../ts/roles";
 
 const meta: Meta<typeof Choose> = {
     title: "Choose",
@@ -10,7 +11,14 @@ const meta: Meta<typeof Choose> = {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
         layout: "fullscreen",
     },
-    // argTypes: {},
+    argTypes: {
+        userChoice: {
+            options: [Roles.PAPER, Roles.ROCK, Roles.SCISSORS, null],
+            control: {
+                type: "select",
+            },
+        },
+    },
     decorators: [
         (Story) => (
             <div
@@ -18,7 +26,7 @@ const meta: Meta<typeof Choose> = {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent:"center",
+                    justifyContent: "center",
                     width: "100vw",
                     height: "100vh",
                     position: "relative",

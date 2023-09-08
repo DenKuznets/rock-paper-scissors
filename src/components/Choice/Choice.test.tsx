@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Choice, { CHOICE_TESTID_SUFFIXES } from "./Choice";
 import { Roles } from "../../ts/roles";
-import userEvent from "@testing-library/user-event";
-import { chosenChoiceScale } from "../Choice/Choice";
 import coords from "../../ts/coords";
 import getChoiceTestIds from "./choiceTestIds";
 

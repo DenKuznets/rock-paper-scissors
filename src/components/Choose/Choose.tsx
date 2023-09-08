@@ -25,33 +25,42 @@ const Choose = () => {
         });
 
     return (
-        <Box
-            data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
-            sx={{
-                opacity: 1,
-                transition: "all 1s ease-in",
-                // backgroundColor: "white",
-                margin: "0 auto",
-                width: "100%",
-                height: {
-                    xs: "9.7rem",
-                    md: userChoice ? "19.4rem" : "14.5rem",
-                },
-                minWidth: {
-                    xs: "11.1rem",
-                    md: userChoice ? "23.8rem" : "17.5rem",
-                },
-                outline: "1px solid red",
-                backgroundImage: userChoice
-                    ? ""
-                    : `url("./images/bg-triangle.svg")`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                position: "relative",
-                backgroundPosition: "center",
-            }}
-        >
-            {sockets}
+        <Box>
+            <Box
+                data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
+                sx={{
+                    opacity: 1,
+                    transition: "all 1s ease-in",
+                    // backgroundColor: "white",
+                    margin: "0 auto",
+                    width: "100%",
+                    height: {
+                        xs: "9.7rem",
+                        md: userChoice ? "19.4rem" : "14.5rem",
+                    },
+                    minWidth: {
+                        xs: "11.1rem",
+                        md: userChoice ? "23.8rem" : "17.5rem",
+                    },
+                    outline: "1px solid red",
+                    backgroundImage: userChoice
+                        ? ""
+                        : `url("./images/bg-triangle.svg")`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    position: "relative",
+                    backgroundPosition: "center",
+                }}
+            >
+                {sockets}
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                textTransform:"uppercase",
+            }}>
+                <Box>you picked</Box>
+                <Box>the house picked</Box>
+            </Box>
         </Box>
     );
 };
