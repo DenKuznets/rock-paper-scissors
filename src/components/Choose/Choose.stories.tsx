@@ -49,13 +49,23 @@ type Story = StoryObj<typeof Choose>;
 
 export const Main: Story = {};
 
+const userChoice =
+    (role: string) =>
+        async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+            const canvas = within(canvasElement);
+            const testids = getChoiceTestIds(role);
+            const rockElement = canvas.getByTestId(
+                testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]
+            );
+            await userEvent.click(rockElement);
+        };
+
 export const UserChoiceRock: Story = {
-    play: async ({ canvasElement }) => {
-        const canvas = within(canvasElement);
-        const testids = getChoiceTestIds(Roles.ROCK);
-        const rockElement = await canvas.getByTestId(
-            testids[`${Roles.ROCK}${CHOICE_TESTID_SUFFIXES.container}`]
-        );
-        await userEvent.click(rockElement);
-    },
+    play: userChoice(Roles.ROCK),
+};
+export const UserChoicePaper: Story = {
+    play: userChoice(Roles.PAPER),
+};
+export const UserChoiceScissors: Story = {
+    play: userChoice(Roles.SCISSORS),
 };

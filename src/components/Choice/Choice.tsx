@@ -20,20 +20,16 @@ const Choice = ({
 }: {
     role?: string;
     onClick?: (role: string) => void;
-    userChoice: string | null,
+    userChoice?: string | null;
 }) => {
-    // const [chosen, setChosen] = useState(false);
     const chosen = userChoice === role;
     const roleCss = getRoleCss(role);
 
     const handleClick = () => {
-        // if (!chosen) setChosen(true);
         if (onClick) onClick(role);
     };
 
     const testids = getChoiceTestIds(role);
-    // console.log(testids);
-    // console.log(testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]);
 
     return (
         <Box
