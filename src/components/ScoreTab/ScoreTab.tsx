@@ -14,19 +14,21 @@ const ScoreTab = () => {
         <Box
             data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
             sx={{
-                outline: `3px solid ${colors.headerOutline}`,
+                border: `3px solid ${colors.headerOutline}`,
+                // border:"1px solid",
                 padding: {
-                    xs: "0.7rem",
-                    md: "1.1rem 1.5rem",
+                    xs: "0.5rem",
+                    md: "0.7rem 1.3rem",
                 },
+                // borderImage: "linear-gradient(#f6b73c, #4d9f0c) 30",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
                 borderRadius: { xs: "4px", md: "18px" },
-                minWidth: { xs: "19rem", md: "33rem" },
+                minWidth: { xs: "19.5rem", md: "33rem" },
                 maxWidth: { xs: "30rem", md: "44rem" },
                 width: "100%",
-                minHeight: { xs: "5.9rem", md: "9.2rem" },
+                minHeight: { xs: "5.9rem", md: "9.4rem" },
             }}
         >
             <Box
