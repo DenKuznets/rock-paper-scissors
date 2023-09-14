@@ -15,6 +15,8 @@ export const Theme = createTheme({
                 body: {
                     // overflow: "hidden",
                     // fontFamily: `'Barlow Semi Condensed', sans-serif`,
+
+                    textTransform: "uppercase",
                 },
                 img: {
                     userSelect: "none",
