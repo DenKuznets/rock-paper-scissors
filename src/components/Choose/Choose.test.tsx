@@ -16,7 +16,11 @@ describe("Choose", () => {
         const chooseContainer = screen.getByTestId(
             CHOOSE_TESTIDS.CHOOSE_CONTAINER
         );
+        const chooseChoicesContainer = screen.getByTestId(
+            CHOOSE_TESTIDS.CHOOSE_CHOICES_CONTAINER
+        );
         expect(chooseContainer).toBeInTheDocument();
+        expect(chooseChoicesContainer).toBeInTheDocument();
 
         for (let role in Roles) {
             const roleElement = screen.getByAltText(role);
@@ -42,7 +46,9 @@ describe("Choose", () => {
             testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]
         );
         await user.click(choice);
-
+        expect(
+            screen.getByTestId(CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER)
+        ).toBeInTheDocument();
         expect(screen.getByText("you picked")).toBeInTheDocument();
         expect(screen.getByText("the house picked")).toBeInTheDocument();
     });

@@ -15,12 +15,10 @@ const ScoreTab = () => {
             data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
             sx={{
                 border: `3px solid ${colors.headerOutline}`,
-                // border:"1px solid",
                 padding: {
                     xs: "0.5rem",
                     md: "0.7rem 1.3rem",
                 },
-                // borderImage: "linear-gradient(#f6b73c, #4d9f0c) 30",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",

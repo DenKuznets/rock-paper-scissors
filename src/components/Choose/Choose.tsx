@@ -6,6 +6,8 @@ import { SxProps, Theme } from "@mui/material/styles";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
+    CHOOSE_CHOICES_CONTAINER: "choose-choices-container",
+    CHOOSE_PICKED_TEXT_CONTAINER: "choose-picked-text-container",
 };
 
 const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
@@ -37,89 +39,106 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
         >
             <Box
                 sx={{
-                    outline: "1px solid green",
-                    opacity: 1,
-                    transition: "all 1s ease-in",
-                    // backgroundColor: "white",
-                    margin: "0 auto",
-                    height: {
-                        xs: "9.7rem",
-                        md: userChoice ? "19.4rem" : "14.5rem",
-                    },
-                    width: {
-                        xs: "11.1rem",
-                        md: userChoice ? "23.8rem" : "17.5rem",
-                    },
-                    maxWidth: {
-                        xs: "11.1rem",
-                        md: userChoice ? "23.8rem" : "17.5rem",
-                    },
-                    minWidth: {
-                        xs: "11.1rem",
-                        md: userChoice ? "23.8rem" : "17.5rem",
-                    },
-                    backgroundImage: userChoice
-                        ? ""
-                        : `url("./images/bg-triangle.svg")`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    position: "relative",
-                    backgroundPosition: "center",
+                    
                 }}
             >
-                {sockets}
-            </Box>
-            <Box
-                sx={{
-                    outline: "1px solid yellow",
-                    display: "flex",
-                    textTransform: "uppercase",
-                    fontSize: { xs: "1rem" },
-                    // width: "100%",
-                    justifyContent: "space-between",
-                    letterSpacing: "2px",
-                    width: {
-                        xs: "11.1rem",
-                        md: userChoice ? "23.8rem" : "17.5rem",
-                    },
-                    maxWidth: {
-                        xs: "11.1rem",
-                        md: userChoice ? "23.8rem" : "17.5rem",
-                    },
-                    minWidth: {
-                        xs: "11.1rem",
-                        md: userChoice ? "23.8rem" : "17.5rem",
-                    },
-                }}
-            >
-                <span
-                    style={{
-                        position: "absolute",
-                        height: 0,
-                        width: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        overflow: "visible",
-                        whiteSpace: "nowrap",
+                <Box
+                    data-testid={CHOOSE_TESTIDS.CHOOSE_CHOICES_CONTAINER}
+                    sx={{
+                        outline: "1px solid green",
+                        opacity: 1,
+                        transition: "all 1s ease-in",
+                        // backgroundColor: "white",
+                        margin: "0 auto",
+                        height: {
+                            xs: "9.7rem",
+                            md: userChoice ? "19.4rem" : "14.5rem",
+                        },
+                        width: {
+                            xs: "11.1rem",
+                            md: userChoice ? "23.8rem" : "17.5rem",
+                        },
+                        maxWidth: {
+                            xs: "11.1rem",
+                            md: userChoice ? "23.8rem" : "17.5rem",
+                        },
+                        minWidth: {
+                            xs: "11.1rem",
+                            md: userChoice ? "23.8rem" : "17.5rem",
+                        },
+                        backgroundImage: userChoice
+                            ? ""
+                            : `url("./images/bg-triangle.svg")`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        position: "relative",
+                        backgroundPosition: "center",
                     }}
                 >
-                    you picked
-                </span>
-                <span
-                    style={{
-                        position: "absolute",
-                        height: 0,
-                        width: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        overflow: "visible",
-                        whiteSpace: "nowrap",
-                    }}
-                >
-                    the house picked
-                </span>
+                    {sockets}
+                </Box>
+                {userChoice && (
+                    <Box
+                        data-testid={
+                            CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER
+                        }
+                        sx={{
+                            outline: "1px solid yellow",
+                            // display: "flex",
+                            textTransform: "uppercase",
+                            fontSize: { xs: "1rem" },
+                            // width: "100%",
+                            // justifyContent: "space-between",
+                            letterSpacing: "2px",
+                            width: {
+                                xs: "11.1rem",
+                                md: userChoice ? "23.8rem" : "17.5rem",
+                            },
+                            maxWidth: {
+                                xs: "11.1rem",
+                                md: userChoice ? "23.8rem" : "17.5rem",
+                            },
+                            minWidth: {
+                                xs: "11.1rem",
+                                md: userChoice ? "23.8rem" : "17.5rem",
+                            },
+                            margin: "0 auto",
+                            mt: { xs: "1rem", md: "0" },
+                            // height: "5rem",
+                            position: "relative",
+                        }}
+                    >
+                        <span
+                            style={{
+                                position: "absolute",
+                                // height: 0,
+                                width: 0,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                overflow: "visible",
+                                whiteSpace: "nowrap",
+                            }}
+                        >
+                            you picked
+                        </span>
+                        <span
+                            style={{
+                                position: "absolute",
+                                // height: 0,
+                                width: 0,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                overflow: "visible",
+                                whiteSpace: "nowrap",
+                                right: "0",
+                            }}
+                        >
+                            the house picked
+                        </span>
+                    </Box>
+                )}
             </Box>
         </Box>
     );
