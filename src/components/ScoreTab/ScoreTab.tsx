@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
 import { colors } from "../../ts/colors";
+import type { RootState } from "../../app/store";
+import { useSelector } from "react-redux";
 
 export const SCORETAB_TESTIDS = {
     SCORETAB_CONTAINER: "scoretab-container",
@@ -10,6 +12,8 @@ export const SCORETAB_TESTIDS = {
 };
 
 const ScoreTab = () => {
+    const score = useSelector((state: RootState) => state.scoreTab.score);
+
     return (
         <Box
             data-testid={SCORETAB_TESTIDS.SCORETAB_CONTAINER}
@@ -71,7 +75,7 @@ const ScoreTab = () => {
                     lineHeight="1"
                     fontWeight="700"
                 >
-                    0
+                    {score}
                 </Box>
             </Box>
         </Box>

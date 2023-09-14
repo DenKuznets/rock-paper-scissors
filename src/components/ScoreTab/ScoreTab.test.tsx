@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/react";
+// import { render, screen } from "@testing-library/react";
 import ScoreTab, { SCORETAB_TESTIDS } from "./ScoreTab";
+import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 
 describe("ScoreTab", () => {
     test("renders correctly", () => {
-        render(<ScoreTab />);
+        renderWithProviders(<ScoreTab />);
 
         const container = screen.getByTestId(
             SCORETAB_TESTIDS.SCORETAB_CONTAINER
