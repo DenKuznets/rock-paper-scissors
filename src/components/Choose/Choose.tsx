@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
 import Choice from "../Choice/Choice";
 import { Roles } from "../../ts/roles";
-import { useState } from "react";
 import { SxProps, Theme } from "@mui/material/styles";
+import type { RootState } from "../../app/store";
+import { useSelector } from "react-redux";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
@@ -11,21 +12,15 @@ export const CHOOSE_TESTIDS = {
 };
 
 const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
-    const [userChoice, setUserChoice] = useState<string | null>(null);
-
+    const userChoice = useSelector(
+        (state: RootState) => state.choice.userChoice
+    );
     const sockets = Object.keys(Roles)
         .filter((role) => {
             return userChoice ? role === userChoice : role;
         })
         .map((role) => {
-            return (
-                <Choice
-                    // onClick={(choiceRole) => setUserChoice(choiceRole)}
-                    key={role}
-                    role={role}
-                    // userChoice={userChoice}
-                />
-            );
+            return <Choice key={role} role={role} />;
         });
 
     return (

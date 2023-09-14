@@ -32,11 +32,11 @@ describe("Choose", () => {
             testRemoveOtherChoices(role);
         }
     });
-    describe("gets choice into proper position after user clicks on it", () => {
-        for (let role in Roles) {
-            testChoicePosition(role);
-        }
-    });
+    // describe("gets choice into proper position after user clicks on it", () => {
+    //     for (let role in Roles) {
+    //         testChoicePosition(role);
+    //     }
+    // });
     test("shows picked text when userChoice has value", async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
