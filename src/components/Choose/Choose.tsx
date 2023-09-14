@@ -20,10 +20,10 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
         .map((role) => {
             return (
                 <Choice
-                    onClick={(choiceRole) => setUserChoice(choiceRole)}
+                    // onClick={(choiceRole) => setUserChoice(choiceRole)}
                     key={role}
                     role={role}
-                    userChoice={userChoice}
+                    // userChoice={userChoice}
                 />
             );
         });

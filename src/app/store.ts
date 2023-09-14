@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import scoreTabReducer from "../components/ScoreTab/scoreTabSlice";
+import choiceReducer from "../components/Choice/choiceSlice";
 
 export const store = configureStore({
-    reducer: { scoreTab: scoreTabReducer },
+    reducer: { scoreTab: scoreTabReducer, choice: choiceReducer },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

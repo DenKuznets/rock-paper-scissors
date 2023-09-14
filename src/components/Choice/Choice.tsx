@@ -3,6 +3,9 @@ import { Roles } from "../../ts/roles";
 import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
 import getChoiceTestIds from "./choiceTestIds";
+import type { RootState } from "../../app/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserChoice } from "./choiceSlice";
 
 export const chosenChoiceScale = 1.55;
 
@@ -13,21 +16,13 @@ export const CHOICE_TESTID_SUFFIXES = {
     image: "_CHOICE_IMAGE",
 };
 
-const Choice = ({
-    role = Roles.PAPER,
-    onClick,
-    userChoice = null,
-}: {
-    role?: string;
-    onClick?: (role: string) => void;
-    userChoice?: string | null;
-}) => {
+const Choice = ({ role = Roles.PAPER }: { role?: string }) => {
+    const userChoice = useSelector(
+        (state: RootState) => state.choice.userChoice
+    );
+    const dispatch = useDispatch();
     const chosen = userChoice === role;
     const roleCss = getRoleCss(role);
-
-    const handleClick = () => {
-        if (onClick) onClick(role);
-    };
 
     const testids = getChoiceTestIds(role);
 
@@ -61,7 +56,7 @@ const Choice = ({
                     },
                 },
             }}
-            onClick={handleClick}
+            onClick={() => dispatch(setUserChoice(role))}
         >
             <Box
                 data-testid={
