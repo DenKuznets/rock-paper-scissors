@@ -21,9 +21,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
         })
         .map((role) => {
             return (
-                <Box sx={{
-                    
-                }}>
+                <Box sx={{}}>
                     <Choice key={role} role={role} />;
                 </Box>
             );
