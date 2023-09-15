@@ -1,11 +1,12 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Theme } from "../ts/theme";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { setupStore } from "./store";
+import { PropsWithChildren } from "react";
 
-export const AppProviders = ({ children }: { children: React.ReactNode }) => {
+export const AppProviders = ({ children }: PropsWithChildren<{}>) => {
     return (
-        <Provider store={store}>
+        <Provider store={setupStore()}>
             <ThemeProvider theme={Theme}>
                 <CssBaseline />
                 {children}

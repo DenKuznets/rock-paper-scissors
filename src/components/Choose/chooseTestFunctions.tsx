@@ -1,18 +1,16 @@
 import userEvent from "@testing-library/user-event";
-import Choose from "./Choose";
+import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { renderWithProviders, screen } from "../../ts/utils-for-tests";
-import getChoiceTestIds, { choiceTestIds } from "../Choice/choiceTestIds";
+import { choiceTestIds } from "../Choice/choiceTestIds";
 import coords from "../../ts/coords";
-import { CHOICE_TESTID_SUFFIXES } from "../Choice/Choice";
 import { Roles } from "../../ts/roles";
 
 export const testChoicePosition = async (role: string) => {
     return test(role, async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
-        const testids = getChoiceTestIds(role);
         const container = screen.getByTestId(
-            testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]
+            choiceTestIds(role).CHOICE_CONTAINER
         );
 
         await user.click(container);
@@ -30,26 +28,35 @@ export const testRemoveOtherChoices = (role: string) => {
     return test(role, async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
-        console.debug(role);
         const clickedElement = screen.getByTestId(
             choiceTestIds(role).CHOICE_CONTAINER
         );
         expect(clickedElement).toBeInTheDocument();
-        // const allElements = screen.getAllByTestId(
-        //     CHOICE_TESTID_SUFFIXES.container,
-        //     {
-        //         exact: false,
-        //     }
-        // );
+        const allElements = screen.getAllByTestId("CHOICE_CONTAINER", {
+            exact: false,
+        });
 
-        // expect(allElements).toHaveLength(Object.keys(Roles).length);
+        expect(allElements).toHaveLength(Object.keys(Roles).length);
 
-        // await user.click(clickedElement);
+        await user.click(clickedElement);
 
-        // for (let elem of allElements) {
-        //     if (elem === clickedElement) expect(elem).toBeInTheDocument();
-        //     else expect(elem).not.toBeInTheDocument();
-        // }
+        for (let elem of allElements) {
+            if (elem === clickedElement) expect(elem).toBeInTheDocument();
+            else expect(elem).not.toBeInTheDocument();
+        }
     });
-    // console.log(role);
+};
+
+export const testShowPickedText = (role: string) => {
+    return test(role, async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Choose />);
+        const choice = screen.getByTestId(choiceTestIds(role).CHOICE_CONTAINER);
+        await user.click(choice);
+        expect(
+            screen.getByTestId(CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER)
+        ).toBeInTheDocument();
+        expect(screen.getByText("you picked")).toBeInTheDocument();
+        expect(screen.getByText("the house picked")).toBeInTheDocument();
+    });
 };

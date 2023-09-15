@@ -12,9 +12,9 @@ const rootReducer = combineReducers({
     choice: choiceReducer,
 });
 
-export const store = configureStore({
-    reducer: rootReducer,
-});
+// export const store = configureStore({
+//     reducer: rootReducer,
+// });
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
     return configureStore({
