@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent } from "@storybook/testing-library";
 import Choose from "./Choose";
 import { gradients } from "../../ts/colors";
 import { Roles } from "../../ts/roles";
@@ -11,7 +10,7 @@ const meta: Meta<typeof Choose> = {
     component: Choose,
     parameters: {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
-        layout: "centered",
+        layout: "fullscreen",
     },
 
     decorators: [
@@ -19,19 +18,13 @@ const meta: Meta<typeof Choose> = {
             <Box
                 sx={{
                     background: gradients.backgroundGradient,
-                    // minHeight: "770px",
                 }}
                 className="App"
             >
                 <Box
                     sx={{
-                        // height: "100vh",
-                        // minHeight: { xs: "740px", md: "600px" },
-                        padding: { xs: "2rem", md: "3rem" },
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        position: "relative",
+                        padding: "10rem 0",
+                        width: "100vw",
                     }}
                 >
                     <Story />
