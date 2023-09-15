@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 export interface ChoiceState {
     userChoice: string | null;
@@ -21,5 +22,8 @@ export const choiceSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { setUserChoice } = choiceSlice.actions;
+
+// прописываем селектор здесь, что бы не пришлось каждый раз в компонентах писать const userChoice = useSelector((state: RootState) => state.choice.userChoice);
+export const selectUserChoice = (state: RootState) => state.choice.userChoice;
 
 export default choiceSlice.reducer;

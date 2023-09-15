@@ -3,9 +3,8 @@ import { Roles } from "../../ts/roles";
 import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
 import getChoiceTestIds from "./choiceTestIds";
-import type { RootState } from "../../app/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserChoice } from "./choiceSlice";
+import { setUserChoice, selectUserChoice } from "./choiceSlice";
 
 export const chosenChoiceScale = 1.55;
 
@@ -17,13 +16,10 @@ export const CHOICE_TESTID_SUFFIXES = {
 };
 
 const Choice = ({ role = Roles.PAPER }: { role?: string }) => {
-    const userChoice = useSelector(
-        (state: RootState) => state.choice.userChoice
-    );
+    const userChoice = useSelector(selectUserChoice);
     const dispatch = useDispatch();
     const chosen = userChoice === role;
     const roleCss = getRoleCss(role);
-
     const testids = getChoiceTestIds(role);
 
     return (

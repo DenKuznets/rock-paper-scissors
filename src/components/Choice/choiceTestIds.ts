@@ -9,4 +9,13 @@ const getChoiceTestIds = (role: string) => {
     };
 };
 
+export const choiceTestIds = (role: string) => {
+    return {
+        CHOICE_CONTAINER: `${role}_CHOICE_CONTAINER`,
+        CHOICE_COLORED_BORDER: `${role}_CHOICE_COLORED_BORDER`,
+        CHOICE_IMAGE: `${role}_CHOICE_IMAGE`,
+        CHOICE_IMAGE_BACKGROUND: `${role}_CHOICE_IMAGE_BACKGROUND`,
+    };
+};
+
 export default getChoiceTestIds;
