@@ -4,6 +4,8 @@ import { gradients } from "../ts/colors";
 import Choose from "../components/Choose/Choose";
 import Rules from "../components/Rules/Rules";
 import { useState } from "react";
+import { useAppSelector } from "./hooks";
+import { selectUserChoice } from "../components/Choice/choiceSlice";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -13,47 +15,48 @@ export const APP_TESTIDS = {
 
 function App() {
     const [showModal, setShowModal] = useState(false);
+    const userChoice = useAppSelector(selectUserChoice);
 
     return (
         <Box
+            data-testis={APP_TESTIDS.APP_CONTAINER}
             sx={{
                 background: gradients.backgroundGradient,
-                minHeight: "770px",
+                height: "100vh",
+                minHeight: { xs: "740px", md: "600px" },
+                padding: { xs: "2rem", md: "3rem" },
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                position: "relative",
             }}
-            className="App"
         >
-            <Box
-                data-testis={APP_TESTIDS.APP_CONTAINER}
+            <ScoreTab />
+            <Choose
                 sx={{
-                    height: "100vh",
-                    minHeight: { xs: "740px", md: "600px" },
-                    padding: { xs: "2rem", md: "3rem" },                    
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    position: "relative",
+                    marginTop: {
+                        xs: userChoice ? "5rem" : "10.5rem",
+                        md: "9.5rem",
+                    },
+                }}
+            />
+            <Button
+                sx={{
+                    marginTop: "13rem",
+                    marginRight: { md: "2rem" },
+                    marginBottom: { md: "2rem" },
+                    position: { md: "absolute" },
+                    right: { md: "0" },
+                    bottom: { md: "0" },
+                }}
+                variant="outlined"
+                onClick={() => {
+                    setShowModal(true);
+                    document.body.style.overflow = "hidden";
                 }}
             >
-                <ScoreTab />
-                <Choose sx={{ marginTop: { xs: "10.5rem", md: "9.5rem" } }} />
-                <Button
-                    sx={{
-                        marginTop: "13rem",
-                        marginRight: { md: "2rem" },
-                        marginBottom: { md: "2rem" },
-                        position: { md: "absolute" },
-                        right: { md: "0" },
-                        bottom: { md: "0" },
-                    }}
-                    variant="outlined"
-                    onClick={() => {
-                        setShowModal(true);
-                        document.body.style.overflow = "hidden";
-                    }}
-                >
-                    RULES
-                </Button>
-            </Box>
+                RULES
+            </Button>
             <Box
                 data-testid={APP_TESTIDS.APP_MODAL}
                 sx={{

@@ -19,7 +19,6 @@ const meta: Meta<typeof Choose> = {
                 sx={{
                     background: gradients.backgroundGradient,
                 }}
-                className="App"
             >
                 <Box
                     sx={{

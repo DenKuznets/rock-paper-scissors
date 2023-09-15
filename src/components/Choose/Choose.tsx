@@ -28,8 +28,9 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
             sx={{
                 ...sx,
-                outline: "1px solid red",
+                // outline: "1px solid red",
                 width: "100%",
+                transition: "margin-top 1s"
             }}
         >
             <Box
@@ -44,7 +45,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 <Box
                     data-testid={CHOOSE_TESTIDS.CHOOSE_CHOICES_CONTAINER}
                     sx={{
-                        outline: "1px solid green",
+                        // outline: "1px solid green",
                         opacity: 1,
                         transition: "all 1s ease-in",
                         // backgroundColor: "white",
@@ -70,7 +71,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                             CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER
                         }
                         sx={{
-                            outline: "1px solid yellow",
+                            // outline: "1px solid yellow",
                             fontSize: { xs: "1rem" },
                             letterSpacing: "2px",
                             mt: { xs: "1rem", md: "0" },
