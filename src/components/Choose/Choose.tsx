@@ -30,7 +30,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 ...sx,
                 // outline: "1px solid red",
                 width: "100%",
-                transition: "margin-top 1s"
+                transition: "margin-top 1s ease-out",
             }}
         >
             <Box
@@ -65,48 +65,46 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 >
                     {sockets}
                 </Box>
-                {userChoice && (
-                    <Box
-                        data-testid={
-                            CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER
-                        }
-                        sx={{
-                            // outline: "1px solid yellow",
-                            fontSize: { xs: "1rem" },
-                            letterSpacing: "2px",
-                            mt: { xs: "1rem", md: "0" },
-                            position: "relative",
+                <Box
+                    data-testid={CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER}
+                    sx={{
+                        // outline: "1px solid yellow",
+                        fontSize: { xs: "1rem" },
+                        letterSpacing: "2px",
+                        mt: { xs: "1rem", md: "0" },
+                        position: "relative",
+                        opacity: userChoice ? 1 : 0,
+                        transition: "opacity 3s ease-in",
+                    }}
+                >
+                    <span
+                        style={{
+                            position: "absolute",
+                            width: 0,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            overflow: "visible",
+                            whiteSpace: "nowrap",
                         }}
                     >
-                        <span
-                            style={{
-                                position: "absolute",
-                                width: 0,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                overflow: "visible",
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            you picked
-                        </span>
-                        <span
-                            style={{
-                                position: "absolute",
-                                width: 0,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                overflow: "visible",
-                                whiteSpace: "nowrap",
-                                right: "0",
-                            }}
-                        >
-                            the house picked
-                        </span>
-                    </Box>
-                )}
+                        you picked
+                    </span>
+                    <span
+                        style={{
+                            position: "absolute",
+                            width: 0,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            overflow: "visible",
+                            whiteSpace: "nowrap",
+                            right: "0",
+                        }}
+                    >
+                        the house picked
+                    </span>
+                </Box>
             </Box>
         </Box>
     );
