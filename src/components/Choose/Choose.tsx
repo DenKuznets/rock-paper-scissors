@@ -20,7 +20,13 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             return userChoice ? role === userChoice : role;
         })
         .map((role) => {
-            return <Choice key={role} role={role} />;
+            return (
+                <Box sx={{
+                    
+                }}>
+                    <Choice key={role} role={role} />;
+                </Box>
+            );
         });
 
     return (
