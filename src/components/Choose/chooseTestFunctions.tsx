@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { renderWithProviders, screen } from "../../ts/utils-for-tests";
-import { choiceTestIds } from "../Choice/choiceTestIds";
+import { choiceTestIds } from "../Choice/Choice";
 import coords from "../../ts/coords";
 import { Roles } from "../../ts/roles";
 

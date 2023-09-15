@@ -3,8 +3,6 @@ import { within, userEvent } from "@storybook/testing-library";
 import Choose from "./Choose";
 import { gradients } from "../../ts/colors";
 import { Roles } from "../../ts/roles";
-import getChoiceTestIds from "../Choice/choiceTestIds";
-import { CHOICE_TESTID_SUFFIXES } from "../Choice/Choice";
 import { userChoice } from "./chooseStorybookFunctions";
 import { Box } from "@mui/material";
 

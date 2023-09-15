@@ -2,29 +2,29 @@ import { Box } from "@mui/material";
 import { Roles } from "../../ts/roles";
 import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
-import getChoiceTestIds from "./choiceTestIds";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserChoice, selectUserChoice } from "./choiceSlice";
 
 export const chosenChoiceScale = 1.55;
 
-export const CHOICE_TESTID_SUFFIXES = {
-    container: "_CHOICE_CONTAINER",
-    coloredBorder: "_CHOICE_COLORED_BORDER",
-    imageBackground: "_CHOICE_IMAGE_BACKGROUND",
-    image: "_CHOICE_IMAGE",
+export const choiceTestIds = (role: string) => {
+    return {
+        CHOICE_CONTAINER: `${role}_CHOICE_CONTAINER`,
+        CHOICE_COLORED_BORDER: `${role}_CHOICE_COLORED_BORDER`,
+        CHOICE_IMAGE: `${role}_CHOICE_IMAGE`,
+        CHOICE_IMAGE_BACKGROUND: `${role}_CHOICE_IMAGE_BACKGROUND`,
+    };
 };
 
-const Choice = ({ role = Roles.PAPER }: { role?: string }) => {
+const Choice = ({ role = Roles.PAPER }) => {
     const userChoice = useSelector(selectUserChoice);
     const dispatch = useDispatch();
     const chosen = userChoice === role;
     const roleCss = getRoleCss(role);
-    const testids = getChoiceTestIds(role);
 
     return (
         <Box
-            data-testid={testids[`${role}${CHOICE_TESTID_SUFFIXES.container}`]}
+            data-testid={choiceTestIds(role).CHOICE_CONTAINER}
             sx={{
                 position: "absolute",
                 height: 0,
@@ -55,12 +55,7 @@ const Choice = ({ role = Roles.PAPER }: { role?: string }) => {
             onClick={() => dispatch(setUserChoice(role))}
         >
             <Box
-                data-testid={
-                    testids[
-                        `${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.coloredBorder}`
-                    ]
-                }
-                data-role={role}
+                data-testid={choiceTestIds(role).CHOICE_COLORED_BORDER}
                 sx={{
                     flex: "1 0 auto",
                     background: roleCss.gradient,
@@ -79,11 +74,7 @@ const Choice = ({ role = Roles.PAPER }: { role?: string }) => {
                 }}
             >
                 <Box
-                    data-testid={
-                        testids[
-                            `${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.imageBackground}`
-                        ]
-                    }
+                    data-testid={choiceTestIds(role).CHOICE_IMAGE_BACKGROUND}
                     sx={{
                         display: "flex",
                         alignItems: "center",
@@ -99,11 +90,7 @@ const Choice = ({ role = Roles.PAPER }: { role?: string }) => {
                     }}
                 >
                     <img
-                        data-testid={
-                            testids[
-                                `${Roles.PAPER}${CHOICE_TESTID_SUFFIXES.image}`
-                            ]
-                        }
+                        data-testid={choiceTestIds(role).CHOICE_IMAGE}
                         src={roleCss.icon}
                         alt={role}
                         height="auto"
