@@ -6,7 +6,7 @@ import coords from "../../ts/coords";
 import { Roles } from "../../ts/roles";
 
 export const testChoicePosition = async (role: string) => {
-    return test(role, async () => {
+    return test(`${role}, ${role} gets into userChoice coords position`, async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
         const container = screen.getByTestId(
@@ -16,39 +16,37 @@ export const testChoicePosition = async (role: string) => {
         await user.click(container);
 
         expect(container).toHaveStyle({
-            top: coords.userChoice.top,
-            bottom: coords.userChoice.bottom,
-            left: coords.userChoice.left,
-            right: coords.userChoice.right,
+            ...coords.userChoice,
         });
     });
 };
 
-// export const testRemoveOtherChoices = (role: string) => {
-//     return test(role, async () => {
-//         const user = userEvent.setup();
-//         renderWithProviders(<Choose />);
-//         const clickedElement = screen.getByTestId(
-//             choiceTestIds(role).CHOICE_CONTAINER
-//         );
-//         expect(clickedElement).toBeInTheDocument();
-//         const allElements = screen.getAllByTestId("CHOICE_CONTAINER", {
-//             exact: false,
-//         });
+export const testRemoveOtherChoices = (role: string) => {
+    return test(`${role}, removes other choices`, async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Choose />);
+        const clickedElement = screen.getByTestId(
+            choiceTestIds(role).CHOICE_CONTAINER
+        );
+        expect(clickedElement).toBeInTheDocument();
+        const allElements = screen.getAllByTestId("CHOICE_CONTAINER", {
+            exact: false,
+        });
 
-//         expect(allElements).toHaveLength(Object.keys(Roles).length);
+        expect(allElements).toHaveLength(Object.keys(Roles).length);
 
-//         await user.click(clickedElement);
+        await user.click(clickedElement);
 
-//         for (let elem of allElements) {
-//             if (elem === clickedElement) expect(elem).toBeInTheDocument();
-//             else expect(elem).not.toBeInTheDocument();
-//         }
-//     });
-// };
+        for (let elem of allElements) {
+            if (elem === clickedElement)
+                expect(elem).toHaveStyle({ opacity: "1" });
+            else expect(elem).toHaveStyle({ opacity: "0" });
+        }
+    });
+};
 
 export const testShowPickedText = (role: string) => {
-    return test(role, async () => {
+    return test(`${role}, shows picked text`, async () => {
         const user = userEvent.setup();
         renderWithProviders(<Choose />);
         const choice = screen.getByTestId(choiceTestIds(role).CHOICE_CONTAINER);

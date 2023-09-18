@@ -3,8 +3,7 @@ import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { Roles } from "../../ts/roles";
 import {
     testChoicePosition,
-    // testChoicePosition,
-    // testRemoveOtherChoices,
+    testRemoveOtherChoices,
     testShowPickedText,
 } from "./chooseTestFunctions";
 
@@ -25,18 +24,10 @@ describe("Choose", () => {
         ).toHaveLength(Object.keys(Roles).length);
     });
 
-    // describe("removes other choices then one choice is clicked", () => {
-    //     for (let role in Roles) {
-    //         testRemoveOtherChoices(role);
-    //     }
-    // });
-    describe("gets choice into userChoice coords position after user clicks on it", () => {
+    describe("after user click on choice", () => {
         for (let role in Roles) {
+            testRemoveOtherChoices(role);
             testChoicePosition(role);
-        }
-    });
-    describe("shows picked text after user clicks choice", () => {
-        for (let role in Roles) {
             testShowPickedText(role);
         }
     });
