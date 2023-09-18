@@ -1,11 +1,7 @@
 import { Box } from "@mui/material";
 import { Roles } from "../../ts/roles";
-import coords from "../../ts/coords";
 import getRoleCss from "./roleCss";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserChoice, selectUserChoice } from "./choiceSlice";
-
-export const chosenChoiceScale = 1.55;
+import { SxProps, Theme } from "@mui/material/styles";
 
 export const choiceTestIds = (role: string) => {
     return {
@@ -16,10 +12,15 @@ export const choiceTestIds = (role: string) => {
     };
 };
 
-const Choice = ({ role = Roles.PAPER }) => {
-    const userChoice = useSelector(selectUserChoice);
-    const dispatch = useDispatch();
-    const chosen = userChoice === role;
+const Choice = ({
+    role = Roles.PAPER,
+    sx,
+    onClick,
+}: {
+    role: string;
+    sx?: SxProps<Theme> | undefined;
+    onClick?: () => void;
+}) => {
     const roleCss = getRoleCss(role);
 
     return (
@@ -32,27 +33,9 @@ const Choice = ({ role = Roles.PAPER }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                top: chosen ? coords.userChoice.top : roleCss.initialTop,
-                bottom: chosen
-                    ? coords.userChoice.bottom
-                    : roleCss.initialBottom,
-                right: chosen ? coords.userChoice.right : roleCss.initialRight,
-                left: chosen ? coords.userChoice.left : roleCss.initialLeft,
-                cursor: chosen ? "default" : "pointer",
-                transform: {
-                    md: chosen ? `scale(${chosenChoiceScale})` : "none",
-                },
-                transition:
-                    "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s",
-                ":hover": {
-                    transform: {
-                        md: chosen
-                            ? `scale(${chosenChoiceScale})`
-                            : "scale(1.05)",
-                    },
-                },
+                ...sx,
             }}
-            onClick={() => !userChoice && dispatch(setUserChoice(role))}
+            onClick={onClick}
         >
             <Box
                 data-testid={choiceTestIds(role).CHOICE_COLORED_BORDER}
@@ -70,7 +53,6 @@ const Choice = ({ role = Roles.PAPER }) => {
                         md: `0 11px 2px 0px ${roleCss.shadowColor}`,
                     },
                     filter: "drop-shadow(0px 0px 3px black)",
-                    // opacity:"0.2",
                 }}
             >
                 <Box

@@ -3,7 +3,10 @@ import Choice from "../Choice/Choice";
 import { Roles } from "../../ts/roles";
 import { SxProps, Theme } from "@mui/material/styles";
 import type { RootState } from "../../app/store";
-import { useSelector } from "react-redux";
+import coords from "../../ts/coords";
+import getRoleCss from "../Choice/roleCss";
+import { setUserChoice } from "../Choice/choiceSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
@@ -12,25 +15,55 @@ export const CHOOSE_TESTIDS = {
 };
 
 const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
+    const chosenChoiceScale = 1.55;
     const userChoice = useSelector(
         (state: RootState) => state.choice.userChoice
     );
-    const sockets = Object.keys(Roles)
-        // .filter((role) => {
-        //     return userChoice ? role === userChoice : role;
-        // })
-        .map((role) => {
-            return <Choice key={role} role={role} />;
-        });
+    const dispatch = useDispatch();
+    const sockets = Object.keys(Roles).map((role) => {
+        const chosen = role === userChoice;
+        const roleCss = getRoleCss(role);
+        return (
+            <Choice
+                sx={{
+                    top: chosen ? coords.userChoice.top : roleCss.initialTop,
+                    bottom: chosen
+                        ? coords.userChoice.bottom
+                        : roleCss.initialBottom,
+                    right: chosen
+                        ? coords.userChoice.right
+                        : roleCss.initialRight,
+                    left: chosen ? coords.userChoice.left : roleCss.initialLeft,
+                    opacity: userChoice && !chosen ? 0 : 1,
+                    cursor: userChoice ? "default" : "pointer",
+                    transform: {
+                        md: chosen ? `scale(${chosenChoiceScale})` : "none",
+                    },
+                    transition:
+                        "top 1s, left 1s, right 1s, bottom 1s, transform 0.1s, opacity 1s",
+                    ":hover": {
+                        transform: {
+                            md: chosen
+                                ? `scale(${chosenChoiceScale})`
+                                : "scale(1.05)",
+                        },
+                    },
+                }}
+                key={role}
+                role={role}
+                onClick={() => !userChoice && dispatch(setUserChoice(role))}
+            />
+        );
+    });
 
     return (
         <Box
             data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
             sx={{
-                ...sx,
                 // outline: "1px solid red",
                 width: "100%",
                 transition: "margin-top 1s ease-out",
+                ...sx,
             }}
         >
             <Box

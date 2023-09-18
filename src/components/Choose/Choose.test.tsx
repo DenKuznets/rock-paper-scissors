@@ -2,6 +2,7 @@ import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { Roles } from "../../ts/roles";
 import {
+    testChoicePosition,
     // testChoicePosition,
     // testRemoveOtherChoices,
     testShowPickedText,
@@ -29,11 +30,11 @@ describe("Choose", () => {
     //         testRemoveOtherChoices(role);
     //     }
     // });
-    // describe("gets choice into userChoice coords position after user clicks on it", () => {
-    //     for (let role in Roles) {
-    //         testChoicePosition(role);
-    //     }
-    // });
+    describe("gets choice into userChoice coords position after user clicks on it", () => {
+        for (let role in Roles) {
+            testChoicePosition(role);
+        }
+    });
     describe("shows picked text after user clicks choice", () => {
         for (let role in Roles) {
             testShowPickedText(role);
