@@ -20,11 +20,11 @@ describe("Choose", () => {
         expect(chooseContainer).toBeInTheDocument();
         expect(chooseChoicesContainer).toBeInTheDocument();
         expect(
-            screen.getAllByTestId("CHOICE_CONTAINER", { exact: false })
+            screen.getAllByTestId("choice-container", { exact: false })
         ).toHaveLength(Object.keys(Roles).length);
     });
 
-    describe("after user click on choice", () => {
+    describe("after user clicks choice", () => {
         for (let role in Roles) {
             testRemoveOtherChoices(role);
             testChoicePosition(role);

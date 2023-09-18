@@ -15,7 +15,7 @@ export const APP_TESTIDS = {
 
 function App() {
     const [showModal, setShowModal] = useState(false);
-    const userChoice = useAppSelector(selectUserChoice);
+    // const userChoice = useAppSelector(selectUserChoice);
 
     return (
         <Box

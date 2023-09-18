@@ -5,10 +5,10 @@ import { SxProps, Theme } from "@mui/material/styles";
 
 export const choiceTestIds = (role: string) => {
     return {
-        CHOICE_CONTAINER: `${role}_CHOICE_CONTAINER`,
-        CHOICE_COLORED_BORDER: `${role}_CHOICE_COLORED_BORDER`,
-        CHOICE_IMAGE: `${role}_CHOICE_IMAGE`,
-        CHOICE_IMAGE_BACKGROUND: `${role}_CHOICE_IMAGE_BACKGROUND`,
+        CHOICE_CONTAINER: `${role}-choice-container`,
+        CHOICE_COLORED_BORDER: `${role}-choice-colored-border`,
+        CHOICE_IMAGE: `${role}-choice-image`,
+        CHOICE_IMAGE_BACKGROUND: `${role}-choice-image-background`,
     };
 };
 
@@ -20,8 +20,7 @@ const Choice = ({
     role: string;
     sx?: SxProps<Theme> | undefined;
     onClick?: () => void;
-    }) => {
-    
+}) => {
     const roleCss = getRoleCss(role);
 
     return (

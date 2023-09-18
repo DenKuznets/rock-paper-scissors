@@ -29,7 +29,7 @@ export const testRemoveOtherChoices = (role: string) => {
             choiceTestIds(role).CHOICE_CONTAINER
         );
         expect(clickedElement).toBeInTheDocument();
-        const allElements = screen.getAllByTestId("CHOICE_CONTAINER", {
+        const allElements = screen.getAllByTestId("choice-container", {
             exact: false,
         });
 
