@@ -16,15 +16,11 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
         (state: RootState) => state.choice.userChoice
     );
     const sockets = Object.keys(Roles)
-        .filter((role) => {
-            return userChoice ? role === userChoice : role;
-        })
+        // .filter((role) => {
+        //     return userChoice ? role === userChoice : role;
+        // })
         .map((role) => {
-            return (
-                <Box sx={{}}>
-                    <Choice key={role} role={role} />;
-                </Box>
-            );
+            return <Choice key={role} role={role} />;
         });
 
     return (

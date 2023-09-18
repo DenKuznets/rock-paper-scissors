@@ -18,15 +18,15 @@ const coords = {
         right: "50%",
     },
     userChoice: {
-        top: "50%",
+        top: "0",
         left: "0",
-        bottom: "50%",
+        bottom: "100%",
         right: "100%",
     },
     houseChoice: {
-        top: "50%",
+        top: "0",
         left: "100%",
-        bottom: "50%",
+        bottom: "100%",
         right: "0",
     },
 };

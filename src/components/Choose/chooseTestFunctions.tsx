@@ -5,24 +5,24 @@ import { choiceTestIds } from "../Choice/Choice";
 import coords from "../../ts/coords";
 import { Roles } from "../../ts/roles";
 
-export const testChoicePosition = async (role: string) => {
-    return test(role, async () => {
-        const user = userEvent.setup();
-        renderWithProviders(<Choose />);
-        const container = screen.getByTestId(
-            choiceTestIds(role).CHOICE_CONTAINER
-        );
+// export const testChoicePosition = async (role: string) => {
+//     return test(role, async () => {
+//         const user = userEvent.setup();
+//         renderWithProviders(<Choose />);
+//         const container = screen.getByTestId(
+//             choiceTestIds(role).CHOICE_CONTAINER
+//         );
 
-        await user.click(container);
+//         await user.click(container);
 
-        expect(container).toHaveStyle({
-            top: coords.userChoice.top,
-            bottom: coords.userChoice.bottom,
-            left: coords.userChoice.left,
-            right: coords.userChoice.right,
-        });
-    });
-};
+//         expect(container).toHaveStyle({
+//             top: coords.userChoice.top,
+//             bottom: coords.userChoice.bottom,
+//             left: coords.userChoice.left,
+//             right: coords.userChoice.right,
+//         });
+//     });
+// };
 
 export const testRemoveOtherChoices = (role: string) => {
     return test(role, async () => {

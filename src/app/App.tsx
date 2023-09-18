@@ -35,7 +35,7 @@ function App() {
             <Choose
                 sx={{
                     marginTop: {
-                        xs: userChoice ? "5rem" : "10.5rem",
+                        xs: "10.5rem",
                         md: "9.5rem",
                     },
                 }}

@@ -52,7 +52,7 @@ const Choice = ({ role = Roles.PAPER }) => {
                     },
                 },
             }}
-            onClick={() => dispatch(setUserChoice(role))}
+            onClick={() => !userChoice && dispatch(setUserChoice(role))}
         >
             <Box
                 data-testid={choiceTestIds(role).CHOICE_COLORED_BORDER}

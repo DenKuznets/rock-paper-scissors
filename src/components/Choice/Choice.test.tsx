@@ -1,5 +1,5 @@
 import { Roles } from "../../ts/roles";
-import { testRendersCorrectly } from "./choiceTestFunctions";
+import { testChoicePosition, testRendersCorrectly } from "./choiceTestFunctions";
 
 describe("Choice", () => {
     describe("renders correctly role", () => {
@@ -7,4 +7,10 @@ describe("Choice", () => {
             testRendersCorrectly(role);
         }
     });
+});
+
+describe("changes coords to userChoice after user clicks on it", () => {
+    for (let role in Roles) {
+        testChoicePosition(role);
+    }
 });
