@@ -3,6 +3,7 @@ import Choose, { CHOOSE_TESTIDS } from "./Choose";
 import { Roles } from "../../ts/roles";
 import {
     testChoicePosition,
+    testShowHousePickPlaceholder,
     testRemoveOtherChoices,
     testShowPickedText,
 } from "./chooseTestFunctions";
@@ -29,6 +30,7 @@ describe("Choose", () => {
             testRemoveOtherChoices(role);
             testChoicePosition(role);
             testShowPickedText(role);
+            testShowHousePickPlaceholder(role);
         }
     });
 });

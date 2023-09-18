@@ -58,3 +58,15 @@ export const testShowPickedText = (role: string) => {
         expect(screen.getByText("the house picked")).toBeInTheDocument();
     });
 };
+
+export const testShowHousePickPlaceholder = (role: string) => {
+    return test(`${role}, shows house placeholder`, async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<Choose />);
+        const choice = screen.getByTestId(choiceTestIds(role).CHOICE_CONTAINER);
+        await user.click(choice);
+        expect(
+            screen.getByTestId(CHOOSE_TESTIDS.CHOOSE_HOUSE_PICK_PLACEHOLDER)
+        ).toBeInTheDocument();
+    });
+};

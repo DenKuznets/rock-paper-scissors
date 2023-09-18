@@ -11,6 +11,8 @@ export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
     CHOOSE_CHOICES_CONTAINER: "choose-choices-container",
     CHOOSE_PICKED_TEXT_CONTAINER: "choose-picked-text-container",
+    CHOOSE_HOUSE_PICK_CONTAINER: "choose-house-pick-container",
+    CHOOSE_HOUSE_PICK_PLACEHOLDER: "choose-house-pick-placeholder",
 };
 
 const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
@@ -28,6 +30,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             <Choice
                 sx={{
                     ...choiceCoords,
+                    position: "absolute",
                     opacity: userChoice && !chosen ? 0 : 1,
                     cursor: userChoice ? "default" : "pointer",
                     transform: {
@@ -62,7 +65,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             <Box
                 sx={{
                     maxWidth: {
-                        xs: "11.1rem",
+                        xs: "11.7rem",
                         md: userChoice ? "23.8rem" : "17.5rem",
                     },
                     margin: "0 auto",
@@ -76,11 +79,11 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                         fontSize: { xs: "0.93rem" },
                         letterSpacing: "2px",
                         position: "absolute",
-                        top: '5.4rem',
+                        top: "5.4rem",
                         left: 0,
                         opacity: userChoice ? 1 : 0,
                         transition: "opacity 3s ease-in",
-                        width:"100%",
+                        width: "100%",
                     }}
                 >
                     <span
@@ -131,6 +134,33 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     }}
                 >
                     {choices}
+                    <Box
+                        data-testid={CHOOSE_TESTIDS.CHOOSE_HOUSE_PICK_CONTAINER}
+                        sx={{
+                            opacity: userChoice ? 1 : 0,
+                            transition: "opacity 1s ease-in",
+                            height: 0,
+                            width: 0,
+                            position: "absolute",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            ...coords.houseChoice,
+                        }}
+                    >
+                        <Box
+                            data-testid={
+                                CHOOSE_TESTIDS.CHOOSE_HOUSE_PICK_PLACEHOLDER
+                            }
+                            sx={{
+                                flex: "1 0 auto",
+                                borderRadius: "50%",
+                                width: { xs: "7rem" },
+                                height: { xs: "7rem" },
+                                backgroundColor: "rgba(0,0,0,0.2)",
+                            }}
+                        ></Box>
+                    </Box>
                 </Box>
             </Box>
         </Box>

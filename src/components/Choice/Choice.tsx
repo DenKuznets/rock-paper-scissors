@@ -27,7 +27,6 @@ const Choice = ({
         <Box
             data-testid={choiceTestIds(role).CHOICE_CONTAINER}
             sx={{
-                position: "absolute",
                 height: 0,
                 width: 0,
                 display: "flex",
