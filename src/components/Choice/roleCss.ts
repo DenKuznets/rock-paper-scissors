@@ -1,4 +1,3 @@
-import coords from "../../ts/coords";
 import { Roles } from "../../ts/roles";
 
 const getRoleCss = (role: string) => {
@@ -6,10 +5,6 @@ const getRoleCss = (role: string) => {
         gradient: "",
         shadowColor: "",
         icon: "./images/",
-        initialTop: "",
-        initialLeft: "",
-        initialBottom: "",
-        initialRight: "",
     };
 
     switch (role) {
@@ -19,10 +14,7 @@ const getRoleCss = (role: string) => {
             RoleCss.shadowColor =
                 "hsl(229.65517241379308, 47.933884297520656%, 47.45098039215686%)";
             RoleCss.icon += "icon-paper.svg";
-            RoleCss.initialTop = coords.topLeft.top;
-            RoleCss.initialLeft = coords.topLeft.left;
-            RoleCss.initialBottom = coords.topLeft.bottom;
-            RoleCss.initialRight = coords.topLeft.right;
+
             break;
         case Roles.ROCK:
             RoleCss.gradient =
@@ -30,10 +22,7 @@ const getRoleCss = (role: string) => {
             RoleCss.shadowColor =
                 "hsl(348.94736842105266, 56.43564356435643%, 39.6078431372549%)";
             RoleCss.icon += "icon-rock.svg";
-            RoleCss.initialTop = coords.topRight.top;
-            RoleCss.initialLeft = coords.topRight.left;
-            RoleCss.initialBottom = coords.topRight.bottom;
-            RoleCss.initialRight = coords.topRight.right;
+
             break;
         case Roles.SCISSORS:
             RoleCss.gradient =
@@ -41,10 +30,7 @@ const getRoleCss = (role: string) => {
             RoleCss.shadowColor =
                 "hsl(40.12269938650307, 90.05524861878453%, 35.490196078431374%)";
             RoleCss.icon += "icon-scissors.svg";
-            RoleCss.initialTop = coords.bottomMiddle.top;
-            RoleCss.initialLeft = coords.bottomMiddle.left;
-            RoleCss.initialBottom = coords.bottomMiddle.bottom;
-            RoleCss.initialRight = coords.bottomMiddle.right;
+
             break;
     }
 

@@ -20,7 +20,8 @@ const Choice = ({
     role: string;
     sx?: SxProps<Theme> | undefined;
     onClick?: () => void;
-}) => {
+    }) => {
+    
     const roleCss = getRoleCss(role);
 
     return (

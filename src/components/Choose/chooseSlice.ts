@@ -24,6 +24,6 @@ export const choiceSlice = createSlice({
 export const { setUserChoice } = choiceSlice.actions;
 
 // прописываем селектор здесь, что бы не пришлось каждый раз в компонентах писать const userChoice = useSelector((state: RootState) => state.choice.userChoice);
-export const selectUserChoice = (state: RootState) => state.choice.userChoice;
+export const selectUserChoice = (state: RootState) => state.choose.userChoice;
 
 export default choiceSlice.reducer;

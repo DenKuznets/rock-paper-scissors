@@ -4,8 +4,7 @@ import { Roles } from "../../ts/roles";
 import { SxProps, Theme } from "@mui/material/styles";
 import type { RootState } from "../../app/store";
 import coords from "../../ts/coords";
-import getRoleCss from "../Choice/roleCss";
-import { setUserChoice } from "../Choice/choiceSlice";
+import { setUserChoice } from "./chooseSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 export const CHOOSE_TESTIDS = {
@@ -17,23 +16,18 @@ export const CHOOSE_TESTIDS = {
 const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
     const chosenChoiceScale = 1.55;
     const userChoice = useSelector(
-        (state: RootState) => state.choice.userChoice
+        (state: RootState) => state.choose.userChoice
     );
     const dispatch = useDispatch();
-    const sockets = Object.keys(Roles).map((role) => {
+    const choices = Object.keys(Roles).map((role, index) => {
         const chosen = role === userChoice;
-        const roleCss = getRoleCss(role);
+        const choiceCoords = chosen
+            ? coords.userChoice
+            : coords.choiceCoords[index];
         return (
             <Choice
                 sx={{
-                    top: chosen ? coords.userChoice.top : roleCss.initialTop,
-                    bottom: chosen
-                        ? coords.userChoice.bottom
-                        : roleCss.initialBottom,
-                    right: chosen
-                        ? coords.userChoice.right
-                        : roleCss.initialRight,
-                    left: chosen ? coords.userChoice.left : roleCss.initialLeft,
+                    ...choiceCoords,
                     opacity: userChoice && !chosen ? 0 : 1,
                     cursor: userChoice ? "default" : "pointer",
                     transform: {
@@ -62,7 +56,6 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             sx={{
                 // outline: "1px solid red",
                 width: "100%",
-                transition: "margin-top 1s ease-out",
                 ...sx,
             }}
         >
@@ -73,41 +66,21 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                         md: userChoice ? "23.8rem" : "17.5rem",
                     },
                     margin: "0 auto",
+                    position: "relative",
                 }}
             >
-                <Box
-                    data-testid={CHOOSE_TESTIDS.CHOOSE_CHOICES_CONTAINER}
-                    sx={{
-                        // outline: "1px solid green",
-                        opacity: 1,
-                        transition: "all 1s ease-in",
-                        // backgroundColor: "white",
-
-                        height: {
-                            xs: "9.7rem",
-                            md: userChoice ? "19.4rem" : "14.5rem",
-                        },
-                        backgroundImage: userChoice
-                            ? ""
-                            : `url("./images/bg-triangle.svg")`,
-                        backgroundSize: "contain",
-                        backgroundRepeat: "no-repeat",
-                        position: "relative",
-                        backgroundPosition: "center",
-                    }}
-                >
-                    {sockets}
-                </Box>
                 <Box
                     data-testid={CHOOSE_TESTIDS.CHOOSE_PICKED_TEXT_CONTAINER}
                     sx={{
                         // outline: "1px solid yellow",
-                        fontSize: { xs: "1rem" },
+                        fontSize: { xs: "0.93rem" },
                         letterSpacing: "2px",
-                        mt: { xs: "1rem", md: "0" },
-                        position: "relative",
+                        position: "absolute",
+                        top: '5.4rem',
+                        left: 0,
                         opacity: userChoice ? 1 : 0,
                         transition: "opacity 3s ease-in",
+                        width:"100%",
                     }}
                 >
                     <span
@@ -137,6 +110,27 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     >
                         the house picked
                     </span>
+                </Box>
+                <Box
+                    data-testid={CHOOSE_TESTIDS.CHOOSE_CHOICES_CONTAINER}
+                    sx={{
+                        // outline: "1px solid green",
+                        opacity: 1,
+                        transition: "all 1s ease-in",
+                        height: {
+                            xs: "9.7rem",
+                            md: userChoice ? "19.4rem" : "14.5rem",
+                        },
+                        backgroundImage: userChoice
+                            ? ""
+                            : `url("./images/bg-triangle.svg")`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        position: "relative",
+                        backgroundPosition: "center",
+                    }}
+                >
+                    {choices}
                 </Box>
             </Box>
         </Box>

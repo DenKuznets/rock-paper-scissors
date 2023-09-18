@@ -5,7 +5,7 @@ import Choose from "../components/Choose/Choose";
 import Rules from "../components/Rules/Rules";
 import { useState } from "react";
 import { useAppSelector } from "./hooks";
-import { selectUserChoice } from "../components/Choice/choiceSlice";
+import { selectUserChoice } from "../components/Choose/chooseSlice";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
