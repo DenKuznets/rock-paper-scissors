@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Roles } from "../../ts/roles";
 import UserPick from "./UserPick";
+import { gradients } from "../../ts/colors";
 
 const meta: Meta<typeof UserPick> = {
     title: "UserPick",
@@ -14,18 +15,11 @@ const meta: Meta<typeof UserPick> = {
         (Story) => (
             <div
                 style={{
-                    margin: "3em",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "150px",
-                    height: "150px",
-                    position: "relative",
+                    backgroundColor: gradients.backgroundGradient,
                 }}
             >
-                <div style={{ position: "relative" }}>
-                    <Story />
-                </div>
+                <Story />
+
                 {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
             </div>
         ),

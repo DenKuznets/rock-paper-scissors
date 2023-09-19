@@ -24,8 +24,12 @@ export const testRendersCorrectly = (role: string) => {
         const choice = screen.getByTestId(
             CHOICE_TESTIDS(role).CHOICE_CONTAINER
         );
+        const userPickText = screen.getByTestId(
+            USER_PICK_TESTIDS.USER_PICK_TEXT
+        );
 
         expect(userPickContainer).toBeInTheDocument();
         expect(choice).toBeInTheDocument();
+        expect(userPickText).toBeInTheDocument();
     });
 };
