@@ -6,6 +6,8 @@ import type { RootState } from "../../app/store";
 import coords from "../../ts/coords";
 import { setUserChoice } from "./chooseSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import Animation from "../Animation/Animation";
 
 export const CHOOSE_TESTIDS = {
     CHOOSE_CONTAINER: "choose-container",
@@ -53,6 +55,8 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
         );
     });
 
+    const [showAnimation, setShowAnimation] = useState(false);
+
     return (
         <Box
             data-testid={CHOOSE_TESTIDS.CHOOSE_CONTAINER}
@@ -62,6 +66,7 @@ const Choose = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 ...sx,
             }}
         >
+            {" "}
             <Box
                 sx={{
                     maxWidth: {
