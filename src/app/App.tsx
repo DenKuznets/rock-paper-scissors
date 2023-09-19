@@ -1,11 +1,11 @@
 import { Box, Button } from "@mui/material";
-import { ScoreTab } from "../components";
 import { gradients } from "../ts/colors";
-import Choose from "../components/Choose/Choose";
-import Rules from "../components/Rules/Rules";
 import { useState } from "react";
 import { useAppSelector } from "./hooks";
-import { selectUserChoice } from "../components/Choose/chooseSlice";
+import { selectUserChoice } from "./appSlice";
+import ScoreTab from "../components/ScoreTab/ScoreTab";
+import ChoiceList from "../components/ChoiceList/ChoiceList";
+import Rules from "../components/Rules/Rules";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -24,7 +24,7 @@ function App() {
                 background: gradients.backgroundGradient,
                 height: "100vh",
                 minHeight: { xs: "740px", md: "600px" },
-                padding: { xs: "2rem", md: "3rem" },
+                padding: { xs320: "1rem", xs375: "2rem", md: "3rem" },
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -32,11 +32,11 @@ function App() {
             }}
         >
             <ScoreTab />
-            <Choose
+            <ChoiceList
                 sx={{
                     marginTop: {
-                        xs: "10.5rem",
-                        md: "9.5rem",
+                        xs: "6.7rem",
+                        md: "4.2rem",
                     },
                 }}
             />

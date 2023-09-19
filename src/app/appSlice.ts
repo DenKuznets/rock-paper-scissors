@@ -1,29 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { RootState } from "./store";
 
-export interface ChoiceState {
+export interface appState {
     userChoice: string | null;
+    score: number;
 }
 
-const initialState: ChoiceState = {
+export const initialState: appState = {
     userChoice: null,
+    score: 0,
 };
 
-export const choiceSlice = createSlice({
-    name: "choice",
+export const appSlice = createSlice({
+    name: "app",
     initialState,
     reducers: {
         setUserChoice: (state, action: PayloadAction<string>) => {
             state.userChoice = action.payload;
         },
+        incrementScore: (state) => {
+            state.score += 1;
+        },
+        decrementScore: (state) => {
+            state.score -= 1;
+        },
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { setUserChoice } = choiceSlice.actions;
+export const { setUserChoice, incrementScore, decrementScore } =
+    appSlice.actions;
 
 // прописываем селектор здесь, что бы не пришлось каждый раз в компонентах писать const userChoice = useSelector((state: RootState) => state.choice.userChoice);
-export const selectUserChoice = (state: RootState) => state.choose.userChoice;
+export const selectUserChoice = (state: RootState) => state.app.userChoice;
 
-export default choiceSlice.reducer;
+export default appSlice.reducer;

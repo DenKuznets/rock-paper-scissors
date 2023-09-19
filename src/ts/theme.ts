@@ -1,6 +1,24 @@
 import { createTheme } from "@mui/material";
 
+declare module "@mui/material/styles" {
+    interface BreakpointOverrides {
+        xs320: true;
+        xs375: true;
+    }
+}
+
 export const Theme = createTheme({
+    breakpoints: {
+        values: {
+            xs: 0,
+            xs320: 320,
+            xs375: 375,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+        },
+    },
     typography: {
         fontFamily: ["Barlow Semi Condensed", "sans-serif"].join(","),
     },

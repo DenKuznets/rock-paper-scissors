@@ -12,7 +12,7 @@ export const SCORETAB_TESTIDS = {
 };
 
 const ScoreTab = () => {
-    const score = useSelector((state: RootState) => state.scoreTab.score);
+    const score = useSelector((state: RootState) => state.app.score);
 
     return (
         <Box

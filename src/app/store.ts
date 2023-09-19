@@ -1,5 +1,4 @@
-import scoreTabReducer from "../components/ScoreTab/scoreTabSlice";
-import chooseReducer from "../components/Choose/chooseSlice";
+import appReducer from "./appSlice";
 import {
     combineReducers,
     configureStore,
@@ -8,8 +7,7 @@ import {
 
 // Create the root reducer independently to obtain the RootState type
 const rootReducer = combineReducers({
-    scoreTab: scoreTabReducer,
-    choose: chooseReducer,
+    app: appReducer,
 });
 
 // export const store = configureStore({

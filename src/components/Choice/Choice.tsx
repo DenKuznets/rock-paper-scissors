@@ -3,7 +3,7 @@ import { Roles } from "../../ts/roles";
 import getRoleCss from "./roleCss";
 import { SxProps, Theme } from "@mui/material/styles";
 
-export const choiceTestIds = (role: string) => {
+export const CHOICE_TESTIDS = (role: string) => {
     return {
         CHOICE_CONTAINER: `${role}-choice-container`,
         CHOICE_COLORED_BORDER: `${role}-choice-colored-border`,
@@ -25,10 +25,9 @@ const Choice = ({
 
     return (
         <Box
-            data-testid={choiceTestIds(role).CHOICE_CONTAINER}
+            data-testid={CHOICE_TESTIDS(role).CHOICE_CONTAINER}
             sx={{
-                height: 0,
-                width: 0,
+                // outline:"1px solid red",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -37,7 +36,7 @@ const Choice = ({
             onClick={onClick}
         >
             <Box
-                data-testid={choiceTestIds(role).CHOICE_COLORED_BORDER}
+                data-testid={CHOICE_TESTIDS(role).CHOICE_COLORED_BORDER}
                 sx={{
                     flex: "1 0 auto",
                     background: roleCss.gradient,
@@ -55,7 +54,7 @@ const Choice = ({
                 }}
             >
                 <Box
-                    data-testid={choiceTestIds(role).CHOICE_IMAGE_BACKGROUND}
+                    data-testid={CHOICE_TESTIDS(role).CHOICE_IMAGE_BACKGROUND}
                     sx={{
                         display: "flex",
                         alignItems: "center",
@@ -71,7 +70,7 @@ const Choice = ({
                     }}
                 >
                     <img
-                        data-testid={choiceTestIds(role).CHOICE_IMAGE}
+                        data-testid={CHOICE_TESTIDS(role).CHOICE_IMAGE}
                         src={roleCss.icon}
                         alt={role}
                         height="auto"
