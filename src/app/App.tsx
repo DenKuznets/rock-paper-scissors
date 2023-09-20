@@ -1,12 +1,13 @@
 import { Box, Button } from "@mui/material";
 import { gradients } from "../ts/colors";
-import { useState } from "react";
-import { useAppSelector } from "./hooks";
-import { selectUserChoice } from "./appSlice";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import { selectUserChoice, setHouseChoice } from "./appSlice";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import ChoiceList from "../components/ChoiceList/ChoiceList";
 import Rules from "../components/Rules/Rules";
 import UserPick from "../components/UserPick/UserPick";
+import { Roles } from "../ts/roles";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -14,9 +15,20 @@ export const APP_TESTIDS = {
     APP_MODAL: "app-modal",
 };
 
+export const getRandomIndex = () =>
+    Math.floor(Math.random() * Object.keys(Roles).length);
+
 function App() {
     const [showModal, setShowModal] = useState(false);
     const userChoice = useAppSelector(selectUserChoice);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (userChoice) {
+            const randomIndex = getRandomIndex();
+            dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+        }
+    }, [userChoice]);
 
     return (
         <Box
