@@ -5,6 +5,9 @@ import { RULES_TESTIDS } from "../components/Rules/Rules";
 import { APP_TESTIDS } from "./App";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "../ts/utils-for-tests";
+import { CHOICE_TESTIDS } from "../components/Choice/Choice";
+import { Roles } from "../ts/roles";
+import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 
 describe("App", () => {
     test("renders correctly", () => {
@@ -13,7 +16,7 @@ describe("App", () => {
         const ScoreTabElement = screen.getByTestId(
             SCORETAB_TESTIDS.SCORETAB_CONTAINER
         );
-        
+
         const rulesButton = screen.getByRole("button", { name: /rules/i });
         const rulesContainer = screen.getByTestId(
             RULES_TESTIDS.RULES_CONTAINER
@@ -47,5 +50,19 @@ describe("App", () => {
         await user.click(rulesCloseBtn);
         expect(appModal).toHaveStyle("display:none");
         expect(document.body).toHaveStyle("overflow:auto");
+    });
+    test("shows 'you picked' text and choice after user clicks on a chocie", async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<App />);
+        const choice = screen.getByTestId(
+            CHOICE_TESTIDS(Roles.PAPER).CHOICE_CONTAINER
+        );
+        await user.click(choice);
+
+        const userPickElement = screen.getByTestId(
+            USER_PICK_TESTIDS.USER_PICK_CONTAINER
+        );
+
+        expect(userPickElement).toBeInTheDocument();
     });
 });

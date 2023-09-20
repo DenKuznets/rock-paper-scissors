@@ -18,7 +18,7 @@ const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             sx={{
                 position: "relative",
                 ...sx,
-                minHeight: { xs: "5rem", md: "unset" },
+                minHeight: { xs: "11rem", md: "unset" },
             }}
         >
             <Box
@@ -34,7 +34,15 @@ const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             >
                 YOU PICKED
             </Box>
-            {typeof userChoice === "string" && <Choice role={userChoice} />}
+            {typeof userChoice === "string" && (
+                <Choice
+                    sx={{
+                        scale: { md: "1.5" },
+                        mt: { md: "6.7rem" },
+                    }}
+                    role={userChoice}
+                />
+            )}
         </Box>
     );
 };

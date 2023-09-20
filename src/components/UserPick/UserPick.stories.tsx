@@ -42,3 +42,17 @@ export const Paper: Story = {
         ),
     ],
 };
+export const ROCK: Story = {
+    decorators: [
+        (story) => (
+            <Provider store={mockedStore(Roles.ROCK)}>{story()}</Provider>
+        ),
+    ],
+};
+export const SCISSORS: Story = {
+    decorators: [
+        (story) => (
+            <Provider store={mockedStore(Roles.SCISSORS)}>{story()}</Provider>
+        ),
+    ],
+};

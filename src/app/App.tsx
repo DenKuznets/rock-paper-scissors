@@ -6,6 +6,7 @@ import { selectUserChoice } from "./appSlice";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import ChoiceList from "../components/ChoiceList/ChoiceList";
 import Rules from "../components/Rules/Rules";
+import UserPick from "../components/UserPick/UserPick";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -15,7 +16,7 @@ export const APP_TESTIDS = {
 
 function App() {
     const [showModal, setShowModal] = useState(false);
-    // const userChoice = useAppSelector(selectUserChoice);
+    const userChoice = useAppSelector(selectUserChoice);
 
     return (
         <Box
@@ -32,14 +33,18 @@ function App() {
             }}
         >
             <ScoreTab />
-            <ChoiceList
-                sx={{
-                    marginTop: {
-                        xs: "6.7rem",
-                        md: "4.2rem",
-                    },
-                }}
-            />
+            {userChoice ? (
+                <UserPick />
+            ) : (
+                <ChoiceList
+                    sx={{
+                        marginTop: {
+                            xs: "6.7rem",
+                            md: "4.2rem",
+                        },
+                    }}
+                />
+            )}
             <Button
                 sx={{
                     marginTop: "13rem",
