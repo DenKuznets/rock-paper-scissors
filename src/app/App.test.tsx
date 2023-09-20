@@ -8,6 +8,7 @@ import { renderWithProviders } from "../ts/utils-for-tests";
 import { CHOICE_TESTIDS } from "../components/Choice/Choice";
 import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
+import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -78,4 +79,9 @@ test("determins house pick and shows 'the house picked' text and house choice th
         CHOICE_TESTIDS(Roles.PAPER).CHOICE_CONTAINER
     );
     await user.click(choice);
+    const housePickComponent = screen.getByTestId(
+        HOUSE_PICK_TESTIDS.HOUSE_PICK_CONTAINER
+    );
+
+    expect(housePickComponent).toBeInTheDocument();
 });
