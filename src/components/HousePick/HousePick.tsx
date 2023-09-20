@@ -19,6 +19,7 @@ const HousePick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_CONTAINER}
             sx={{
                 position: "relative",
+                minWidth: { xs: "9rem", md: "18.3rem" },
                 ...sx,
                 minHeight: { xs: "11rem", md: "unset" },
             }}
@@ -53,7 +54,7 @@ const HousePick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     sx={{
                         scale: { md: "1.5" },
                         mt: { md: "6.7rem" },
-                        margin:"0 auto",
+                        margin: "0 auto",
                     }}
                     role={houseChoice}
                 />
