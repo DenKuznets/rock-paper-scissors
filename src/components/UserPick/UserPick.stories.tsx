@@ -35,7 +35,7 @@ const mockedStore = (role: string) => {
 export default meta;
 type Story = StoryObj<typeof UserPick>;
 
-export const Paper: Story = {
+export const PAPER: Story = {
     decorators: [
         (story) => (
             <Provider store={mockedStore(Roles.PAPER)}>{story()}</Provider>

@@ -38,7 +38,10 @@
             "react-app",
             "react-app/jest",
             "plugin:storybook/recommended"
-        ]
+        ],
+        "rules": {
+            "indent": "off"
+        }
     },
     "browserslist": {
         "production": [

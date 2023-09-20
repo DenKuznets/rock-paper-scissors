@@ -70,3 +70,12 @@ test("function getRandomIndex returns random integer between 0 and Roles length"
         expect(index).toBeGreaterThanOrEqual(0);
     }
 });
+
+test("determins house pick and shows 'the house picked' text and house choice then user clicks on choice", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<App />);
+    const choice = screen.getByTestId(
+        CHOICE_TESTIDS(Roles.PAPER).CHOICE_CONTAINER
+    );
+    await user.click(choice);
+});
