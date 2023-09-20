@@ -16,8 +16,9 @@ const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             data-testid={USER_PICK_TESTIDS.USER_PICK_CONTAINER}
             sx={{
                 position: "relative",
-                ...sx,
+                minWidth: { xs: "8.2rem", md: "18.3rem" },
                 minHeight: { xs: "11rem", md: "unset" },
+                ...sx,
             }}
         >
             <Box
@@ -38,6 +39,7 @@ const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     sx={{
                         scale: { md: "1.5" },
                         mt: { md: "6.7rem" },
+                        margin: "0 auto",
                     }}
                     role={userChoice}
                 />
