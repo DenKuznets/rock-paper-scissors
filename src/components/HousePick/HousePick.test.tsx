@@ -20,6 +20,11 @@ test("renders correctly", () => {
         HOUSE_PICK_TESTIDS.HOUSE_PICK_TEXT
     );
 
+    const houseChoice = screen.getByTestId("choice-container", {
+        exact: false,
+    });
+
     expect(housePickContainer).toBeInTheDocument();
     expect(housePickText).toBeInTheDocument();
+    expect(houseChoice).toBeInTheDocument();
 });
