@@ -51,7 +51,7 @@ describe("App", () => {
         expect(appModal).toHaveStyle("display:none");
         expect(document.body).toHaveStyle("overflow:auto");
     });
-    test("shows 'you picked' text and choice after user clicks on a chocie", async () => {
+    test("shows 'you picked' text and choice after user clicks on a choice", async () => {
         const user = userEvent.setup();
         renderWithProviders(<App />);
         const choice = screen.getByTestId(
