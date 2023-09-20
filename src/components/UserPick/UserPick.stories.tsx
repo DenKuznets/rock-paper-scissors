@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Roles } from "../../ts/roles";
 import UserPick from "./UserPick";
 import { gradients } from "../../ts/colors";
+import { initialState } from "../../app/appSlice";
+import { Provider } from "react-redux";
+import { setupStore } from "../../app/store";
 
 const meta: Meta<typeof UserPick> = {
     title: "UserPick",
@@ -13,20 +16,29 @@ const meta: Meta<typeof UserPick> = {
 
     decorators: [
         (Story) => (
-            <div
-                style={{
-                    backgroundColor: gradients.backgroundGradient,
-                }}
-            >
+            <div style={{ background: gradients.backgroundGradient }}>
                 <Story />
-
-                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
             </div>
         ),
     ],
 };
 
+const mockedStore = (role: string) => {
+    return setupStore({
+        app: {
+            ...initialState,
+            userChoice: role,
+        },
+    });
+};
+
 export default meta;
 type Story = StoryObj<typeof UserPick>;
 
-export const Main: Story = {};
+export const Paper: Story = {
+    decorators: [
+        (story) => (
+            <Provider store={mockedStore(Roles.PAPER)}>{story()}</Provider>
+        ),
+    ],
+};

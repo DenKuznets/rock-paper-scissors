@@ -5,10 +5,10 @@ import { SxProps, Theme } from "@mui/material/styles";
 
 export const CHOICE_TESTIDS = (role: string) => {
     return {
-        CHOICE_CONTAINER: `${role}-choice-container`,
-        CHOICE_COLORED_BORDER: `${role}-choice-colored-border`,
-        CHOICE_IMAGE: `${role}-choice-image`,
-        CHOICE_IMAGE_BACKGROUND: `${role}-choice-image-background`,
+        CHOICE_CONTAINER: `${role.toLowerCase()}-choice-container`,
+        CHOICE_COLORED_BORDER: `${role.toLowerCase()}-choice-colored-border`,
+        CHOICE_IMAGE: `${role.toLowerCase()}-choice-image`,
+        CHOICE_IMAGE_BACKGROUND: `${role.toLowerCase()}-choice-image-background`,
     };
 };
 
