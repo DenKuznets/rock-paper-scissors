@@ -11,7 +11,6 @@ export const USER_PICK_TESTIDS = {
 
 const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
     const userChoice = useSelector((state: RootState) => state.app.userChoice);
-    console.debug("userChoice", userChoice);
     return (
         <Box
             data-testid={USER_PICK_TESTIDS.USER_PICK_CONTAINER}
