@@ -10,7 +10,7 @@ import UserPick from "../components/UserPick/UserPick";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
-    APP_CHOOSE_CONTAINER: "app-choose-container",
+    APP_CHOICE_CONTAINER: "app-choose-container",
     APP_MODAL: "app-modal",
 };
 
@@ -34,7 +34,17 @@ function App() {
         >
             <ScoreTab />
             {userChoice ? (
-                <UserPick />
+                <Box
+                    data-testid={APP_TESTIDS.APP_CHOICE_CONTAINER}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        mt: { xs: "6.3rem" },
+                    }}
+                >
+                    <UserPick />
+                </Box>
             ) : (
                 <ChoiceList
                     sx={{
