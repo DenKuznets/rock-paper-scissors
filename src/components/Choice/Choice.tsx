@@ -22,7 +22,7 @@ const Choice = ({
     onClick?: () => void;
 }) => {
     const roleCss = getRoleCss(role);
-
+    const size = { xs: "8rem", md: "12rem" };
     return (
         <Box
             data-testid={CHOICE_TESTIDS(role).CHOICE_CONTAINER}
@@ -31,6 +31,8 @@ const Choice = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                flex: "1 0 auto",
+                width: size,
                 ...sx,
             }}
             onClick={onClick}
@@ -40,8 +42,8 @@ const Choice = ({
                 sx={{
                     flex: "1 0 auto",
                     background: roleCss.gradient,
-                    height: { xs: "8rem", md: "12rem" },
-                    width: { xs: "8rem", md: "12rem" },
+                    height: size,
+                    width: size,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

@@ -31,7 +31,7 @@ const HousePick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     position: { xs: "absolute", md: "static" },
                     bottom: "0",
                     width: "100%",
-                    whiteSpace:"nowrap",
+                    whiteSpace: "nowrap",
                 }}
                 data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_TEXT}
             >
@@ -53,6 +53,7 @@ const HousePick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     sx={{
                         scale: { md: "1.5" },
                         mt: { md: "6.7rem" },
+                        margin:"0 auto",
                     }}
                     role={houseChoice}
                 />
