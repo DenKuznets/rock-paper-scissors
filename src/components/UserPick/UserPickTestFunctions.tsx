@@ -1,8 +1,4 @@
-import userEvent from "@testing-library/user-event";
 import { renderWithProviders, screen } from "../../ts/utils-for-tests";
-// import Choice from "./Choice";
-// import { CHOICE_TESTIDS } from "./Choice";
-import { Roles } from "../../ts/roles";
 import UserPick, { USER_PICK_TESTIDS } from "./UserPick";
 import { CHOICE_TESTIDS } from "../Choice/Choice";
 import { initialState } from "../../app/appSlice";

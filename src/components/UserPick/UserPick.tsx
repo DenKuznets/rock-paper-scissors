@@ -17,8 +17,7 @@ const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             <span data-testid={USER_PICK_TESTIDS.USER_PICK_TEXT}>
                 YOU PICKED
             </span>
-            {/* {typeof userChoice === "string" && <Choice role={userChoice} />} */}
-            <Choice role={userChoice} />
+            {typeof userChoice === "string" && <Choice role={userChoice} />}
         </Box>
     );
 };
