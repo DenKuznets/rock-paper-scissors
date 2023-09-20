@@ -13,10 +13,27 @@ const UserPick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
     const userChoice = useSelector((state: RootState) => state.app.userChoice);
     console.debug("userChoice", userChoice);
     return (
-        <Box data-testid={USER_PICK_TESTIDS.USER_PICK_CONTAINER} sx={{ ...sx }}>
-            <span data-testid={USER_PICK_TESTIDS.USER_PICK_TEXT}>
+        <Box
+            data-testid={USER_PICK_TESTIDS.USER_PICK_CONTAINER}
+            sx={{
+                position: "relative",
+                ...sx,
+                minHeight: { xs: "5rem", md: "unset" },
+            }}
+        >
+            <Box
+                sx={{
+                    fontSize: { xs: "0.93rem", md: "1.6rem" },
+                    letterSpacing: "2px",
+                    textAlign: "center",
+                    position: { xs: "absolute", md: "static" },
+                    bottom: "0",
+                    width: "100%",
+                }}
+                data-testid={USER_PICK_TESTIDS.USER_PICK_TEXT}
+            >
                 YOU PICKED
-            </span>
+            </Box>
             {typeof userChoice === "string" && <Choice role={userChoice} />}
         </Box>
     );
