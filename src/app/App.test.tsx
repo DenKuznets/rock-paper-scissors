@@ -72,7 +72,7 @@ test("function getRandomIndex returns random integer between 0 and Roles length"
     }
 });
 
-test("determins house pick and shows 'the house picked' text and house choice then user clicks on choice", async () => {
+test("determins house pick and shows 'the house picked' text and house choice then user clicks on option", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
     const choice = screen.getByTestId(
