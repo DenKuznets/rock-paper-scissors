@@ -26,10 +26,16 @@ function App() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        let houseChoiceTimeout: NodeJS.Timeout;
         if (userChoice) {
             const randomIndex = getRandomIndex();
-            dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+            houseChoiceTimeout = setTimeout(() => {
+                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+            }, 2000);
         }
+        return () => {
+            clearTimeout(houseChoiceTimeout);
+        };
     }, [userChoice]);
 
     return (
