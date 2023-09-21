@@ -8,11 +8,13 @@ import ChoiceList from "../components/ChoiceList/ChoiceList";
 import Rules from "../components/Rules/Rules";
 import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
+import HousePick from "../components/HousePick/HousePick";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
-    APP_CHOICE_CONTAINER: "app-choose-container",
+    APP_CHOICE_CONTAINER: "app-choice-container",
     APP_MODAL: "app-modal",
+    APP_SHOW_RULES_BUTTON: "app-show-rules-button",
 };
 
 export const getRandomIndex = () =>
@@ -49,13 +51,16 @@ function App() {
                 <Box
                     data-testid={APP_TESTIDS.APP_CHOICE_CONTAINER}
                     sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
                         width: "100%",
-                        mt: { xs: "6.3rem" },
+                        mt: { xs: "6.3rem", md: "4.1rem" },
+                        minWidth: { xs375: "24rem" },
+                        maxWidth: "46rem",
                     }}
                 >
                     <UserPick />
+                    <HousePick />
                 </Box>
             ) : (
                 <ChoiceList
@@ -68,6 +73,7 @@ function App() {
                 />
             )}
             <Button
+                data-testid={APP_TESTIDS.APP_SHOW_RULES_BUTTON}
                 sx={{
                     marginTop: "13rem",
                     marginRight: { md: "2rem" },
