@@ -3,6 +3,9 @@ import App from "./App";
 import { Roles } from "../ts/roles";
 import { within, userEvent } from "@storybook/testing-library";
 import Choice, { CHOICE_TESTIDS } from "../components/Choice/Choice";
+import { Provider } from "react-redux";
+import { setupStore } from "./store";
+import { initialState } from "./appSlice";
 
 const meta: Meta<typeof App> = {
     title: "App",
@@ -26,7 +29,7 @@ export const ShowRules: Story = {
     },
 };
 
-export const UserPickPaper: Story = {
+export const UserClickedPaper: Story = {
     play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
         const canvas = within(canvasElement);
         const choice = canvas.getByTestId(
@@ -34,4 +37,24 @@ export const UserPickPaper: Story = {
         );
         await userEvent.click(choice);
     },
+};
+
+const mockedStore = (userRole: string, houseRole: string) => {
+    return setupStore({
+        app: {
+            ...initialState,
+            userChoice: userRole,
+            houseChoice: houseRole,
+        },
+    });
+};
+
+export const UserChoicePaperHouseChoiceRock: Story = {
+    decorators: [
+        (story) => (
+            <Provider store={mockedStore(Roles.PAPER, Roles.ROCK)}>
+                {story()}
+            </Provider>
+        ),
+    ],
 };

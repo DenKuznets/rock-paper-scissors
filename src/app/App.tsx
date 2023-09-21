@@ -2,18 +2,24 @@ import { Box, Button } from "@mui/material";
 import { gradients } from "../ts/colors";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import { selectUserChoice, setHouseChoice } from "./appSlice";
+import {
+    selectHouseChoice,
+    selectUserChoice,
+    setHouseChoice,
+} from "./appSlice";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import ChoiceList from "../components/ChoiceList/ChoiceList";
 import Rules from "../components/Rules/Rules";
 import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
+import { RESULT_OPTIONS, determineWinner } from "../ts/utils";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
     APP_CHOICE_CONTAINER: "app-choice-container",
     APP_MODAL: "app-modal",
+    APP_RESULT: "app-result",
     APP_SHOW_RULES_BUTTON: "app-show-rules-button",
 };
 
@@ -22,19 +28,32 @@ export const getRandomIndex = () =>
 
 function App() {
     const [showModal, setShowModal] = useState(false);
+    const [result, setResult] = useState<string | null>(null);
     const userChoice = useAppSelector(selectUserChoice);
+    const houseChoice = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         let houseChoiceTimeout: NodeJS.Timeout;
+        let resultTimeout: NodeJS.Timeout;
         if (userChoice) {
+            // rolling the house pick
             const randomIndex = getRandomIndex();
             houseChoiceTimeout = setTimeout(() => {
-                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+                // only set houseChoice if no houseChoice is present
+                !houseChoice &&
+                    dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+                // calculate result only if there is no result at the moment
+                if (!result) {
+                    resultTimeout = setTimeout(() => {
+                        setResult(determineWinner(userChoice, houseChoice));
+                    }, 2000);
+                }
             }, 2000);
         }
         return () => {
             clearTimeout(houseChoiceTimeout);
+            clearTimeout(resultTimeout);
         };
     }, [userChoice]);
 
@@ -67,6 +86,7 @@ function App() {
                 >
                     <UserPick />
                     <HousePick />
+                    <Box></Box>
                 </Box>
             ) : (
                 <ChoiceList

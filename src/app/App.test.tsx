@@ -1,14 +1,29 @@
-import { screen } from "@testing-library/react";
 import App, { getRandomIndex } from "./App";
 import { SCORETAB_TESTIDS } from "../components/ScoreTab/ScoreTab";
 import { RULES_TESTIDS } from "../components/Rules/Rules";
 import { APP_TESTIDS } from "./App";
+import { RESULT_OPTIONS } from "../ts/utils";
 import userEvent from "@testing-library/user-event";
-import { renderWithProviders } from "../ts/utils-for-tests";
+import { renderWithProviders, screen } from "../ts/utils-for-tests";
 import { CHOICE_TESTIDS } from "../components/Choice/Choice";
 import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
+import { initialState } from "./appSlice";
+
+test("displays YOU WIN if player picks ROCK and the house picks SCISSORS", async () => {
+    renderWithProviders(<App />, {
+        preloadedState: {
+            app: {
+                ...initialState,
+                userChoice: Roles.ROCK,
+                houseChoice: Roles.SCISSORS,
+            },
+        },
+    });
+    const result = screen.getByTestId(APP_TESTIDS.APP_RESULT);
+    expect(result).toHaveTextContent(RESULT_OPTIONS.WIN);
+});
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -64,7 +79,7 @@ test("shows 'you picked' text and choice after user clicks on a choice", async (
     expect(userPickElement).toBeInTheDocument();
 });
 
-test("function getRandomIndex returns random integer between 0 and Roles length", () => {
+test("function getRandomIndex returns random integer between 0 and the amount of Roles", () => {
     for (let index = 0; index < 1000; index++) {
         const index = getRandomIndex();
         expect(index).toBeLessThan(Object.keys(Roles).length);

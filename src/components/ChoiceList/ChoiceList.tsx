@@ -1,12 +1,12 @@
 import type { RootState } from "../../app/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserChoice } from "../../app/appSlice";
+import { selectUserChoice, setUserChoice } from "../../app/appSlice";
 import { Box } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
 import Choice from "../Choice/Choice";
+import { useAppSelector } from "../../app/hooks";
 
-const chosenChoiceScale = 1.55;
 const choicePos = [
     {
         top: "0",
@@ -28,6 +28,7 @@ export const CHOICE_LIST_TESTIDS = {
 };
 
 const ChoiceList = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
+    const userChoice = useAppSelector(selectUserChoice);
     const dispatch = useDispatch();
     const choiceList = Object.keys(Roles).map((role, index) => {
         const choiceCoords = choicePos[index];
@@ -44,7 +45,7 @@ const ChoiceList = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 }}
                 key={role}
                 role={role}
-                onClick={() => dispatch(setUserChoice(role))}
+                onClick={() => !userChoice && dispatch(setUserChoice(role))} //only set userChoice on the first click
             />
         );
     });

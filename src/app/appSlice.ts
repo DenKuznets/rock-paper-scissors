@@ -39,5 +39,6 @@ export const { setUserChoice, setHouseChoice, incrementScore, decrementScore } =
 
 // прописываем селектор здесь, что бы не пришлось каждый раз в компонентах писать const userChoice = useSelector((state: RootState) => state.choice.userChoice);
 export const selectUserChoice = (state: RootState) => state.app.userChoice;
+export const selectHouseChoice = (state: RootState) => state.app.houseChoice;
 
 export default appSlice.reducer;
