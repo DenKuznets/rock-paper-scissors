@@ -51,9 +51,11 @@ const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 sx={{
                     color: colors.darkText,
                     padding: "0.67rem 3.9rem",
-                    fontSize: "1rem",
+                    fontSize: "1.05rem",
+                    fontWeight: "800",
                     ":hover": {
                         backgroundColor: "#fff",
+                        color: "red",
                     },
                     backgroundColor: "#fff",
                 }}
