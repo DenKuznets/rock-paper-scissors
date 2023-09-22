@@ -10,6 +10,7 @@ import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
 import { resultTest } from "./appTestFunctions";
+import { initialState } from "./appSlice";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -101,4 +102,22 @@ describe("displays result", () => {
     resultTest(Roles.PAPER, Roles.PAPER, RESULT_OPTIONS.DRAW);
     resultTest(Roles.ROCK, Roles.ROCK, RESULT_OPTIONS.DRAW);
     resultTest(Roles.SCISSORS, Roles.SCISSORS, RESULT_OPTIONS.DRAW);
+});
+
+test('Diplays a "play again" button when there is a result', async () => {
+    renderWithProviders(<App />, {
+        preloadedState: {
+            app: {
+                ...initialState,
+                userChoice: Roles.PAPER,
+                houseChoice: Roles.ROCK,
+            },
+        },
+    });
+    const playAgainButton = await screen.findByTestId(
+        APP_TESTIDS.APP_PLAY_AGAIN_BUTTON,
+        {},
+        { timeout: 2001 }
+    );
+    expect(playAgainButton).toBeInTheDocument();
 });

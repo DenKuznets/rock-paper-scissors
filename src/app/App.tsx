@@ -21,6 +21,7 @@ export const APP_TESTIDS = {
     APP_MODAL: "app-modal",
     APP_RESULT: "app-result",
     APP_SHOW_RULES_BUTTON: "app-show-rules-button",
+    APP_PLAY_AGAIN_BUTTON: "app-play-again-button",
 };
 
 export const getRandomIndex = () =>
@@ -92,28 +93,36 @@ function App() {
                 <Box
                     data-testid={APP_TESTIDS.APP_CHOICE_CONTAINER}
                     sx={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
+                        display: "flex",
+                        justifyContent: "space-between",
                         width: "100%",
                         mt: { xs: "6.3rem", md: "4.1rem" },
-                        minWidth: { xs375: "24rem" },
-                        maxWidth: "46rem",
+                        minWidth: { xs375: "21rem" },
+                        maxWidth: {
+                            xs: "24rem",
+                            md: result ? "60rem" : "46rem",
+                        },
+                        position: "relative",
                     }}
                 >
                     <UserPick />
+                    {result && (
+                        <Box
+                            data-testid={APP_TESTIDS.APP_RESULT}
+                            sx={{
+                                fontSize: { xs: "3.6rem" },
+                                marginTop: { xs: "14.5rem" },
+                                position: { xs: "absolute", md: "relative" },
+                                width: { xs: "100%" },
+                                textAlign: "center",
+                                // margin: { xs: "14.5rem auto" },
+                            }}
+                        >
+                            {result !== RESULT_OPTIONS.DRAW && "you "}
+                            {result}
+                        </Box>
+                    )}
                     {houseChoice && <HousePick />}
-                </Box>
-            )}
-            {result && (
-                <Box
-                    data-testid={APP_TESTIDS.APP_RESULT}
-                    sx={{
-                        fontSize: { xs: "3.6rem" },
-                        marginTop: { xs: "3.7rem" },
-                    }}
-                >
-                    {result !== RESULT_OPTIONS.DRAW && "you "}
-                    {result}
                 </Box>
             )}
             <Button
