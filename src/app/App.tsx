@@ -35,27 +35,33 @@ function App() {
 
     useEffect(() => {
         let houseChoiceTimeout: NodeJS.Timeout;
-        let resultTimeout: NodeJS.Timeout;
+
         if (userChoice) {
             // rolling the house pick
             const randomIndex = getRandomIndex();
             houseChoiceTimeout = setTimeout(() => {
                 // only set houseChoice if no houseChoice is present
-                !houseChoice &&
+                houseChoice === null &&
                     dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
-                // calculate result only if there is no result at the moment
-                if (!result) {
-                    resultTimeout = setTimeout(() => {
-                        setResult(determineWinner(userChoice, houseChoice));
-                    }, 2000);
-                }
-            }, 2000);
+            }, 1);
         }
         return () => {
             clearTimeout(houseChoiceTimeout);
-            clearTimeout(resultTimeout);
         };
     }, [userChoice]);
+
+    useEffect(() => {
+        let resultTimeout: NodeJS.Timeout;
+        // calculate result only if there is no result at the moment
+        if (!result && houseChoice && userChoice) {
+            resultTimeout = setTimeout(() => {
+                setResult(determineWinner(userChoice, houseChoice));
+            }, 1);
+        }
+        return () => {
+            clearTimeout(resultTimeout);
+        };
+    }, [houseChoice]);
 
     return (
         <Box
@@ -72,7 +78,17 @@ function App() {
             }}
         >
             <ScoreTab />
-            {userChoice ? (
+            {!userChoice && (
+                <ChoiceList
+                    sx={{
+                        marginTop: {
+                            xs: "6.7rem",
+                            md: "4.2rem",
+                        },
+                    }}
+                />
+            )}
+            {userChoice && (
                 <Box
                     data-testid={APP_TESTIDS.APP_CHOICE_CONTAINER}
                     sx={{
@@ -85,18 +101,20 @@ function App() {
                     }}
                 >
                     <UserPick />
-                    <HousePick />
-                    <Box></Box>
+                    {houseChoice && <HousePick />}
                 </Box>
-            ) : (
-                <ChoiceList
+            )}
+            {result && (
+                <Box
+                    data-testid={APP_TESTIDS.APP_RESULT}
                     sx={{
-                        marginTop: {
-                            xs: "6.7rem",
-                            md: "4.2rem",
-                        },
+                        fontSize: { xs: "3.6rem" },
+                        marginTop: { xs: "3.7rem" },
                     }}
-                />
+                >
+                    {result !== RESULT_OPTIONS.DRAW && "you "}
+                    {result}
+                </Box>
             )}
             <Button
                 data-testid={APP_TESTIDS.APP_SHOW_RULES_BUTTON}

@@ -9,21 +9,7 @@ import { CHOICE_TESTIDS } from "../components/Choice/Choice";
 import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
-import { initialState } from "./appSlice";
-
-test("displays YOU WIN if player picks ROCK and the house picks SCISSORS", async () => {
-    renderWithProviders(<App />, {
-        preloadedState: {
-            app: {
-                ...initialState,
-                userChoice: Roles.ROCK,
-                houseChoice: Roles.SCISSORS,
-            },
-        },
-    });
-    const result = screen.getByTestId(APP_TESTIDS.APP_RESULT);
-    expect(result).toHaveTextContent(RESULT_OPTIONS.WIN);
-});
+import { resultTest } from "./appTestFunctions";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -55,6 +41,7 @@ test("rules button click displays rules component and prevents document scroll",
         `);
     expect(document.body).toHaveStyle(`overflow:hidden`);
 });
+
 test("rules close button closes modal and restores document scroll", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
@@ -64,6 +51,7 @@ test("rules close button closes modal and restores document scroll", async () =>
     expect(appModal).toHaveStyle("display:none");
     expect(document.body).toHaveStyle("overflow:auto");
 });
+
 test("shows 'you picked' text and choice after user clicks on a choice", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
@@ -94,9 +82,23 @@ test("determins house pick and shows 'the house picked' text and house choice th
         CHOICE_TESTIDS(Roles.PAPER).CHOICE_CONTAINER
     );
     await user.click(choice);
-    const housePickComponent = screen.getByTestId(
-        HOUSE_PICK_TESTIDS.HOUSE_PICK_CONTAINER
+    const housePickComponent = await screen.findByTestId(
+        HOUSE_PICK_TESTIDS.HOUSE_PICK_CONTAINER,
+        {},
+        { timeout: 2001 }
     );
 
     expect(housePickComponent).toBeInTheDocument();
+});
+
+describe("displays result", () => {
+    resultTest(Roles.PAPER, Roles.ROCK, RESULT_OPTIONS.WIN);
+    resultTest(Roles.ROCK, Roles.SCISSORS, RESULT_OPTIONS.WIN);
+    resultTest(Roles.SCISSORS, Roles.PAPER, RESULT_OPTIONS.WIN);
+    resultTest(Roles.PAPER, Roles.SCISSORS, RESULT_OPTIONS.LOSE);
+    resultTest(Roles.ROCK, Roles.PAPER, RESULT_OPTIONS.LOSE);
+    resultTest(Roles.SCISSORS, Roles.ROCK, RESULT_OPTIONS.LOSE);
+    resultTest(Roles.PAPER, Roles.PAPER, RESULT_OPTIONS.DRAW);
+    resultTest(Roles.ROCK, Roles.ROCK, RESULT_OPTIONS.DRAW);
+    resultTest(Roles.SCISSORS, Roles.SCISSORS, RESULT_OPTIONS.DRAW);
 });
