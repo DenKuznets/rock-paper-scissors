@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import ScoreTab from "./ScoreTab";
 import { Box } from "@mui/material";
-import { gradients } from "../../ts/colors";
+import { gradients } from "../../ts/theme";
 
 const meta: Meta<typeof ScoreTab> = {
     title: "ScoreTab",

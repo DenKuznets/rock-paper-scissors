@@ -1,5 +1,17 @@
 import { createTheme } from "@mui/material";
 
+export const colors = {
+    darkText: "hsl(229, 25%, 31%)",
+    scoreText: "hsl(229, 64%, 46%)",
+    headerOutline: "hsl(217, 16%, 45%)",
+};
+
+export const gradients = {
+    backgroundGradient:
+        "radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%))",
+};
+
+
 declare module "@mui/material/styles" {
     interface BreakpointOverrides {
         xs320: true;
@@ -49,6 +61,7 @@ export const Theme = createTheme({
                     minWidth: "8rem",
                     borderRadius: "8px",
                     letterSpacing: "2px",
+                    backgroundColor: "#fff",
                     ":hover": {
                         color: "#1976d2",
                     },

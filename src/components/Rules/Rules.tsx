@@ -1,5 +1,5 @@
 import { Box, IconButton } from "@mui/material";
-import { colors } from "../../ts/colors";
+import { colors } from "../../ts/theme";
 
 export const RULES_TESTIDS = {
     RULES_CONTAINER: "rules-container",

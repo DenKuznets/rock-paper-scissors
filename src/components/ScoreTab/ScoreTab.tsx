@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { colors } from "../../ts/colors";
+import { colors } from "../../ts/theme";
 import type { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 

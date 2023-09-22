@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ChoiceList from "./ChoiceList";
-import { gradients } from "../../ts/colors";
+import { gradients } from "../../ts/theme";
 
 const meta: Meta<typeof ChoiceList> = {
     title: "ChoiceList",

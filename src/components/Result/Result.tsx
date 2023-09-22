@@ -1,6 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { useAppSelector } from "../../app/hooks";
+import { selectResult } from "../../app/appSlice";
+import { colors } from "../../ts/theme";
 
-const RESULT_TESTIDS = {
+export const RESULT_TESTIDS = {
     RESULT_CONTAINER: "result-container",
     RESULT_TEXT: "result-text",
     RESULT_PLAY_AGAIN: "result-play-again",
@@ -13,6 +16,7 @@ export const RESULT_OPTIONS = {
 };
 
 const Result = () => {
+    const result = useAppSelector(selectResult);
     return (
         <Box
             data-testid={RESULT_TESTIDS.RESULT_CONTAINER}
@@ -26,6 +30,7 @@ const Result = () => {
             }}
         >
             <Box
+                data-testid={RESULT_TESTIDS.RESULT_TEXT}
                 sx={{
                     fontSize: { xs: "3.6rem" },
                     textAlign: "center",
@@ -34,6 +39,18 @@ const Result = () => {
                 {result !== RESULT_OPTIONS.DRAW && "you "}
                 {result}
             </Box>
+            <Button
+                data-testid={RESULT_TESTIDS.RESULT_PLAY_AGAIN}
+                variant="contained"
+                sx={{
+                    color: colors.darkText,
+                    ":hover": {
+                        backgroundColor: "#fff",
+                    },
+                }}
+            >
+                play again
+            </Button>
         </Box>
     );
 };

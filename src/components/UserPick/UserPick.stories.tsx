@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Roles } from "../../ts/roles";
 import UserPick from "./UserPick";
-import { gradients } from "../../ts/colors";
+import { gradients } from "../../ts/theme";
 import { initialState } from "../../app/appSlice";
 import { Provider } from "react-redux";
 import { setupStore } from "../../app/store";

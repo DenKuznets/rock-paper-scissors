@@ -1,7 +1,7 @@
-import { renderWithProviders, screen } from "../ts/utils-for-tests";
-import { initialState } from "./appSlice";
-import App from "./App";
-import { APP_TESTIDS } from "./App";
+import { renderWithProviders, screen } from "../../ts/utils-for-tests";
+import { initialState } from "../../app/appSlice";
+import App from "../../app/App";
+import { RESULT_TESTIDS } from "./Result";
 
 export const resultTest = (
     userChoice: string,
@@ -19,7 +19,7 @@ export const resultTest = (
             },
         });
         const result = await screen.findByTestId(
-            APP_TESTIDS.APP_RESULT,
+            RESULT_TESTIDS.RESULT_CONTAINER,
             {},
             { timeout: 2001 }
         );

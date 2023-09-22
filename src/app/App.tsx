@@ -1,11 +1,13 @@
 import { Box, Button } from "@mui/material";
-import { gradients } from "../ts/colors";
+import { gradients } from "../ts/theme";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import {
     selectHouseChoice,
+    selectResult,
     selectUserChoice,
     setHouseChoice,
+    setResult,
 } from "./appSlice";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import ChoiceList from "../components/ChoiceList/ChoiceList";
@@ -18,7 +20,7 @@ import Result from "../components/Result/Result";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
-    APP_CHOICE_CONTAINER: "app-choice-container",
+    APP_CHOICES_CONTAINER: "app-choices-container",
     APP_MODAL: "app-modal",
     APP_RESULT: "app-result",
     APP_SHOW_RULES_BUTTON: "app-show-rules-button",
@@ -30,7 +32,8 @@ export const getRandomIndex = () =>
 
 function App() {
     const [showModal, setShowModal] = useState(false);
-    const [result, setResult] = useState<string | null>(null);
+    // const [result, setResult] = useState<string | null>(null);
+    const result = useAppSelector(selectResult);
     const userChoice = useAppSelector(selectUserChoice);
     const houseChoice = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
@@ -57,7 +60,8 @@ function App() {
         // calculate result only if there is no result at the moment
         if (!result && houseChoice && userChoice) {
             resultTimeout = setTimeout(() => {
-                setResult(determineWinner(userChoice, houseChoice));
+                const result = determineWinner(userChoice, houseChoice);
+                dispatch(setResult(result));
             }, 1);
         }
         return () => {
@@ -92,7 +96,7 @@ function App() {
             )}
             {userChoice && (
                 <Box
-                    data-testid={APP_TESTIDS.APP_CHOICE_CONTAINER}
+                    data-testid={APP_TESTIDS.APP_CHOICES_CONTAINER}
                     sx={{
                         display: "flex",
                         justifyContent: "space-between",

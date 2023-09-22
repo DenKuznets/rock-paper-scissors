@@ -2,15 +2,12 @@ import App, { getRandomIndex } from "./App";
 import { SCORETAB_TESTIDS } from "../components/ScoreTab/ScoreTab";
 import { RULES_TESTIDS } from "../components/Rules/Rules";
 import { APP_TESTIDS } from "./App";
-import { RESULT_OPTIONS } from "../ts/utils";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders, screen } from "../ts/utils-for-tests";
 import { CHOICE_TESTIDS } from "../components/Choice/Choice";
 import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
-import { resultTest } from "./appTestFunctions";
-import { initialState } from "./appSlice";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -92,32 +89,4 @@ test("determins house pick and shows 'the house picked' text and house choice th
     expect(housePickComponent).toBeInTheDocument();
 });
 
-describe("displays result", () => {
-    resultTest(Roles.PAPER, Roles.ROCK, RESULT_OPTIONS.WIN);
-    resultTest(Roles.ROCK, Roles.SCISSORS, RESULT_OPTIONS.WIN);
-    resultTest(Roles.SCISSORS, Roles.PAPER, RESULT_OPTIONS.WIN);
-    resultTest(Roles.PAPER, Roles.SCISSORS, RESULT_OPTIONS.LOSE);
-    resultTest(Roles.ROCK, Roles.PAPER, RESULT_OPTIONS.LOSE);
-    resultTest(Roles.SCISSORS, Roles.ROCK, RESULT_OPTIONS.LOSE);
-    resultTest(Roles.PAPER, Roles.PAPER, RESULT_OPTIONS.DRAW);
-    resultTest(Roles.ROCK, Roles.ROCK, RESULT_OPTIONS.DRAW);
-    resultTest(Roles.SCISSORS, Roles.SCISSORS, RESULT_OPTIONS.DRAW);
-});
 
-test('Diplays a "play again" button when there is a result', async () => {
-    renderWithProviders(<App />, {
-        preloadedState: {
-            app: {
-                ...initialState,
-                userChoice: Roles.PAPER,
-                houseChoice: Roles.ROCK,
-            },
-        },
-    });
-    const playAgainButton = await screen.findByTestId(
-        APP_TESTIDS.APP_PLAY_AGAIN_BUTTON,
-        {},
-        { timeout: 2001 }
-    );
-    expect(playAgainButton).toBeInTheDocument();
-});
