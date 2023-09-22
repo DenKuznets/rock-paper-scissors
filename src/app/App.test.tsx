@@ -17,36 +17,31 @@ test("renders correctly", () => {
     );
 
     const rulesButton = screen.getByRole("button", { name: /rules/i });
-    const rulesContainer = screen.getByTestId(RULES_TESTIDS.RULES_CONTAINER);
-    const appModal = screen.getByTestId(APP_TESTIDS.APP_MODAL);
 
     expect(ScoreTabElement).toBeInTheDocument();
     expect(rulesButton).toBeInTheDocument();
-    expect(rulesContainer).toBeInTheDocument();
-    expect(appModal).toHaveStyle(`
-        display:none
-        `);
 });
 
 test("rules button click displays rules component and prevents document scroll", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
-    const appModal = screen.getByTestId(APP_TESTIDS.APP_MODAL);
-    const rulesButton = screen.getByRole("button", { name: /rules/i });
+    const rulesButton = screen.getByTestId(APP_TESTIDS.APP_RULES_BUTTON);
     await user.click(rulesButton);
-    expect(appModal).toHaveStyle(`
-        display:flex
-        `);
+    const rulesComponent = screen.getByTestId(RULES_TESTIDS.RULES_CONTAINER);
+    expect(rulesComponent).toBeInTheDocument();
     expect(document.body).toHaveStyle(`overflow:hidden`);
 });
 
 test("rules close button closes modal and restores document scroll", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
-    const appModal = screen.getByTestId(APP_TESTIDS.APP_MODAL);
+    const rulesButton = screen.getByRole("button", { name: /rules/i });
+    await user.click(rulesButton);
     const rulesCloseBtn = screen.getByTestId(RULES_TESTIDS.RULES_CLOSE_BTN);
     await user.click(rulesCloseBtn);
-    expect(appModal).toHaveStyle("display:none");
+    expect(
+        screen.queryByTestId(RULES_TESTIDS.RULES_CONTAINER)
+    ).not.toBeInTheDocument();
     expect(document.body).toHaveStyle("overflow:auto");
 });
 
@@ -88,5 +83,3 @@ test("determins house pick and shows 'the house picked' text and house choice th
 
     expect(housePickComponent).toBeInTheDocument();
 });
-
-

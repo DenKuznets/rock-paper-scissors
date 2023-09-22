@@ -21,10 +21,7 @@ import Result from "../components/Result/Result";
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
     APP_CHOICES_CONTAINER: "app-choices-container",
-    APP_MODAL: "app-modal",
-    APP_RESULT: "app-result",
-    APP_SHOW_RULES_BUTTON: "app-show-rules-button",
-    APP_PLAY_AGAIN_BUTTON: "app-play-again-button",
+    APP_RULES_BUTTON: "app-rules-button",
 };
 
 export const getRandomIndex = () =>
@@ -32,7 +29,6 @@ export const getRandomIndex = () =>
 
 function App() {
     const [showModal, setShowModal] = useState(false);
-    // const [result, setResult] = useState<string | null>(null);
     const result = useAppSelector(selectResult);
     const userChoice = useAppSelector(selectUserChoice);
     const houseChoice = useAppSelector(selectHouseChoice);
@@ -68,6 +64,11 @@ function App() {
             clearTimeout(resultTimeout);
         };
     }, [houseChoice]);
+
+    useEffect(() => {
+        // disable window scroll then showing modal window
+        document.body.style.overflow = showModal ? "hidden" : "auto";
+    }, [showModal]);
 
     return (
         <Box
@@ -120,7 +121,7 @@ function App() {
                 </Box>
             )}
             <Button
-                data-testid={APP_TESTIDS.APP_SHOW_RULES_BUTTON}
+                data-testid={APP_TESTIDS.APP_RULES_BUTTON}
                 sx={{
                     marginTop: { xs: "16rem", md: "13rem" },
                     marginRight: { md: "2rem" },
@@ -132,34 +133,17 @@ function App() {
                 variant="outlined"
                 onClick={() => {
                     setShowModal(true);
-                    document.body.style.overflow = "hidden";
                 }}
             >
                 RULES
             </Button>
-            <Box
-                data-testid={APP_TESTIDS.APP_MODAL}
-                sx={{
-                    width: "100%",
-                    height: "100vh",
-                    backgroundColor: "rgba(0,0,0,0.8)",
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    display: showModal ? "flex" : "none",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
+            {showModal && (
                 <Rules
                     onCloseButtonClick={() => {
                         setShowModal(false);
-                        document.body.style.overflow = "auto";
                     }}
                 />
-            </Box>
+            )}
         </Box>
     );
 }
