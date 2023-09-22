@@ -61,7 +61,6 @@ export const Theme = createTheme({
                     minWidth: "8rem",
                     borderRadius: "8px",
                     letterSpacing: "2px",
-                    backgroundColor: "#fff",
                     ":hover": {
                         color: "#1976d2",
                     },

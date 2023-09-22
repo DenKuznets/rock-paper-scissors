@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material";
 import { useAppSelector } from "../../app/hooks";
 import { selectResult } from "../../app/appSlice";
 import { colors } from "../../ts/theme";
+import { SxProps, Theme } from "@mui/material/styles";
 
 export const RESULT_TESTIDS = {
     RESULT_CONTAINER: "result-container",
@@ -15,18 +16,23 @@ export const RESULT_OPTIONS = {
     DRAW: "draw",
 };
 
-const Result = () => {
+const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
     const result = useAppSelector(selectResult);
     return (
         <Box
             data-testid={RESULT_TESTIDS.RESULT_CONTAINER}
             sx={{
-                marginTop: { xs: "14.5rem" },
                 position: {
                     xs: "absolute",
                     md: "relative",
                 },
                 width: { xs: "100%" },
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.2rem",
+                ...sx,
             }}
         >
             <Box
@@ -44,9 +50,12 @@ const Result = () => {
                 variant="contained"
                 sx={{
                     color: colors.darkText,
+                    padding: "0.67rem 3.9rem",
+                    fontSize: "1rem",
                     ":hover": {
                         backgroundColor: "#fff",
                     },
+                    backgroundColor: "#fff",
                 }}
             >
                 play again

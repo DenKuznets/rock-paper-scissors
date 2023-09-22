@@ -111,7 +111,11 @@ function App() {
                     }}
                 >
                     <UserPick />
-                    {result && <Result />}
+                    {result && (
+                        <Result
+                            sx={{ marginTop: { xs: "14.5rem", md: "7.6rem" } }}
+                        />
+                    )}
                     {houseChoice && <HousePick />}
                 </Box>
             )}
