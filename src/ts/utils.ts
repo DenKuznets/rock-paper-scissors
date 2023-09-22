@@ -1,10 +1,5 @@
+import { RESULT_OPTIONS } from "../components/Result/Result";
 import { Roles } from "./roles";
-
-export const RESULT_OPTIONS = {
-    WIN: "win",
-    LOSE: "lose",
-    DRAW: "draw",
-};
 
 export const determineWinner = (
     userChoice: string,

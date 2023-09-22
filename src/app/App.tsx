@@ -13,7 +13,8 @@ import Rules from "../components/Rules/Rules";
 import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
-import { RESULT_OPTIONS, determineWinner } from "../ts/utils";
+import { determineWinner } from "../ts/utils";
+import Result from "../components/Result/Result";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -106,22 +107,7 @@ function App() {
                     }}
                 >
                     <UserPick />
-                    {result && (
-                        <Box
-                            data-testid={APP_TESTIDS.APP_RESULT}
-                            sx={{
-                                fontSize: { xs: "3.6rem" },
-                                marginTop: { xs: "14.5rem" },
-                                position: { xs: "absolute", md: "relative" },
-                                width: { xs: "100%" },
-                                textAlign: "center",
-                                // margin: { xs: "14.5rem auto" },
-                            }}
-                        >
-                            {result !== RESULT_OPTIONS.DRAW && "you "}
-                            {result}
-                        </Box>
-                    )}
+                    {result && <Result />}
                     {houseChoice && <HousePick />}
                 </Box>
             )}
