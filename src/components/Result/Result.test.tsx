@@ -1,10 +1,8 @@
 import { renderWithProviders, screen } from "../../ts/utils-for-tests";
 import Result, { RESULT_TESTIDS } from "./Result";
-import { initialState } from "../../app/appSlice";
 import { Roles } from "../../ts/roles";
 import { RESULT_OPTIONS } from "./Result";
 import { resultTest } from "./resultTestFunctions";
-import userEvent from "@testing-library/user-event";
 import { gameEndState } from "../../ts/utils";
 
 test("Renders correctly", async () => {

@@ -19,7 +19,6 @@ import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
 import { determineWinner } from "../ts/utils";
 import Result, { RESULT_OPTIONS } from "../components/Result/Result";
-import { increment } from "../components/ScoreTab/scoreTabSlice";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",

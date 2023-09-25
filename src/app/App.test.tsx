@@ -11,8 +11,7 @@ import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
 import { RESULT_OPTIONS, RESULT_TESTIDS } from "../components/Result/Result";
 import { gameEndState } from "../ts/utils";
 import { CHOICE_LIST_TESTIDS } from "../components/ChoiceList/ChoiceList";
-import { initialState, setHouseChoice } from "./appSlice";
-import { useAppDispatch } from "./hooks";
+import { initialState } from "./appSlice";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);

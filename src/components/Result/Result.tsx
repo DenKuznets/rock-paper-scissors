@@ -8,7 +8,6 @@ import {
 } from "../../app/appSlice";
 import { colors } from "../../ts/theme";
 import { SxProps, Theme } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
 
 export const RESULT_TESTIDS = {
     RESULT_CONTAINER: "result-container",
