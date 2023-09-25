@@ -8,6 +8,9 @@ import { CHOICE_TESTIDS } from "../components/Choice/Choice";
 import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
+import { RESULT_TESTIDS } from "../components/Result/Result";
+import { gameEndState } from "../ts/utils";
+import { CHOICE_LIST_TESTIDS } from "../components/ChoiceList/ChoiceList";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -83,3 +86,40 @@ test("determins house pick and shows 'the house picked' text and house choice th
 
     expect(housePickComponent).toBeInTheDocument();
 });
+
+test("displays result component then result is set", () => {
+    renderWithProviders(<App />, {
+        preloadedState: gameEndState,
+    });
+    const resultContainer = screen.getByTestId(RESULT_TESTIDS.RESULT_CONTAINER);
+
+    expect(resultContainer).toBeInTheDocument();
+});
+
+test("PLAY AGAIN button starts new round", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<App />, {
+        preloadedState: gameEndState,
+    });
+    const playAgainButton = screen.getByTestId(
+        RESULT_TESTIDS.RESULT_PLAY_AGAIN
+    );
+    await user.click(playAgainButton);
+
+    const choiceComponent = screen.queryByTestId(
+        CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
+    );
+
+    expect(choiceComponent).toBeInTheDocument();
+});
+
+// test("If the player wins, the score increases by one", () => {
+//     renderWithProviders(<App />, {
+//         preloadedState: {
+//             app: {
+                
+//             }
+//         },
+//     });
+
+// });

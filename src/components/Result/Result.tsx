@@ -1,8 +1,14 @@
 import { Box, Button } from "@mui/material";
-import { useAppSelector } from "../../app/hooks";
-import { selectResult } from "../../app/appSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+    selectResult,
+    setHouseChoice,
+    setResult,
+    setUserChoice,
+} from "../../app/appSlice";
 import { colors } from "../../ts/theme";
 import { SxProps, Theme } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
 
 export const RESULT_TESTIDS = {
     RESULT_CONTAINER: "result-container",
@@ -17,6 +23,7 @@ export const RESULT_OPTIONS = {
 };
 
 const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
+    const dispatch = useAppDispatch();
     const result = useAppSelector(selectResult);
     return (
         <Box
@@ -58,6 +65,11 @@ const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                         color: "red",
                     },
                     backgroundColor: "#fff",
+                }}
+                onClick={() => {
+                    dispatch(setUserChoice(null));
+                    dispatch(setHouseChoice(null));
+                    dispatch(setResult(null));
                 }}
             >
                 play again

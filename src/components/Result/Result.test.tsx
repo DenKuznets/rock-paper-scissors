@@ -4,17 +4,12 @@ import { initialState } from "../../app/appSlice";
 import { Roles } from "../../ts/roles";
 import { RESULT_OPTIONS } from "./Result";
 import { resultTest } from "./resultTestFunctions";
+import userEvent from "@testing-library/user-event";
+import { gameEndState } from "../../ts/utils";
 
 test("Renders correctly", async () => {
     renderWithProviders(<Result />, {
-        preloadedState: {
-            app: {
-                ...initialState,
-                userChoice: Roles.PAPER,
-                houseChoice: Roles.ROCK,
-                result: RESULT_OPTIONS.WIN,
-            },
-        },
+        preloadedState: gameEndState,
     });
     const resultContainer = screen.getByTestId(RESULT_TESTIDS.RESULT_CONTAINER);
     const playAgainButton = screen.getByTestId(
@@ -38,3 +33,4 @@ describe("correctly displays result", () => {
     resultTest(Roles.ROCK, Roles.ROCK, RESULT_OPTIONS.DRAW);
     resultTest(Roles.SCISSORS, Roles.SCISSORS, RESULT_OPTIONS.DRAW);
 });
+

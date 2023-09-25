@@ -1,5 +1,6 @@
 import { RESULT_OPTIONS } from "../components/Result/Result";
 import { Roles } from "./roles";
+import { initialState } from "../app/appSlice";
 
 export const determineWinner = (
     userChoice: string,
@@ -32,4 +33,13 @@ export const determineWinner = (
             break;
     }
     return "UNKNOWN ROLES";
+};
+
+export const gameEndState = {
+    app: {
+        ...initialState,
+        userChoice: Roles.PAPER,
+        houseChoice: Roles.ROCK,
+        result: RESULT_OPTIONS.WIN,
+    },
 };

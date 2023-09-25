@@ -1,5 +1,4 @@
-import type { RootState } from "../../app/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { selectUserChoice, setUserChoice } from "../../app/appSlice";
 import { Box } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";

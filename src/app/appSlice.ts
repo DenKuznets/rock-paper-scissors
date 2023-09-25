@@ -20,13 +20,13 @@ export const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        setUserChoice: (state, action: PayloadAction<string>) => {
+        setUserChoice: (state, action: PayloadAction<string | null>) => {
             state.userChoice = action.payload;
         },
-        setHouseChoice: (state, action: PayloadAction<string>) => {
+        setHouseChoice: (state, action: PayloadAction<string | null>) => {
             state.houseChoice = action.payload;
         },
-        setResult: (state, action: PayloadAction<string>) => {
+        setResult: (state, action: PayloadAction<string | null>) => {
             state.result = action.payload;
         },
         incrementScore: (state) => {
