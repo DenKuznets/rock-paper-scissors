@@ -33,33 +33,34 @@ function App() {
     const [showChoiceList, setShowChoiceList] = useState(true);
     const [showUserPick, setShowUserPick] = useState(false);
     const resultState = useAppSelector(selectResult);
-    const userChoice = useAppSelector(selectUserChoice);
-    const houseChoice = useAppSelector(selectHouseChoice);
+    const userChoiceState = useAppSelector(selectUserChoice);
+    const houseChoiceState = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
     const choiceListRef = useRef<HTMLDivElement | null>(null);
 
     // animate choice list dissapearance
     useEffect(() => {
         const choiceComponent = choiceListRef.current;
-        if (choiceComponent && userChoice) choiceComponent.style.opacity = "0";
+        if (choiceComponent && userChoiceState)
+            choiceComponent.style.opacity = "0";
 
         return () => {
-            if (choiceComponent && !userChoice)
+            if (choiceComponent && !userChoiceState)
                 choiceComponent.style.opacity = "1";
         };
-    }, [userChoice]);
+    }, [userChoiceState]);
 
     // setting house choice
     useEffect(() => {
-        if (userChoice) {
+        if (userChoiceState) {
             // rolling the house pick
             const randomIndex = getRandomIndex();
-            houseChoice === null &&
+            houseChoiceState === null &&
                 dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
             setShowUserPick(true);
         }
-        if (!resultState && houseChoice && userChoice) {
-            const result = determineWinner(userChoice, houseChoice);
+        if (!resultState && houseChoiceState && userChoiceState) {
+            const result = determineWinner(userChoiceState, houseChoiceState);
             dispatch(setResult(result));
         }
         switch (resultState) {
@@ -72,7 +73,7 @@ function App() {
             default:
                 break;
         }
-    }, [userChoice, houseChoice, resultState, dispatch]);
+    }, [userChoiceState, houseChoiceState, resultState, dispatch]);
 
     // disable window scroll then showing modal window
     useEffect(() => {
@@ -118,7 +119,7 @@ function App() {
                     }}
                 />
             )}
-            {userChoice && (
+            {userChoiceState && (
                 <Box
                     data-testid={APP_TESTIDS.APP_CHOICES_CONTAINER}
                     sx={{
@@ -148,7 +149,7 @@ function App() {
                             }}
                         />
                     )}
-                    {houseChoice && <HousePick />}
+                    {houseChoiceState && <HousePick />}
                 </Box>
             )}
             <Button
