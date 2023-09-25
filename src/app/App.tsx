@@ -60,23 +60,33 @@ function App() {
             houseChoice === null &&
                 dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
             setShowUserPick(true);
-            // }, 1000);
         }
-        // return () => {
+        if (!resultState && houseChoice && userChoice) {
+            // }, 1000);
+            const result = determineWinner(userChoice, houseChoice);
+            dispatch(setResult(result));
+        }
+        switch (resultState) {
+            case RESULT_OPTIONS.WIN:
+                dispatch(incrementScore());
+                break;
+            case RESULT_OPTIONS.LOSE:
+                dispatch(decrementScore());
+                break;
+            default:
+                break;
+            // return () => {
+        }
         //     clearTimeout(houseChoiceTimeout);
         // };
-    }, [userChoice]);
+    }, [userChoice, houseChoice, resultState, dispatch]);
 
     // setting result depending on user and house choices
     useEffect(() => {
         // let resultTimeout: NodeJS.Timeout;
         // calculate result only if there is no result at the moment
-        if (!resultState && houseChoice && userChoice) {
-            // resultTimeout = setTimeout(() => {
-            const result = determineWinner(userChoice, houseChoice);
-            dispatch(setResult(result));
-            // }, 1);
-        }
+        // resultTimeout = setTimeout(() => {
+        // }, 1);
         // return () => {
         //     clearTimeout(resultTimeout);
         // };
@@ -88,18 +98,7 @@ function App() {
     }, [showModal]);
 
     // setting score depending on result
-    useEffect(() => {
-        switch (resultState) {
-            case RESULT_OPTIONS.WIN:
-                dispatch(incrementScore());
-                break;
-            case RESULT_OPTIONS.LOSE:
-                dispatch(decrementScore());
-                break;
-            default:
-                break;
-        }
-    }, [resultState]);
+    useEffect(() => {}, [resultState]);
 
     return (
         <Box
