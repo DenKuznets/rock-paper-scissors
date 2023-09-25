@@ -32,7 +32,7 @@ function App() {
     const [showModal, setShowModal] = useState(false);
     const [showChoiceList, setShowChoiceList] = useState(true);
     const [showUserPick, setShowUserPick] = useState(false);
-    const result = useAppSelector(selectResult);
+    const resultState = useAppSelector(selectResult);
     const userChoice = useAppSelector(selectUserChoice);
     const houseChoice = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
@@ -71,7 +71,7 @@ function App() {
     useEffect(() => {
         let resultTimeout: NodeJS.Timeout;
         // calculate result only if there is no result at the moment
-        if (!result && houseChoice && userChoice) {
+        if (!resultState && houseChoice && userChoice) {
             resultTimeout = setTimeout(() => {
                 const result = determineWinner(userChoice, houseChoice);
                 dispatch(setResult(result));
@@ -89,7 +89,7 @@ function App() {
 
     // setting score depending on result
     useEffect(() => {
-        switch (result) {
+        switch (resultState) {
             case RESULT_OPTIONS.WIN:
                 dispatch(incrementScore());
                 break;
@@ -99,7 +99,7 @@ function App() {
             default:
                 break;
         }
-    }, [result]);
+    }, [resultState]);
 
     return (
         <Box
@@ -145,15 +145,16 @@ function App() {
                     data-testid={APP_TESTIDS.APP_CHOICES_CONTAINER}
                     sx={{
                         display: "flex",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
                         width: "100%",
                         mt: { xs: "6.3rem", md: "4.1rem" },
                         minWidth: { xs375: "21rem" },
                         maxWidth: {
                             xs: "24rem",
-                            md: result ? "60rem" : "46rem",
+                            md: "100%",
                         },
                         position: "relative",
+                        gap: { md: "4rem" },
                     }}
                 >
                     <UserPick
@@ -162,7 +163,7 @@ function App() {
                             transition: "opacity 1s",
                         }}
                     />
-                    {result && (
+                    {resultState && (
                         <Result
                             sx={{
                                 marginTop: { xs: "14.5rem", md: "7.6rem" },

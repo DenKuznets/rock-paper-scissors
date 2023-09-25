@@ -32,7 +32,7 @@ const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     xs: "absolute",
                     md: "relative",
                 },
-                width: { xs: "100%" },
+                width: { xs: "100%", md: "unset" },
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
