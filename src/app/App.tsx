@@ -141,7 +141,7 @@ function App() {
             <Button
                 data-testid={APP_TESTIDS.APP_RULES_BUTTON}
                 sx={{
-                    marginTop: { xs: "8rem", md: "13rem" },
+                    marginTop: { xs: result ? "16rem" : "8rem", md: "13rem" },
                     marginRight: { md: "2rem" },
                     marginBottom: { md: "2rem" },
                     position: { md: "absolute" },
