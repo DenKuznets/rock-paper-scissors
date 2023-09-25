@@ -3,6 +3,8 @@ import { gradients } from "../ts/theme";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import {
+    decrementScore,
+    incrementScore,
     selectHouseChoice,
     selectResult,
     selectUserChoice,
@@ -16,7 +18,8 @@ import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
 import { determineWinner } from "../ts/utils";
-import Result from "../components/Result/Result";
+import Result, { RESULT_OPTIONS } from "../components/Result/Result";
+import { increment } from "../components/ScoreTab/scoreTabSlice";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -34,6 +37,7 @@ function App() {
     const houseChoice = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
 
+    // setting house choice
     useEffect(() => {
         let houseChoiceTimeout: NodeJS.Timeout;
 
@@ -51,6 +55,7 @@ function App() {
         };
     }, [userChoice]);
 
+    // setting result depending on user and house choices
     useEffect(() => {
         let resultTimeout: NodeJS.Timeout;
         // calculate result only if there is no result at the moment
@@ -65,10 +70,24 @@ function App() {
         };
     }, [houseChoice]);
 
+    // disable window scroll then showing modal window
     useEffect(() => {
-        // disable window scroll then showing modal window
         document.body.style.overflow = showModal ? "hidden" : "auto";
     }, [showModal]);
+
+    // setting score depending on result
+    useEffect(() => {
+        switch (result) {
+            case RESULT_OPTIONS.WIN:
+                dispatch(incrementScore());
+                break;
+            case RESULT_OPTIONS.LOSE:
+                dispatch(decrementScore());
+                break;
+            default:
+                break;
+        }
+    }, [result]);
 
     return (
         <Box

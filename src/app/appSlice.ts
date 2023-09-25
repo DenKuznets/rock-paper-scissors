@@ -30,10 +30,10 @@ export const appSlice = createSlice({
             state.result = action.payload;
         },
         incrementScore: (state) => {
-            state.score += 1;
+            state.score++;
         },
         decrementScore: (state) => {
-            state.score -= 1;
+            state.score--;
         },
     },
 });
