@@ -1,4 +1,4 @@
-import App, { getRandomIndex } from "./App";
+import App from "./App";
 import { SCORETAB_TESTIDS } from "../components/ScoreTab/ScoreTab";
 import { RULES_TESTIDS } from "../components/Rules/Rules";
 import { APP_TESTIDS } from "./App";
@@ -9,7 +9,7 @@ import { Roles } from "../ts/roles";
 import { USER_PICK_TESTIDS } from "../components/UserPick/UserPick";
 import { HOUSE_PICK_TESTIDS } from "../components/HousePick/HousePick";
 import { RESULT_OPTIONS, RESULT_TESTIDS } from "../components/Result/Result";
-import { gameEndState } from "../ts/utils";
+import { gameEndState, getRandomIndex } from "../ts/utils";
 import { CHOICE_LIST_TESTIDS } from "../components/ChoiceList/ChoiceList";
 import { initialState } from "./appSlice";
 

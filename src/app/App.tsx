@@ -17,7 +17,7 @@ import Rules from "../components/Rules/Rules";
 import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
-import { determineWinner } from "../ts/utils";
+import { determineWinner, getRandomIndex } from "../ts/utils";
 import Result, { RESULT_OPTIONS } from "../components/Result/Result";
 
 export const APP_TESTIDS = {
@@ -26,15 +26,14 @@ export const APP_TESTIDS = {
     APP_RULES_BUTTON: "app-rules-button",
 };
 
-export const getRandomIndex = () =>
-    Math.floor(Math.random() * Object.keys(Roles).length);
-
 function App() {
     const [showModal, setShowModal] = useState(false);
     const result = useAppSelector(selectResult);
     const userChoice = useAppSelector(selectUserChoice);
     const houseChoice = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
+
+    // animate choice list dissapearance
 
     // setting house choice
     useEffect(() => {
@@ -47,7 +46,7 @@ function App() {
                 // only set houseChoice if no houseChoice is present
                 houseChoice === null &&
                     dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
-            }, 1);
+            }, 1000);
         }
         return () => {
             clearTimeout(houseChoiceTimeout);

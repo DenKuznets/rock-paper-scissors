@@ -43,3 +43,6 @@ export const gameEndState = {
         result: RESULT_OPTIONS.WIN,
     },
 };
+
+export const getRandomIndex = () =>
+    Math.floor(Math.random() * Object.keys(Roles).length);
