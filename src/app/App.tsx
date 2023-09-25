@@ -51,18 +51,14 @@ function App() {
 
     // setting house choice
     useEffect(() => {
-        // let houseChoiceTimeout: NodeJS.Timeout;
-
         if (userChoice) {
             // rolling the house pick
             const randomIndex = getRandomIndex();
-            // houseChoiceTimeout = setTimeout(() => {
             houseChoice === null &&
                 dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
             setShowUserPick(true);
         }
         if (!resultState && houseChoice && userChoice) {
-            // }, 1000);
             const result = determineWinner(userChoice, houseChoice);
             dispatch(setResult(result));
         }
@@ -75,30 +71,13 @@ function App() {
                 break;
             default:
                 break;
-            // return () => {
         }
-        //     clearTimeout(houseChoiceTimeout);
-        // };
     }, [userChoice, houseChoice, resultState, dispatch]);
-
-    // setting result depending on user and house choices
-    useEffect(() => {
-        // let resultTimeout: NodeJS.Timeout;
-        // calculate result only if there is no result at the moment
-        // resultTimeout = setTimeout(() => {
-        // }, 1);
-        // return () => {
-        //     clearTimeout(resultTimeout);
-        // };
-    }, [houseChoice]);
 
     // disable window scroll then showing modal window
     useEffect(() => {
         document.body.style.overflow = showModal ? "hidden" : "auto";
     }, [showModal]);
-
-    // setting score depending on result
-    useEffect(() => {}, [resultState]);
 
     return (
         <Box
