@@ -175,12 +175,9 @@ function App() {
             <Button
                 data-testid={APP_TESTIDS.APP_RULES_BUTTON}
                 sx={{
-                    marginTop: { xs: result ? "16rem" : "8rem", md: "13rem" },
-                    marginRight: { md: "2rem" },
-                    marginBottom: { md: "2rem" },
-                    position: { md: "absolute" },
-                    right: { md: "0" },
-                    bottom: { md: "0" },
+                    position: "absolute",
+                    right: { md: "2rem" },
+                    bottom: { xs: "3.4rem", md: "2rem" },
                 }}
                 variant="outlined"
                 onClick={() => {
