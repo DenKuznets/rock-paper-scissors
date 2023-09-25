@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { gradients } from "../ts/theme";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import {
     decrementScore,
@@ -12,7 +12,9 @@ import {
     setResult,
 } from "./appSlice";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
-import ChoiceList from "../components/ChoiceList/ChoiceList";
+import ChoiceList, {
+    CHOICE_LIST_TESTIDS,
+} from "../components/ChoiceList/ChoiceList";
 import Rules from "../components/Rules/Rules";
 import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
@@ -28,12 +30,24 @@ export const APP_TESTIDS = {
 
 function App() {
     const [showModal, setShowModal] = useState(false);
+    const [showChoiceList, setShowChoiceList] = useState(true);
+    const [showUserPick, setShowUserPick] = useState(false);
     const result = useAppSelector(selectResult);
     const userChoice = useAppSelector(selectUserChoice);
     const houseChoice = useAppSelector(selectHouseChoice);
     const dispatch = useAppDispatch();
+    const choiceListRef = useRef<HTMLDivElement | null>(null);
 
     // animate choice list dissapearance
+    useEffect(() => {
+        const choiceComponent = choiceListRef.current;
+        if (choiceComponent && userChoice) choiceComponent.style.opacity = "0";
+
+        return () => {
+            if (choiceComponent && !userChoice)
+                choiceComponent.style.opacity = "1";
+        };
+    }, [userChoice]);
 
     // setting house choice
     useEffect(() => {
@@ -43,9 +57,9 @@ function App() {
             // rolling the house pick
             const randomIndex = getRandomIndex();
             houseChoiceTimeout = setTimeout(() => {
-                // only set houseChoice if no houseChoice is present
                 houseChoice === null &&
                     dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+                setShowUserPick(true);
             }, 1000);
         }
         return () => {
@@ -102,9 +116,23 @@ function App() {
             }}
         >
             <ScoreTab />
-            {!userChoice && (
+            {showChoiceList && (
                 <ChoiceList
+                    // fadeout ChoiceList from the screen
+                    // when opacity animation goes to 0, remove ChoiceList from the document
+                    handleTransitionEnd={(e) => {
+                        if (
+                            e.target instanceof HTMLDivElement &&
+                            e.target.getAttribute("data-testid") ===
+                                CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
+                        ) {
+                            setShowChoiceList(false);
+                        }
+                    }}
+                    choiceListRef={choiceListRef}
                     sx={{
+                        opacity: "1",
+                        transition: "opacity 1s",
                         marginTop: {
                             xs: "6.7rem",
                             md: "4.2rem",
@@ -128,10 +156,17 @@ function App() {
                         position: "relative",
                     }}
                 >
-                    <UserPick />
+                    <UserPick
+                        sx={{
+                            opacity: showUserPick ? 1 : 0,
+                            transition: "opacity 1s",
+                        }}
+                    />
                     {result && (
                         <Result
-                            sx={{ marginTop: { xs: "14.5rem", md: "7.6rem" } }}
+                            sx={{
+                                marginTop: { xs: "14.5rem", md: "7.6rem" },
+                            }}
                         />
                     )}
                     {houseChoice && <HousePick />}

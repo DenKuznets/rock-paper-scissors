@@ -5,6 +5,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
 import Choice from "../Choice/Choice";
 import { useAppSelector } from "../../app/hooks";
+import { ForwardedRef, AnimationEvent, TransitionEvent } from "react";
 
 const choicePos = [
     {
@@ -26,7 +27,15 @@ export const CHOICE_LIST_TESTIDS = {
     CHOICE_LIST_CONTAINER: "choice-list-container",
 };
 
-const ChoiceList = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
+const ChoiceList = ({
+    sx,
+    choiceListRef,
+    handleTransitionEnd,
+}: {
+    sx?: SxProps<Theme> | undefined;
+    choiceListRef?: ForwardedRef<HTMLDivElement>;
+    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+}) => {
     const userChoice = useAppSelector(selectUserChoice);
     const dispatch = useDispatch();
     const choiceList = Object.keys(Roles).map((role, index) => {
@@ -48,13 +57,12 @@ const ChoiceList = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             />
         );
     });
-    
-    
+
     return (
         <Box
+            ref={choiceListRef}
             data-testid={CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER}
             sx={{
-                // outline: "1px solid green",
                 opacity: 1,
                 backgroundImage: `url("./images/bg-triangle.svg")`,
                 backgroundSize: "65%",
@@ -68,6 +76,9 @@ const ChoiceList = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 margin: "0 auto",
                 ...sx,
             }}
+            onTransitionEnd={(e) =>
+                handleTransitionEnd && handleTransitionEnd(e)
+            }
         >
             {choiceList}
         </Box>
