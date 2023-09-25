@@ -94,7 +94,7 @@ function App() {
             sx={{
                 background: gradients.backgroundGradient,
                 height: "100vh",
-                minHeight: { xs: "740px", md: "600px" },
+                minHeight: { xs: "740px", md: "790px" },
                 padding: { xs320: "1rem", xs375: "2rem", md: "3rem" },
                 display: "flex",
                 flexDirection: "column",
@@ -141,7 +141,7 @@ function App() {
             <Button
                 data-testid={APP_TESTIDS.APP_RULES_BUTTON}
                 sx={{
-                    marginTop: { xs: "16rem", md: "13rem" },
+                    marginTop: { xs: "8rem", md: "13rem" },
                     marginRight: { md: "2rem" },
                     marginBottom: { md: "2rem" },
                     position: { md: "absolute" },
