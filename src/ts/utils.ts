@@ -1,6 +1,7 @@
 import { RESULT_OPTIONS } from "../components/Result/Result";
 import { Roles } from "./roles";
 import { initialState } from "../app/appSlice";
+import { useAppDispatch } from "../app/reduxHooks";
 
 export const determineWinner = (
     userChoice: string,

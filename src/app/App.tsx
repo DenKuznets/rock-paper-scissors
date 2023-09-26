@@ -21,6 +21,7 @@ import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
 import { determineWinner, getRandomIndex } from "../ts/utils";
 import Result, { RESULT_OPTIONS } from "../components/Result/Result";
+import FadeIn from "../components/FadeIn";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -31,34 +32,37 @@ export const APP_TESTIDS = {
 function App() {
     const [showModal, setShowModal] = useState(false);
     const [showChoiceList, setShowChoiceList] = useState(true);
-    const [showUserPick, setShowUserPick] = useState(false);
+    const [showChoicesContainer, setShowChoicesContainer] = useState(false);
     const resultState = useAppSelector(selectResult);
     const userChoiceState = useAppSelector(selectUserChoice);
     const houseChoiceState = useAppSelector(selectHouseChoice);
     const choiceListRef = useRef<HTMLDivElement | null>(null);
     const dispatch = useAppDispatch();
 
-    // animate choice list dissapearance
+    // animateions
     useEffect(() => {
-        const choiceComponent = choiceListRef.current;
-        if (choiceComponent && userChoiceState)
-            choiceComponent.style.opacity = "0";
-        setShowUserPick(true);
+        const choiceListComponent = choiceListRef.current;
+        // choiceList smooth fade out
+        if (choiceListComponent && userChoiceState) {
+            choiceListComponent.style.opacity = "0";
+        }
+        // show choiceList again, then new game starts
+        if (!userChoiceState) {
+            setShowChoiceList(true);
+        }
 
-        setShowUserPick(true);
         return () => {
-            if (choiceComponent && !userChoiceState)
-                choiceComponent.style.opacity = "1";
+            // cleanup for strict mode
+            if (choiceListComponent && !userChoiceState)
+                choiceListComponent.style.opacity = "1";
         };
     }, [userChoiceState]);
 
     // set house choice
     useEffect(() => {
         if (userChoiceState) {
-            // rolling the house pick
-            const randomIndex = getRandomIndex();
-            houseChoiceState === null &&
-                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+            const houseChoice = Object.values(Roles)[getRandomIndex()];
+            houseChoiceState === null && dispatch(setHouseChoice(houseChoice));
         }
     }, [userChoiceState]);
 
@@ -115,6 +119,7 @@ function App() {
                                 CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
                         ) {
                             setShowChoiceList(false);
+                            setShowChoicesContainer(true);
                         }
                     }}
                     choiceListRef={choiceListRef}
@@ -128,38 +133,35 @@ function App() {
                     }}
                 />
             )}
-            {userChoiceState && (
-                <Box
-                    data-testid={APP_TESTIDS.APP_CHOICES_CONTAINER}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                        mt: { xs: "6.3rem", md: "4.1rem" },
-                        minWidth: { xs375: "21rem" },
-                        maxWidth: {
-                            xs: "24rem",
-                            md: "100%",
-                        },
-                        position: "relative",
-                        gap: { md: "4rem" },
-                    }}
-                >
-                    <UserPick
+            {showChoicesContainer && (
+                <FadeIn>
+                    <Box
+                        data-testid={APP_TESTIDS.APP_CHOICES_CONTAINER}
                         sx={{
-                            opacity: showUserPick ? 1 : 0,
-                            transition: "opacity 1s",
+                            display: "flex",
+                            justifyContent: "center",
+                            width: "100%",
+                            mt: { xs: "6.3rem", md: "4.1rem" },
+                            minWidth: { xs375: "21rem" },
+                            maxWidth: {
+                                xs: "24rem",
+                                md: "100%",
+                            },
+                            position: "relative",
+                            gap: { md: "4rem" },
                         }}
-                    />
-                    {resultState && (
-                        <Result
-                            sx={{
-                                marginTop: { xs: "14.5rem", md: "7.6rem" },
-                            }}
-                        />
-                    )}
-                    {houseChoiceState && <HousePick />}
-                </Box>
+                    >
+                        <UserPick />
+                        {resultState && (
+                            <Result
+                                sx={{
+                                    marginTop: { xs: "14.5rem", md: "7.6rem" },
+                                }}
+                            />
+                        )}
+                        {houseChoiceState && <HousePick />}
+                    </Box>
+                </FadeIn>
             )}
             <Button
                 data-testid={APP_TESTIDS.APP_RULES_BUTTON}
