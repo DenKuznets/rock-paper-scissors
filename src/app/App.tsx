@@ -45,6 +45,7 @@ function App() {
             choiceComponent.style.opacity = "0";
         setShowUserPick(true);
 
+        setShowUserPick(true);
         return () => {
             if (choiceComponent && !userChoiceState)
                 choiceComponent.style.opacity = "1";
