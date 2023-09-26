@@ -36,6 +36,7 @@ function App() {
     const userChoiceState = useAppSelector(selectUserChoice);
     const houseChoiceState = useAppSelector(selectHouseChoice);
     const choiceListRef = useRef<HTMLDivElement | null>(null);
+    const dispatch = useAppDispatch();
 
     // animate choice list dissapearance
     useEffect(() => {
@@ -50,8 +51,37 @@ function App() {
         };
     }, [userChoiceState]);
 
-    // getting result
-    useCalculateResult(userChoiceState, houseChoiceState, resultState);
+    // set house choice
+    useEffect(() => {
+        if (userChoiceState) {
+            // rolling the house pick
+            const randomIndex = getRandomIndex();
+            houseChoiceState === null &&
+                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+        }
+    }, [userChoiceState]);
+
+    // set result
+    useEffect(() => {
+        if (!resultState && houseChoiceState && userChoiceState) {
+            const result = determineWinner(userChoiceState, houseChoiceState);
+            dispatch(setResult(result));
+        }
+    }, [houseChoiceState]);
+
+    // set score
+    useEffect(() => {
+        switch (resultState) {
+            case RESULT_OPTIONS.WIN:
+                dispatch(incrementScore());
+                break;
+            case RESULT_OPTIONS.LOSE:
+                dispatch(decrementScore());
+                break;
+            default:
+                break;
+        }
+    }, [resultState]);
 
     // disable window scroll then showing modal window
     useEffect(() => {
@@ -156,33 +186,3 @@ function App() {
 }
 
 export default App;
-
-function useCalculateResult(
-    userChoiceState: string | null,
-    houseChoiceState: string | null,
-    resultState: string | null
-) {
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (userChoiceState) {
-            // rolling the house pick
-            const randomIndex = getRandomIndex();
-            houseChoiceState === null &&
-                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
-        }
-        if (!resultState && houseChoiceState && userChoiceState) {
-            const result = determineWinner(userChoiceState, houseChoiceState);
-            dispatch(setResult(result));
-        }
-        switch (resultState) {
-            case RESULT_OPTIONS.WIN:
-                dispatch(incrementScore());
-                break;
-            case RESULT_OPTIONS.LOSE:
-                dispatch(decrementScore());
-                break;
-            default:
-                break;
-        }
-    }, [userChoiceState, houseChoiceState, resultState, dispatch]);
-}
