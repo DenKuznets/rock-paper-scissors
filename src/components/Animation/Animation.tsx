@@ -1,13 +1,18 @@
 import { Box } from "@mui/material";
 import Choice from "../Choice/Choice";
 import { Roles } from "../../ts/roles";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { SxProps, Theme } from "@mui/material/styles";
 
 export const ANIMATION_TESTIDS = {
     ANIMATION_CONTAINER: "animation-container",
 };
 
-const Animation = () => {
+export interface Props {
+    sx?: SxProps<Theme> | undefined;
+}
+
+const Animation: FC<Props> = ({ sx }) => {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
@@ -22,8 +27,11 @@ const Animation = () => {
     }, []);
 
     return (
-        <Box data-testid={ANIMATION_TESTIDS.ANIMATION_CONTAINER}>
-            <Choice role={Object.values(Roles)[index]} />
+        <Box sx={{ ...sx }} data-testid={ANIMATION_TESTIDS.ANIMATION_CONTAINER}>
+            <Choice
+                sx={{ margin: "0 auto" }}
+                role={Object.values(Roles)[index]}
+            />
         </Box>
     );
 };
