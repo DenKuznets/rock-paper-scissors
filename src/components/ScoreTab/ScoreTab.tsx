@@ -27,10 +27,11 @@ const ScoreTab = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 borderRadius: { xs: "4px", md: "18px" },
-                minWidth: { xs: "19.5rem", md: "33rem" },
+                // minWidth: { xs: "19.5rem", md: "33rem" },
                 maxWidth: { xs: "30rem", md: "44rem" },
                 width: "100%",
                 minHeight: { xs: "5.9rem", md: "9.4rem" },
+                margin: "0 auto",
             }}
         >
             <Box

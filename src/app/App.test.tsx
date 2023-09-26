@@ -6,6 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { renderWithProviders, screen } from "../ts/utils-for-tests";
 import { Roles } from "../ts/roles";
 import { getRandomIndex } from "../ts/utils";
+import { SHOWRULES_TESTIDS } from "../components/ShowRules/ShowRules";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -23,7 +24,9 @@ test("renders correctly", () => {
 test("rules button click displays rules component and prevents document scroll", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
-    const rulesButton = screen.getByTestId(APP_TESTIDS.APP_RULES_BUTTON);
+    const rulesButton = screen.getByTestId(
+        SHOWRULES_TESTIDS.SHOWRULES_CONTAINER
+    );
     await user.click(rulesButton);
     const rulesComponent = screen.getByTestId(RULES_TESTIDS.RULES_CONTAINER);
     expect(rulesComponent).toBeInTheDocument();
