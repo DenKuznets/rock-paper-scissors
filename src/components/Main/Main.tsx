@@ -3,11 +3,13 @@ import Step1, { STEP1_TESTIDS } from "../../app/steps/Step1/Step1";
 import { useAppSelector } from "../../app/reduxHooks";
 import { selectUserChoice } from "../../app/appSlice";
 import Step2 from "../../app/steps/Step2/Step2";
+import Step3 from "../../app/steps/Step3/Step3";
 
 const Main = () => {
     const step1ref = useRef<HTMLDivElement | null>(null);
     const [showStep1, setShowStep1] = useState(true);
     const [showStep2, setShowStep2] = useState(false);
+    const [showStep3, setShowStep3] = useState(false);
     const userChoiceState = useAppSelector(selectUserChoice);
     useEffect(() => {
         const step1 = step1ref.current;
@@ -39,7 +41,15 @@ const Main = () => {
                     }}
                 />
             )}
-            {showStep2 && <Step2 />}
+            {showStep2 && (
+                <Step2
+                    handleTransitionEnd={() => {
+                        setShowStep2(false);
+                        setShowStep3(true);
+                    }}
+                />
+            )}
+            {showStep3 && <Step3 />}
         </div>
     );
 };

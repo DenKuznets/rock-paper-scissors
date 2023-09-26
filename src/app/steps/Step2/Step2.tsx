@@ -10,7 +10,7 @@ import HousePick, {
 type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+    handleTransitionEnd?: () => void;
 };
 
 export const STEP2_TESTIDS = {
@@ -25,6 +25,11 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
             setHousePickView(HOUSE_OPTIONS.animation);
             setTimeout(() => {
                 setHousePickView(HOUSE_OPTIONS.choice);
+                if (handleTransitionEnd) {
+                    handleTransitionEnd();
+                    // setTimeout(() => {
+                    // }, 1000);
+                }
             }, 2000);
         }, 1000);
 

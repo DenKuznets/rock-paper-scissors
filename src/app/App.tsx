@@ -6,12 +6,14 @@ import Main from "../components/Main/Main";
 import ShowRules from "../components/ShowRules/ShowRules";
 import Rules from "../components/Rules/Rules";
 import { Roles } from "../ts/roles";
-import { getRandomIndex } from "../ts/utils";
+import { determineWinner, getRandomIndex } from "../ts/utils";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import {
     selectHouseChoice,
+    selectResult,
     selectUserChoice,
     setHouseChoice,
+    setResult,
 } from "./appSlice";
 
 export const APP_TESTIDS = {
@@ -36,6 +38,8 @@ function App() {
     const dispatch = useAppDispatch();
     const userChoiceState = useAppSelector(selectUserChoice);
     const houseChoiceState = useAppSelector(selectHouseChoice);
+    const resultState = useAppSelector(selectResult);
+
     // disable window scroll then showing modal window
     useEffect(() => {
         document.body.style.overflow = showRules ? "hidden" : "auto";
@@ -48,6 +52,14 @@ function App() {
             houseChoiceState === null && dispatch(setHouseChoice(houseChoice));
         }
     }, [userChoiceState]);
+
+    // set result
+    useEffect(() => {
+        if (!resultState && houseChoiceState && userChoiceState) {
+            const result = determineWinner(userChoiceState, houseChoiceState);
+            dispatch(setResult(result));
+        }
+    }, [houseChoiceState]);
 
     return (
         <Box data-testis={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
