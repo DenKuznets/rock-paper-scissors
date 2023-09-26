@@ -4,7 +4,10 @@ import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
 import { useAppSelector } from "../../reduxHooks";
 import { selectHouseChoice } from "../../appSlice";
-import HousePick from "../../../components/HousePick/HousePick";
+import HousePick, {
+    HOUSE_OPTIONS,
+} from "../../../components/HousePick/HousePick";
+import Animation from "../../../components/Animation/Animation";
 
 type Props = {
     children?: React.ReactNode;
@@ -17,7 +20,7 @@ export const STEP2_TESTIDS = {
 };
 
 const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
-    const houseChoiceState = useAppSelector(selectHouseChoice);
+    // const houseChoiceState = useAppSelector(selectHouseChoice);
 
     return (
         <FadeIn>
@@ -40,8 +43,7 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 }}
             >
                 <UserPick />
-
-                {houseChoiceState && <HousePick stub />}
+                <HousePick view={HOUSE_OPTIONS.animation} />
             </Box>
         </FadeIn>
     );

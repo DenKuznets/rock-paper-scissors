@@ -3,6 +3,7 @@ import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 import { SxProps, Theme } from "@mui/material/styles";
 import Choice from "../Choice/Choice";
+import Animation from "../Animation/Animation";
 
 export const HOUSE_PICK_TESTIDS = {
     HOUSE_PICK_CONTAINER: "house-pick-container",
@@ -10,15 +11,59 @@ export const HOUSE_PICK_TESTIDS = {
     HOUSE_PICK_PLACEHOLDER: "house-pick-placeholder",
 };
 
-export interface HousePickType {
-    sx?: SxProps<Theme> | undefined;
-    stub?: boolean;
+export enum HOUSE_OPTIONS {
+    stub,
+    animation,
+    choice,
 }
 
-const HousePick: React.FC<HousePickType> = ({ sx, stub }) => {
+export interface HousePickType {
+    sx?: SxProps<Theme> | undefined;
+    view?: HOUSE_OPTIONS;
+}
+
+const HousePick: React.FC<HousePickType> = ({
+    sx,
+    view = HOUSE_OPTIONS.choice,
+}) => {
     const houseChoice = useSelector(
         (state: RootState) => state.app.houseChoice
     );
+
+    const toShow = () => {
+        switch (view) {
+            case HOUSE_OPTIONS.stub:
+                return (
+                    <Box
+                        data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_PLACEHOLDER}
+                        sx={{
+                            flex: "1 0 auto",
+                            borderRadius: "50%",
+                            width: { xs: "7rem", md: "9rem" },
+                            height: { xs: "7rem", md: "9rem" },
+                            backgroundColor: "rgba(0,0,0,0.2)",
+                            margin: "0 auto",
+                        }}
+                    />
+                );
+
+            case HOUSE_OPTIONS.animation:
+                return <Animation />;
+
+            default:
+                return (
+                    <Choice
+                        sx={{
+                            scale: { md: "1.5" },
+                            mt: { md: "6.7rem" },
+                            margin: "0 auto",
+                        }}
+                        role={houseChoice as string}
+                    />
+                );
+        }
+    };
+
     return (
         <Box
             data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_CONTAINER}
@@ -43,28 +88,8 @@ const HousePick: React.FC<HousePickType> = ({ sx, stub }) => {
             >
                 THE HOUSE PICKED
             </Box>
-            {stub ? (
-                <Box
-                    data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_PLACEHOLDER}
-                    sx={{
-                        flex: "1 0 auto",
-                        borderRadius: "50%",
-                        width: { xs: "7rem", md: "9rem" },
-                        height: { xs: "7rem", md: "9rem" },
-                        backgroundColor: "rgba(0,0,0,0.2)",
-                        margin: "0 auto",
-                    }}
-                />
-            ) : (
-                <Choice
-                    sx={{
-                        scale: { md: "1.5" },
-                        mt: { md: "6.7rem" },
-                        margin: "0 auto",
-                    }}
-                    role={houseChoice as string}
-                />
-            )}
+
+            {toShow()}
         </Box>
     );
 };
