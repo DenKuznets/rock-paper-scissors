@@ -8,10 +8,19 @@ type Props = {
     handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
 };
 
+export const STEP1_TESTIDS = {
+    STEP1_CONTAINER: "step1-container",
+};
+
 const Step1: React.FC<Props> = ({ stepRef: ref, handleTransitionEnd }) => {
     return (
         <Box
-            sx={{ mt: { xs: "4rem", md: "2rem" } }}
+            data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
+            sx={{
+                mt: { xs: "4rem", md: "2rem" },
+                opacity: "1",
+                transition: "opacity 1s",
+            }}
             onTransitionEnd={(e) =>
                 handleTransitionEnd && handleTransitionEnd(e)
             }
