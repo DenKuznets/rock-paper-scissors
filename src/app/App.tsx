@@ -3,8 +3,6 @@ import { gradients } from "../ts/theme";
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import {
-    decrementScore,
-    incrementScore,
     selectHouseChoice,
     selectResult,
     selectUserChoice,
@@ -20,7 +18,7 @@ import UserPick from "../components/UserPick/UserPick";
 import { Roles } from "../ts/roles";
 import HousePick from "../components/HousePick/HousePick";
 import { determineWinner, getRandomIndex } from "../ts/utils";
-import Result, { RESULT_OPTIONS } from "../components/Result/Result";
+import Result from "../components/Result/Result";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -36,6 +34,7 @@ function App() {
     const userChoiceState = useAppSelector(selectUserChoice);
     const houseChoiceState = useAppSelector(selectHouseChoice);
     const choiceListRef = useRef<HTMLDivElement | null>(null);
+    const dispatch = useAppDispatch();
 
     // animate choice list dissapearance
     useEffect(() => {
@@ -53,23 +52,23 @@ function App() {
 
     // set house choice
     useEffect(() => {
-        if (userChoice) {
+        if (userChoiceState) {
             // rolling the house pick
             const randomIndex = getRandomIndex();
-            houseChoice === null &&
+            houseChoiceState === null &&
                 dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
         }
-    }, [userChoice]);
+    }, [userChoiceState]);
 
     // set result
     useEffect(() => {
         // let resultTimeout: NodeJS.Timeout;
         // calculate result only if there is no result at the moment
-        if (!resultState && houseChoice && userChoice) {
-            const result = determineWinner(userChoice, houseChoice);
+        if (!resultState && houseChoiceState && userChoiceState) {
+            const result = determineWinner(userChoiceState, houseChoiceState);
             dispatch(setResult(result));
         }
-    }, [houseChoice]);
+    }, [houseChoiceState]);
 
     // disable window scroll then showing modal window
     useEffect(() => {
@@ -174,33 +173,3 @@ function App() {
 }
 
 export default App;
-
-function useCalculateResult(
-    userChoiceState: string | null,
-    houseChoiceState: string | null,
-    resultState: string | null
-) {
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (userChoiceState) {
-            // rolling the house pick
-            const randomIndex = getRandomIndex();
-            houseChoiceState === null &&
-                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
-        }
-        if (!resultState && houseChoiceState && userChoiceState) {
-            const result = determineWinner(userChoiceState, houseChoiceState);
-            dispatch(setResult(result));
-        }
-        switch (resultState) {
-            case RESULT_OPTIONS.WIN:
-                dispatch(incrementScore());
-                break;
-            case RESULT_OPTIONS.LOSE:
-                dispatch(decrementScore());
-                break;
-            default:
-                break;
-        }
-    }, [userChoiceState, houseChoiceState, resultState, dispatch]);
-}
