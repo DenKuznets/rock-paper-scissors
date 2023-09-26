@@ -33,22 +33,23 @@ function App() {
     const [showChoiceList, setShowChoiceList] = useState(true);
     const [showUserPick, setShowUserPick] = useState(false);
     const resultState = useAppSelector(selectResult);
-    const userChoice = useAppSelector(selectUserChoice);
-    const houseChoice = useAppSelector(selectHouseChoice);
-    const dispatch = useAppDispatch();
+    const userChoiceState = useAppSelector(selectUserChoice);
+    const houseChoiceState = useAppSelector(selectHouseChoice);
     const choiceListRef = useRef<HTMLDivElement | null>(null);
 
     // animate choice list dissapearance
     useEffect(() => {
         const choiceComponent = choiceListRef.current;
-        if (choiceComponent && userChoice) choiceComponent.style.opacity = "0";
+        if (choiceComponent && userChoiceState)
+            choiceComponent.style.opacity = "0";
+        setShowUserPick(true);
 
         setShowUserPick(true);
         return () => {
-            if (choiceComponent && !userChoice)
+            if (choiceComponent && !userChoiceState)
                 choiceComponent.style.opacity = "1";
         };
-    }, [userChoice]);
+    }, [userChoiceState]);
 
     // set house choice
     useEffect(() => {
@@ -74,20 +75,6 @@ function App() {
     useEffect(() => {
         document.body.style.overflow = showModal ? "hidden" : "auto";
     }, [showModal]);
-
-    // setting score depending on result
-    useEffect(() => {
-        switch (resultState) {
-            case RESULT_OPTIONS.WIN:
-                dispatch(incrementScore());
-                break;
-            case RESULT_OPTIONS.LOSE:
-                dispatch(decrementScore());
-                break;
-            default:
-                break;
-        }
-    }, [resultState]);
 
     return (
         <Box
@@ -128,7 +115,7 @@ function App() {
                     }}
                 />
             )}
-            {userChoice && (
+            {userChoiceState && (
                 <Box
                     data-testid={APP_TESTIDS.APP_CHOICES_CONTAINER}
                     sx={{
@@ -158,7 +145,7 @@ function App() {
                             }}
                         />
                     )}
-                    {houseChoice && <HousePick />}
+                    {houseChoiceState && <HousePick />}
                 </Box>
             )}
             <Button
@@ -187,3 +174,33 @@ function App() {
 }
 
 export default App;
+
+function useCalculateResult(
+    userChoiceState: string | null,
+    houseChoiceState: string | null,
+    resultState: string | null
+) {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        if (userChoiceState) {
+            // rolling the house pick
+            const randomIndex = getRandomIndex();
+            houseChoiceState === null &&
+                dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
+        }
+        if (!resultState && houseChoiceState && userChoiceState) {
+            const result = determineWinner(userChoiceState, houseChoiceState);
+            dispatch(setResult(result));
+        }
+        switch (resultState) {
+            case RESULT_OPTIONS.WIN:
+                dispatch(incrementScore());
+                break;
+            case RESULT_OPTIONS.LOSE:
+                dispatch(decrementScore());
+                break;
+            default:
+                break;
+        }
+    }, [userChoiceState, houseChoiceState, resultState, dispatch]);
+}
