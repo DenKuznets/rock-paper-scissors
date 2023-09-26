@@ -1,13 +1,11 @@
-import { ForwardedRef, TransitionEvent } from "react";
+import { ForwardedRef, TransitionEvent, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
-import { useAppSelector } from "../../reduxHooks";
-import { selectHouseChoice } from "../../appSlice";
+
 import HousePick, {
     HOUSE_OPTIONS,
 } from "../../../components/HousePick/HousePick";
-import Animation from "../../../components/Animation/Animation";
 
 type Props = {
     children?: React.ReactNode;
@@ -20,7 +18,20 @@ export const STEP2_TESTIDS = {
 };
 
 const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
-    // const houseChoiceState = useAppSelector(selectHouseChoice);
+    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setHousePickView(HOUSE_OPTIONS.animation);
+            setTimeout(() => {
+                setHousePickView(HOUSE_OPTIONS.choice);
+            }, 2000);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
 
     return (
         <FadeIn>
@@ -43,7 +54,7 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 }}
             >
                 <UserPick />
-                <HousePick view={HOUSE_OPTIONS.animation} />
+                <HousePick view={housePickView} />
             </Box>
         </FadeIn>
     );
