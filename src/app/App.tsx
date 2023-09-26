@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { gradients } from "../ts/theme";
 import { useEffect, useRef, useState } from "react";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import {
     decrementScore,
     incrementScore,

@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
 import Choice from "../Choice/Choice";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/reduxHooks";
 import { ForwardedRef, AnimationEvent, TransitionEvent } from "react";
 
 const choicePos = [

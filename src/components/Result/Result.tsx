@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
 import {
     selectResult,
     setHouseChoice,
