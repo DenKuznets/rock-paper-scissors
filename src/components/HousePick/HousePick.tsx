@@ -7,10 +7,15 @@ import Choice from "../Choice/Choice";
 export const HOUSE_PICK_TESTIDS = {
     HOUSE_PICK_CONTAINER: "house-pick-container",
     HOUSE_PICK_TEXT: "house-pick-text",
-    HOUSE_PICK_PLACEHOLDER: "house-pick-palceholder",
+    HOUSE_PICK_PLACEHOLDER: "house-pick-placeholder",
 };
 
-const HousePick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
+export interface HousePickType {
+    sx?: SxProps<Theme> | undefined;
+    stub?: boolean;
+}
+
+const HousePick: React.FC<HousePickType> = ({ sx, stub }) => {
     const houseChoice = useSelector(
         (state: RootState) => state.app.houseChoice
     );
@@ -38,25 +43,26 @@ const HousePick = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
             >
                 THE HOUSE PICKED
             </Box>
-            {typeof houseChoice === "string" && (
-                // НЕ УДАЛЯТЬ!
-                // <Box
-                //     data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_PLACEHOLDER}
-                //     sx={{
-                //         flex: "1 0 auto",
-                //         borderRadius: "50%",
-                //         width: { xs: "7rem", md: "9rem" },
-                //         height: { xs: "7rem", md: "9rem" },
-                //         backgroundColor: "rgba(0,0,0,0.2)",
-                //     }}
-                // />
+            {stub ? (
+                <Box
+                    data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_PLACEHOLDER}
+                    sx={{
+                        flex: "1 0 auto",
+                        borderRadius: "50%",
+                        width: { xs: "7rem", md: "9rem" },
+                        height: { xs: "7rem", md: "9rem" },
+                        backgroundColor: "rgba(0,0,0,0.2)",
+                        margin: "0 auto",
+                    }}
+                />
+            ) : (
                 <Choice
                     sx={{
                         scale: { md: "1.5" },
                         mt: { md: "6.7rem" },
                         margin: "0 auto",
                     }}
-                    role={houseChoice}
+                    role={houseChoice as string}
                 />
             )}
         </Box>

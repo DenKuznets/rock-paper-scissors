@@ -12,7 +12,7 @@ export const STEP1_TESTIDS = {
     STEP1_CONTAINER: "step1-container",
 };
 
-const Step1: React.FC<Props> = ({ stepRef: ref, handleTransitionEnd }) => {
+const Step1: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
     return (
         <Box
             data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
@@ -24,7 +24,7 @@ const Step1: React.FC<Props> = ({ stepRef: ref, handleTransitionEnd }) => {
             onTransitionEnd={(e) =>
                 handleTransitionEnd && handleTransitionEnd(e)
             }
-            ref={ref}
+            ref={stepRef}
         >
             <ChoiceList />
         </Box>
