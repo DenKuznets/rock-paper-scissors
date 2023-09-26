@@ -43,43 +43,31 @@ function App() {
         const choiceComponent = choiceListRef.current;
         if (choiceComponent && userChoice) choiceComponent.style.opacity = "0";
 
+        setShowUserPick(true);
         return () => {
             if (choiceComponent && !userChoice)
                 choiceComponent.style.opacity = "1";
         };
     }, [userChoice]);
 
-    // setting house choice
+    // set house choice
     useEffect(() => {
-        // let houseChoiceTimeout: NodeJS.Timeout;
-
         if (userChoice) {
             // rolling the house pick
             const randomIndex = getRandomIndex();
-            // houseChoiceTimeout = setTimeout(() => {
             houseChoice === null &&
                 dispatch(setHouseChoice(Object.values(Roles)[randomIndex]));
-            setShowUserPick(true);
-            // }, 1000);
         }
-        // return () => {
-        //     clearTimeout(houseChoiceTimeout);
-        // };
     }, [userChoice]);
 
-    // setting result depending on user and house choices
+    // set result
     useEffect(() => {
         // let resultTimeout: NodeJS.Timeout;
         // calculate result only if there is no result at the moment
         if (!resultState && houseChoice && userChoice) {
-            // resultTimeout = setTimeout(() => {
             const result = determineWinner(userChoice, houseChoice);
             dispatch(setResult(result));
-            // }, 1);
         }
-        // return () => {
-        //     clearTimeout(resultTimeout);
-        // };
     }, [houseChoice]);
 
     // disable window scroll then showing modal window
