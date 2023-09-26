@@ -10,6 +10,7 @@ import {
     selectUserChoice,
     setHouseChoice,
     setResult,
+    setUserChoice,
 } from "./appSlice";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import ChoiceList, {
@@ -39,16 +40,20 @@ function App() {
     const choiceListRef = useRef<HTMLDivElement | null>(null);
     const dispatch = useAppDispatch();
 
+    const playAgain = () => {
+        setShowChoiceList(true);
+        setShowChoicesContainer(false);
+        dispatch(setUserChoice(null));
+        dispatch(setHouseChoice(null));
+        dispatch(setResult(null));
+    };
+
     // animateions
     useEffect(() => {
         const choiceListComponent = choiceListRef.current;
         // choiceList smooth fade out
         if (choiceListComponent && userChoiceState) {
             choiceListComponent.style.opacity = "0";
-        }
-        // show choiceList again, then new game starts
-        if (!userChoiceState) {
-            setShowChoiceList(true);
         }
 
         return () => {
@@ -157,6 +162,7 @@ function App() {
                                 sx={{
                                     marginTop: { xs: "14.5rem", md: "7.6rem" },
                                 }}
+                                playAgain={() => playAgain()}
                             />
                         )}
                         {houseChoiceState && <HousePick />}

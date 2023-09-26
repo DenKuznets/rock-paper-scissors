@@ -1,11 +1,6 @@
 import { Box, Button } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
-import {
-    selectResult,
-    setHouseChoice,
-    setResult,
-    setUserChoice,
-} from "../../app/appSlice";
+import { useAppSelector } from "../../app/reduxHooks";
+import { selectResult } from "../../app/appSlice";
 import { colors } from "../../ts/theme";
 import { SxProps, Theme } from "@mui/material/styles";
 
@@ -21,8 +16,13 @@ export const RESULT_OPTIONS = {
     DRAW: "draw",
 };
 
-const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
-    const dispatch = useAppDispatch();
+const Result = ({
+    sx,
+    playAgain,
+}: {
+    sx?: SxProps<Theme> | undefined;
+    playAgain?: () => void;
+}) => {
     const result = useAppSelector(selectResult);
     return (
         <Box
@@ -65,11 +65,7 @@ const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                     },
                     backgroundColor: "#fff",
                 }}
-                onClick={() => {
-                    dispatch(setUserChoice(null));
-                    dispatch(setHouseChoice(null));
-                    dispatch(setResult(null));
-                }}
+                onClick={playAgain}
             >
                 play again
             </Button>
