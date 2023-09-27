@@ -19,7 +19,7 @@ export const STEP3_TESTIDS = {
     STEP3_CONTAINER: "step3-container",
 };
 
-const Step3: React.FC<Props> = ({ playAgain }) => {
+const Step3: React.FC<Props> = ({ playAgain, stepRef }) => {
     const [showResult, setShowResult] = useState(false);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -49,6 +49,7 @@ const Step3: React.FC<Props> = ({ playAgain }) => {
                 transitionProperty: "all",
                 transitionDuration: "1s",
             }}
+            ref={stepRef}
         >
             <UserPick />
             {showResult && (

@@ -56,6 +56,7 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                     transitionProperty: "all",
                     transitionDuration: "1s",
                 }}
+                ref={stepRef}
             >
                 <UserPick />
                 <HousePick view={housePickView} />
