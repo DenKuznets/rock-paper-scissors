@@ -17,7 +17,7 @@ const Step1: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
         <Box
             data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
             sx={{
-                mt: { xs: "4rem", md: "2rem" },
+                mt: { xs: "6.5rem", md: "2rem" },
                 opacity: "1",
                 transition: "opacity 1s",
             }}

@@ -28,10 +28,7 @@ const Result = ({
         <Box
             data-testid={RESULT_TESTIDS.RESULT_CONTAINER}
             sx={{
-                position: {
-                    xs: "absolute",
-                    md: "relative",
-                },
+                
                 width: { xs: "100%", md: "unset" },
                 display: "flex",
                 flexDirection: "column",

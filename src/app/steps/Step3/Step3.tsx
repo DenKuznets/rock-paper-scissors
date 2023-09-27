@@ -35,7 +35,7 @@ const Step3: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
             data-testid={STEP3_TESTIDS.STEP3_CONTAINER}
             sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 width: "100%",
                 mt: { xs: "6.3rem", md: "4.1rem" },
                 ml: "auto",
@@ -43,10 +43,10 @@ const Step3: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 minWidth: { xs375: "21rem" },
                 maxWidth: {
                     xs: "24rem",
-                    md: "100%",
+                    md: "60rem",
                 },
                 position: "relative",
-                gap: { xs: "3rem", md: "4rem" },
+                // gap: { xs: "3rem", md: "4rem" },
                 transitionProperty: "all",
                 transitionDuration: "1s",
             }}
@@ -56,6 +56,12 @@ const Step3: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 <FadeIn duration={3}>
                     <Result
                         sx={{
+                            position: {
+                                xs: "absolute",
+                                // md: "relative",
+                            },
+                            left: "50%",
+                            translate: "-50%",
                             marginTop: { xs: "14.5rem", md: "7.6rem" },
                         }}
                     />
