@@ -46,11 +46,21 @@ const Step3: React.FC<Props> = ({ stepRef }) => {
                 mr: "auto",
                 maxWidth: {
                     xs: "24rem",
-                    md: showResult ? "60rem" : "41rem",
                 },
                 position: "relative",
-                transitionProperty: "all",
-                transitionDuration: "1s",
+                animationName: "width-change",
+                animationDuration: "1s",
+                animationFillMode: "forwards",
+                "@keyframes width-change": {
+                    md: {
+                        "0%": {
+                            maxWidth: "41rem",
+                        },
+                        "100%": {
+                            maxWidth: "60rem",
+                        },
+                    },
+                },
             }}
             ref={stepRef}
         >
