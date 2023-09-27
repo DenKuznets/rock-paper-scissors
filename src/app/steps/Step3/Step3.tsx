@@ -7,6 +7,8 @@ import HousePick, {
     HOUSE_OPTIONS,
 } from "../../../components/HousePick/HousePick";
 import Result from "../../../components/Result/Result";
+import { useAppDispatch, useAppSelector } from "../../reduxHooks";
+import { selectShowResult, setShowResult } from "../../appSlice";
 
 type Props = {
     children?: React.ReactNode;
@@ -19,10 +21,12 @@ export const STEP3_TESTIDS = {
 };
 
 const Step3: React.FC<Props> = ({ stepRef }) => {
-    const [showResult, setShowResult] = useState(false);
+    // const [showResult, setShowResult] = useState(false);
+    const showResult = useAppSelector(selectShowResult);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setShowResult(true);
+            dispatch(setShowResult(true));
         }, 500);
 
         return () => {
