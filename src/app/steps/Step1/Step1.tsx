@@ -1,6 +1,7 @@
 import { ForwardedRef, TransitionEvent } from "react";
 import ChoiceList from "../../../components/ChoiceList/ChoiceList";
 import { Box } from "@mui/material";
+import FadeIn from "../../../components/FadeIn";
 
 type Props = {
     children?: React.ReactNode;
@@ -14,20 +15,22 @@ export const STEP1_TESTIDS = {
 
 const Step1: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
     return (
-        <Box
-            data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
-            sx={{
-                mt: { xs: "6.5rem", md: "4rem" },
-                opacity: "1",
-                transition: "opacity 1s",
-            }}
-            onTransitionEnd={(e) =>
-                handleTransitionEnd && handleTransitionEnd(e)
-            }
-            ref={stepRef}
-        >
-            <ChoiceList />
-        </Box>
+        <FadeIn>
+            <Box
+                data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
+                sx={{
+                    mt: { xs: "6.5rem", md: "4rem" },
+                    opacity: "1",
+                    transition: "opacity 1s",
+                }}
+                onTransitionEnd={(e) =>
+                    handleTransitionEnd && handleTransitionEnd(e)
+                }
+                ref={stepRef}
+            >
+                <ChoiceList />
+            </Box>
+        </FadeIn>
     );
 };
 
