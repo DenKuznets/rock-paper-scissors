@@ -45,8 +45,8 @@ const stepSx = {
         },
     },
 };
-const Step3: React.FC<Props> = ({ stepRef }) => {
-    // const [showResult, setShowResult] = useState(false);
+
+const ChildrenLocal = () => {
     const showResult = useAppSelector(selectShowResult);
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -60,11 +60,7 @@ const Step3: React.FC<Props> = ({ stepRef }) => {
     }, []);
 
     return (
-        <Box
-            data-testid={STEP3_TESTIDS.STEP3_CONTAINER}
-            sx={stepSx}
-            ref={stepRef}
-        >
+        <>
             <UserPick />
             {showResult && (
                 <FadeIn duration={3}>
@@ -82,6 +78,29 @@ const Step3: React.FC<Props> = ({ stepRef }) => {
                 </FadeIn>
             )}
             <HousePick view={HOUSE_OPTIONS.choice} />
+        </>
+    );
+};
+
+const Step3: React.FC<Props> = ({
+    children = <ChildrenLocal />,
+    stepRef,
+    handleTransitionEnd,
+}) => {
+    // const [showResult, setShowResult] = useState(false);
+    useEffect(() => {
+        if (handleTransitionEnd) {
+            handleTransitionEnd();
+        }
+    }, []);
+
+    return (
+        <Box
+            data-testid={STEP3_TESTIDS.STEP3_CONTAINER}
+            sx={stepSx}
+            ref={stepRef}
+        >
+            {children}
         </Box>
     );
 };
