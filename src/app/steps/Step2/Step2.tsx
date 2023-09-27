@@ -1,4 +1,4 @@
-import { ForwardedRef, TransitionEvent, useEffect, useState } from "react";
+import { ForwardedRef, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
@@ -27,8 +27,6 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 setHousePickView(HOUSE_OPTIONS.choice);
                 if (handleTransitionEnd) {
                     handleTransitionEnd();
-                    // setTimeout(() => {
-                    // }, 1000);
                 }
             }, 2000);
         }, 1000);
@@ -44,18 +42,20 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 data-testid={STEP2_TESTIDS.STEP2_CONTAINER}
                 sx={{
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "space-between",
                     width: "100%",
                     mt: { xs: "6.3rem", md: "4.1rem" },
                     ml: "auto",
                     mr: "auto",
-                    minWidth: { xs375: "21rem" },
+                    // minWidth: { xs375: "21rem" },
                     maxWidth: {
                         xs: "24rem",
-                        md: "100%",
+                        md: "41rem",
                     },
                     position: "relative",
-                    gap: { xs: "3rem", md: "4rem" },
+                    // gap: { xs: "3rem", md: "4rem" },
+                    transitionProperty: "all",
+                    transitionDuration: "1s",
                 }}
             >
                 <UserPick />

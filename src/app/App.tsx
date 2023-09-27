@@ -24,13 +24,13 @@ export const APP_TESTIDS = {
 
 const appContainerSx = {
     background: gradients.backgroundGradient,
-    // height: "100vh",
+    height: "100vh",
     minHeight: { xs: "740px", md: "790px" },
     padding: { xs320: "1rem", xs375: "2rem", md: "3rem" },
+    position: "relative",
     // display: "flex",
     // flexDirection: "column",
     // alignItems: "center",
-    position: "relative",
 };
 
 function App() {

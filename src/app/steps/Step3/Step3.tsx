@@ -23,7 +23,7 @@ const Step3: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setShowResult(true);
-        }, 2000);
+        }, 500);
 
         return () => {
             clearTimeout(timeout);
@@ -40,10 +40,10 @@ const Step3: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 mt: { xs: "6.3rem", md: "4.1rem" },
                 ml: "auto",
                 mr: "auto",
-                minWidth: { xs375: "21rem" },
+                // minWidth: { xs375: "21rem" },
                 maxWidth: {
                     xs: "24rem",
-                    md: "60rem",
+                    md: showResult ? "60rem" : "41rem",
                 },
                 position: "relative",
                 // gap: { xs: "3rem", md: "4rem" },
@@ -62,7 +62,7 @@ const Step3: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                             },
                             left: "50%",
                             translate: "-50%",
-                            marginTop: { xs: "14.5rem", md: "7.6rem" },
+                            marginTop: { xs: "14.5rem", md: "9.8rem" },
                         }}
                     />
                 </FadeIn>

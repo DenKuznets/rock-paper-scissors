@@ -43,18 +43,23 @@ const HousePick: React.FC<HousePickType> = ({
                             height: { xs: "7rem", md: "9rem" },
                             backgroundColor: "rgba(0,0,0,0.2)",
                             margin: "0 auto",
+                            scale: { md: "1.5" },
                             ...sx,
                         }}
                     />
                 );
 
             case HOUSE_OPTIONS.animation:
-                return <Animation sx={{ margin: "0 auto" }} />;
+                return (
+                    <Animation
+                        sx={{ margin: "0 auto", scale: { md: "1.5" } }}
+                    />
+                );
 
             default:
                 return (
                     <Choice
-                        sx={{ margin: "0 auto" }}
+                        sx={{ margin: "0 auto", scale: { md: "1.5" } }}
                         role={houseChoice as string}
                     />
                 );
@@ -72,6 +77,7 @@ const HousePick: React.FC<HousePickType> = ({
             }}
         >
             <Box
+                data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_TEXT}
                 sx={{
                     fontSize: { xs: "0.93rem", md: "1.6rem" },
                     letterSpacing: "2px",
@@ -81,13 +87,12 @@ const HousePick: React.FC<HousePickType> = ({
                     width: "100%",
                     whiteSpace: "nowrap",
                 }}
-                data-testid={HOUSE_PICK_TESTIDS.HOUSE_PICK_TEXT}
             >
                 THE HOUSE PICKED
             </Box>
             <Box
                 sx={{
-                    scale: { md: "1.5" },
+                    // scale: { md: "1.5" },
                     margin: "0 auto",
                     mt: {
                         xs: view === HOUSE_OPTIONS.stub ? "0.5rem" : "unset",

@@ -5,6 +5,10 @@ import { selectUserChoice } from "../../app/appSlice";
 import Step2 from "../../app/steps/Step2/Step2";
 import Step3 from "../../app/steps/Step3/Step3";
 
+export const MAIN_TESTIDS = {
+    MAIN_CONTAINER: "main-container",
+};
+
 const Main = () => {
     const step1ref = useRef<HTMLDivElement | null>(null);
     const [showStep1, setShowStep1] = useState(true);
@@ -25,7 +29,7 @@ const Main = () => {
     }, [userChoiceState]);
 
     return (
-        <div>
+        <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
             {showStep1 && (
                 <Step1
                     stepRef={step1ref}
