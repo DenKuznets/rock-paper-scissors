@@ -9,7 +9,7 @@ export interface appState {
     result: string | null;
     showStep1: boolean;
     showStep2: boolean;
-    showStep3: boolean;
+    showStep4: boolean;
     showResult: boolean;
 }
 
@@ -20,7 +20,7 @@ export const initialState: appState = {
     result: null,
     showStep1: true,
     showStep2: false,
-    showStep3: false,
+    showStep4: false,
     showResult: false,
 };
 
@@ -49,8 +49,8 @@ export const appSlice = createSlice({
         setShowStep2: (state, action: PayloadAction<boolean>) => {
             state.showStep2 = action.payload;
         },
-        setShowStep3: (state, action: PayloadAction<boolean>) => {
-            state.showStep3 = action.payload;
+        setShowStep4: (state, action: PayloadAction<boolean>) => {
+            state.showStep4 = action.payload;
         },
         setShowResult: (state, action: PayloadAction<boolean>) => {
             state.showResult = action.payload;
@@ -61,7 +61,7 @@ export const appSlice = createSlice({
             state.result = null;
             state.showStep1 = true;
             state.showStep2 = false;
-            state.showStep3 = false;
+            state.showStep4 = false;
             state.showResult = false;
         },
     },
@@ -76,7 +76,7 @@ export const {
     decrementScore,
     setShowStep1,
     setShowStep2,
-    setShowStep3,
+    setShowStep4,
     setShowResult,
     playAgain,
 } = appSlice.actions;
@@ -87,7 +87,7 @@ export const selectHouseChoice = (state: RootState) => state.app.houseChoice;
 export const selectResult = (state: RootState) => state.app.result;
 export const selectShowStep1 = (state: RootState) => state.app.showStep1;
 export const selectShowStep2 = (state: RootState) => state.app.showStep2;
-export const selectShowStep3 = (state: RootState) => state.app.showStep3;
+export const selectShowStep4 = (state: RootState) => state.app.showStep4;
 export const selectShowResult = (state: RootState) => state.app.showResult;
 
 export default appSlice.reducer;

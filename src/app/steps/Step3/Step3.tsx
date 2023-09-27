@@ -2,13 +2,9 @@ import { ForwardedRef, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
-
 import HousePick, {
     HOUSE_OPTIONS,
 } from "../../../components/HousePick/HousePick";
-import Result from "../../../components/Result/Result";
-import { useAppDispatch, useAppSelector } from "../../reduxHooks";
-import { selectShowResult, setShowResult } from "../../appSlice";
 
 type Props = {
     children?: React.ReactNode;
@@ -16,8 +12,8 @@ type Props = {
     handleTransitionEnd?: () => void;
 };
 
-export const STEP3_TESTIDS = {
-    STEP3_CONTAINER: "step3-container",
+export const STEP2_TESTIDS = {
+    STEP2_CONTAINER: "step2-container",
 };
 
 const stepSx = {
@@ -27,32 +23,29 @@ const stepSx = {
     mt: { xs: "6.3rem", md: "4.1rem" },
     ml: "auto",
     mr: "auto",
+    // minWidth: { xs375: "21rem" },
     maxWidth: {
         xs: "24rem",
+        md: "41rem",
     },
     position: "relative",
-    animationName: "width-change",
-    animationDuration: "1s",
-    animationFillMode: "forwards",
-    "@keyframes width-change": {
-        md: {
-            "0%": {
-                maxWidth: "41rem",
-            },
-            "100%": {
-                maxWidth: "60rem",
-            },
-        },
-    },
+    // gap: { xs: "3rem", md: "4rem" },
+    transitionProperty: "all",
+    transitionDuration: "1s",
 };
-const Step3: React.FC<Props> = ({ stepRef }) => {
-    // const [showResult, setShowResult] = useState(false);
-    const showResult = useAppSelector(selectShowResult);
-    const dispatch = useAppDispatch();
+const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
+    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
+
     useEffect(() => {
         const timeout = setTimeout(() => {
-            dispatch(setShowResult(true));
-        }, 500);
+            setHousePickView(HOUSE_OPTIONS.animation);
+            setTimeout(() => {
+                setHousePickView(HOUSE_OPTIONS.choice);
+                if (handleTransitionEnd) {
+                    handleTransitionEnd();
+                }
+            }, 2000);
+        }, 1000);
 
         return () => {
             clearTimeout(timeout);
@@ -60,30 +53,17 @@ const Step3: React.FC<Props> = ({ stepRef }) => {
     }, []);
 
     return (
-        <Box
-            data-testid={STEP3_TESTIDS.STEP3_CONTAINER}
-            sx={stepSx}
-            ref={stepRef}
-        >
-            <UserPick />
-            {showResult && (
-                <FadeIn duration={3}>
-                    <Result
-                        sx={{
-                            position: {
-                                xs: "absolute",
-                                // md: "relative",
-                            },
-                            left: "50%",
-                            translate: "-50%",
-                            marginTop: { xs: "14.5rem", md: "9.8rem" },
-                        }}
-                    />
-                </FadeIn>
-            )}
-            <HousePick view={HOUSE_OPTIONS.choice} />
-        </Box>
+        <FadeIn>
+            <Box
+                data-testid={STEP2_TESTIDS.STEP2_CONTAINER}
+                sx={stepSx}
+                ref={stepRef}
+            >
+                <UserPick />
+                <HousePick view={housePickView} />
+            </Box>
+        </FadeIn>
     );
 };
 
-export default Step3;
+export default Step2;

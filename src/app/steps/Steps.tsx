@@ -4,14 +4,14 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
     selectShowStep2,
-    selectShowStep3,
+    selectShowStep4,
     selectUserChoice,
     setShowStep1,
     setShowStep2,
-    setShowStep3,
+    setShowStep4,
 } from "../appSlice";
 import Step2 from "./Step2/Step2";
-import Step3 from "./Step3/Step3";
+import Step3 from "./Step4/Step4";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -23,7 +23,7 @@ const Steps = () => {
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
+    const showStep3 = useAppSelector(selectShowStep4);
 
     useEffect(() => {
         const step1 = step1ref.current;
@@ -59,7 +59,7 @@ const Steps = () => {
                 <Step2
                     handleTransitionEnd={() => {
                         dispatch(setShowStep2(false));
-                        dispatch(setShowStep3(true));
+                        dispatch(setShowStep4(true));
                     }}
                 />
             )}
