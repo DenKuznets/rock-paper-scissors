@@ -1,4 +1,4 @@
-import { ForwardedRef, useEffect, useState } from "react";
+import { ForwardedRef, useEffect } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
@@ -91,7 +91,7 @@ const Step3: React.FC<Props> = ({
         if (handleTransitionEnd) {
             handleTransitionEnd();
         }
-    }, []);
+    }, [handleTransitionEnd]);
 
     return (
         <Box

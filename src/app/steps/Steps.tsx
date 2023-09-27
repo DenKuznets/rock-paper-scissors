@@ -57,7 +57,7 @@ const Steps = () => {
             )}
             {showStep2 && (
                 <Step2
-                    handleTransitionEnd={() => {
+                    handleOnMount={() => {
                         setTimeout(() => {
                             dispatch(setShowStep2(false));
                             dispatch(setShowStep3(true));

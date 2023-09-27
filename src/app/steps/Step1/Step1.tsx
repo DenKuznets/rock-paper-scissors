@@ -7,6 +7,7 @@ type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
     handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+    handleOnMount?: () => void;
 };
 
 export const STEP1_TESTIDS = {
@@ -24,6 +25,7 @@ const Step1: React.FC<Props> = ({
     children = childrenLocal,
     stepRef,
     handleTransitionEnd,
+    handleOnMount,
 }) => {
     return (
         <FadeIn>

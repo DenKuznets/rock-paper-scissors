@@ -62,7 +62,7 @@ const Step2: React.FC<Props> = ({
         if (handleTransitionEnd) {
             handleTransitionEnd();
         }
-    }, []);
+    }, [handleTransitionEnd]);
 
     return (
         <FadeIn>

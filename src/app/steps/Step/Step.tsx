@@ -1,63 +1,44 @@
-import { ForwardedRef, useEffect, useState } from "react";
+import { ForwardedRef, useEffect, TransitionEvent } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
-import UserPick from "../../../components/UserPick/UserPick";
-import HousePick, {
-    HOUSE_OPTIONS,
-} from "../../../components/HousePick/HousePick";
+import { SxProps, Theme } from "@mui/material/styles";
 
 type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: () => void;
+    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+    stepSx?: SxProps<Theme> | undefined;
+    handleOnMount?: () => void;
 };
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
 };
 
-const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd, children }) => {
-    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
-
-    // on mount behavior
+const Step2: React.FC<Props> = ({
+    children,
+    stepRef,
+    handleTransitionEnd,
+    stepSx,
+    handleOnMount,
+}) => {
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setHousePickView(HOUSE_OPTIONS.animation);
-            setTimeout(() => {
-                setHousePickView(HOUSE_OPTIONS.choice);
-                if (handleTransitionEnd) {
-                    handleTransitionEnd();
-                }
-            }, 2000);
-        }, 1000);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
+        if (handleOnMount) {
+            handleOnMount();
+        }
+    }, [handleOnMount]);
 
     return (
         <FadeIn>
             <Box
                 data-testid={STEP_TESTIDS.STEP_CONTAINER}
-                sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    mt: { xs: "6.3rem", md: "4.1rem" },
-                    ml: "auto",
-                    mr: "auto",
-                    maxWidth: {
-                        xs: "24rem",
-                        md: "41rem",
-                    },
-                    position: "relative",
-                    transitionProperty: "all",
-                    transitionDuration: "1s",
-                }}
+                sx={stepSx}
+                ref={stepRef}
+                onTransitionEnd={(e) =>
+                    handleTransitionEnd && handleTransitionEnd(e)
+                }
             >
-                <UserPick />
-                <HousePick view={housePickView} />
+                {children}
             </Box>
         </FadeIn>
     );
