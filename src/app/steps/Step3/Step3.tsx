@@ -87,7 +87,6 @@ const Step3: React.FC<Props> = ({
     stepRef,
     handleTransitionEnd,
 }) => {
-    // const [showResult, setShowResult] = useState(false);
     useEffect(() => {
         if (handleTransitionEnd) {
             handleTransitionEnd();
