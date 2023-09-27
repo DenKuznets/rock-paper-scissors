@@ -23,33 +23,47 @@ const stepSx = {
     mt: { xs: "6.3rem", md: "4.1rem" },
     ml: "auto",
     mr: "auto",
-    // minWidth: { xs375: "21rem" },
     maxWidth: {
         xs: "24rem",
         md: "41rem",
     },
     position: "relative",
-    // gap: { xs: "3rem", md: "4rem" },
     transitionProperty: "all",
     transitionDuration: "1s",
 };
-const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
-    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
 
+const ChildrenLocal = () => {
+    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
     useEffect(() => {
         const timeout = setTimeout(() => {
             setHousePickView(HOUSE_OPTIONS.animation);
             setTimeout(() => {
                 setHousePickView(HOUSE_OPTIONS.choice);
-                if (handleTransitionEnd) {
-                    handleTransitionEnd();
-                }
             }, 2000);
         }, 1000);
 
         return () => {
             clearTimeout(timeout);
         };
+    });
+
+    return (
+        <>
+            <UserPick />
+            <HousePick view={housePickView} />
+        </>
+    );
+};
+
+const Step2: React.FC<Props> = ({
+    children = <ChildrenLocal />,
+    stepRef,
+    handleTransitionEnd,
+}) => {
+    useEffect(() => {
+        if (handleTransitionEnd) {
+            handleTransitionEnd();
+        }
     }, []);
 
     return (
@@ -59,8 +73,7 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 sx={stepSx}
                 ref={stepRef}
             >
-                <UserPick />
-                <HousePick view={housePickView} />
+                {children}
             </Box>
         </FadeIn>
     );
