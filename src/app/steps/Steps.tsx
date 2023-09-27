@@ -58,8 +58,10 @@ const Steps = () => {
             {showStep2 && (
                 <Step2
                     handleTransitionEnd={() => {
-                        dispatch(setShowStep2(false));
-                        dispatch(setShowStep3(true));
+                        setTimeout(() => {
+                            dispatch(setShowStep2(false));
+                            dispatch(setShowStep3(true));
+                        }, 3500);
                     }}
                 />
             )}

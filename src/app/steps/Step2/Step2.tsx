@@ -28,8 +28,6 @@ const stepSx = {
         md: "41rem",
     },
     position: "relative",
-    transitionProperty: "all",
-    transitionDuration: "1s",
 };
 
 const ChildrenLocal = () => {
