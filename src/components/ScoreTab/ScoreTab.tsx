@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { colors } from "../../ts/theme";
 import type { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export const SCORETAB_TESTIDS = {
     SCORETAB_CONTAINER: "scoretab-container",
@@ -10,9 +11,19 @@ export const SCORETAB_TESTIDS = {
     SCORETAB_SCORE_DISPLAY_LABEL: "scoretab-score-display-label",
     SCORETAB_SCORE_DISPLAY_SCORE: "scoretab-score-display-score",
 };
-
+// 3500
 const ScoreTab = () => {
     const score = useSelector((state: RootState) => state.app.score);
+    const [scoreToShow, setScoreToShow] = useState(score);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setScoreToShow(score);
+        }, 5000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [score]);
 
     return (
         <Box
@@ -76,7 +87,7 @@ const ScoreTab = () => {
                     lineHeight="1"
                     fontWeight="700"
                 >
-                    {score}
+                    {scoreToShow}
                 </Box>
             </Box>
         </Box>

@@ -9,12 +9,15 @@ import { Roles } from "../ts/roles";
 import { determineWinner, getRandomIndex } from "../ts/utils";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import {
+    incrementScore,
+    decrementScore,
     selectHouseChoice,
     selectResult,
     selectUserChoice,
     setHouseChoice,
     setResult,
 } from "./appSlice";
+import { RESULT_OPTIONS } from "../components/Result/Result";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
@@ -28,9 +31,6 @@ const appContainerSx = {
     minHeight: { xs: "740px", md: "790px" },
     padding: { xs320: "1rem", xs375: "2rem", md: "3rem" },
     position: "relative",
-    // display: "flex",
-    // flexDirection: "column",
-    // alignItems: "center",
 };
 
 function App() {
@@ -60,6 +60,20 @@ function App() {
             dispatch(setResult(result));
         }
     }, [houseChoiceState]);
+
+    // set score
+    useEffect(() => {
+        switch (resultState) {
+            case RESULT_OPTIONS.WIN:
+                dispatch(incrementScore());
+                break;
+            case RESULT_OPTIONS.LOSE:
+                dispatch(decrementScore());
+                break;
+            default:
+                break;
+        }
+    }, [resultState]);
 
     return (
         <Box data-testis={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
