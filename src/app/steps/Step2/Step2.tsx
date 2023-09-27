@@ -16,6 +16,23 @@ export const STEP2_TESTIDS = {
     STEP2_CONTAINER: "step2-container",
 };
 
+const stepSx = {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    mt: { xs: "6.3rem", md: "4.1rem" },
+    ml: "auto",
+    mr: "auto",
+    // minWidth: { xs375: "21rem" },
+    maxWidth: {
+        xs: "24rem",
+        md: "41rem",
+    },
+    position: "relative",
+    // gap: { xs: "3rem", md: "4rem" },
+    transitionProperty: "all",
+    transitionDuration: "1s",
+};
 const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
 
@@ -39,23 +56,7 @@ const Step2: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
         <FadeIn>
             <Box
                 data-testid={STEP2_TESTIDS.STEP2_CONTAINER}
-                sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    mt: { xs: "6.3rem", md: "4.1rem" },
-                    ml: "auto",
-                    mr: "auto",
-                    // minWidth: { xs375: "21rem" },
-                    maxWidth: {
-                        xs: "24rem",
-                        md: "41rem",
-                    },
-                    position: "relative",
-                    // gap: { xs: "3rem", md: "4rem" },
-                    transitionProperty: "all",
-                    transitionDuration: "1s",
-                }}
+                sx={stepSx}
                 ref={stepRef}
             >
                 <UserPick />

@@ -13,16 +13,17 @@ export const STEP1_TESTIDS = {
     STEP1_CONTAINER: "step1-container",
 };
 
+const stepSx = {
+    mt: { xs: "6.5rem", md: "4rem" },
+    opacity: "1",
+    transition: "opacity 1s",
+};
 const Step1: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
     return (
         <FadeIn>
             <Box
                 data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
-                sx={{
-                    mt: { xs: "6.5rem", md: "4rem" },
-                    opacity: "1",
-                    transition: "opacity 1s",
-                }}
+                sx={stepSx}
                 onTransitionEnd={(e) =>
                     handleTransitionEnd && handleTransitionEnd(e)
                 }
