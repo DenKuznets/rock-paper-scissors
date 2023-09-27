@@ -14,7 +14,7 @@ export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
 };
 
-const Main = () => {
+const Steps = () => {
     const dispatch = useAppDispatch();
     const step1ref = useRef<HTMLDivElement | null>(null);
     const [showStep1, setShowStep1] = useState(true);
@@ -74,4 +74,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default Steps;

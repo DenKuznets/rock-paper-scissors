@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { gradients } from "../ts/theme";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import { useEffect, useState } from "react";
-import Main from "./steps/Steps";
+import Steps from "./steps/Steps";
 import ShowRules from "../components/ShowRules/ShowRules";
 import Rules from "../components/Rules/Rules";
 import { Roles } from "../ts/roles";
@@ -78,7 +78,7 @@ function App() {
     return (
         <Box data-testis={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
             <ScoreTab />
-            <Main />
+            <Steps />
             <ShowRules onClick={() => setShowRules(true)} />
             {showRules && (
                 <Rules onCloseButtonClick={() => setShowRules(false)} />
