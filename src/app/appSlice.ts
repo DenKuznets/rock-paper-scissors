@@ -8,6 +8,8 @@ export interface appState {
     score: number;
     result: string | null;
     showStep1: boolean;
+    showStep2: boolean;
+    showStep3: boolean;
 }
 
 export const initialState: appState = {
@@ -16,6 +18,8 @@ export const initialState: appState = {
     score: 0,
     result: null,
     showStep1: true,
+    showStep2: false,
+    showStep3: false,
 };
 
 export const appSlice = createSlice({
@@ -40,6 +44,12 @@ export const appSlice = createSlice({
         setShowStep1: (state, action: PayloadAction<boolean>) => {
             state.showStep1 = action.payload;
         },
+        setShowStep2: (state, action: PayloadAction<boolean>) => {
+            state.showStep2 = action.payload;
+        },
+        setShowStep3: (state, action: PayloadAction<boolean>) => {
+            state.showStep3 = action.payload;
+        },
     },
 });
 
@@ -51,6 +61,8 @@ export const {
     incrementScore,
     decrementScore,
     setShowStep1,
+    setShowStep2,
+    setShowStep3,
 } = appSlice.actions;
 
 // прописываем селектор здесь, что бы не пришлось каждый раз в компонентах писать const userChoice = useSelector((state: RootState) => state.choice.userChoice);
@@ -58,5 +70,7 @@ export const selectUserChoice = (state: RootState) => state.app.userChoice;
 export const selectHouseChoice = (state: RootState) => state.app.houseChoice;
 export const selectResult = (state: RootState) => state.app.result;
 export const selectShowStep1 = (state: RootState) => state.app.showStep1;
+export const selectShowStep2 = (state: RootState) => state.app.showStep2;
+export const selectShowStep3 = (state: RootState) => state.app.showStep3;
 
 export default appSlice.reducer;

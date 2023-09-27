@@ -3,10 +3,14 @@ import Step1, { STEP1_TESTIDS } from "./Step1/Step1";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
+    selectShowStep2,
+    selectShowStep3,
     selectUserChoice,
     setHouseChoice,
     setResult,
     setShowStep1,
+    setShowStep2,
+    setShowStep3,
     setUserChoice,
 } from "../appSlice";
 import Step2 from "./Step2/Step2";
@@ -19,19 +23,18 @@ export const MAIN_TESTIDS = {
 const Steps = () => {
     const dispatch = useAppDispatch();
     const step1ref = useRef<HTMLDivElement | null>(null);
-    // const [showStep1, setShowStep1] = useState(true);
-    const [showStep2, setShowStep2] = useState(false);
-    const [showStep3, setShowStep3] = useState(false);
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
+    const showStep2 = useAppSelector(selectShowStep2);
+    const showStep3 = useAppSelector(selectShowStep3);
 
     const playAgain = () => {
         dispatch(setUserChoice(null));
         dispatch(setHouseChoice(null));
         dispatch(setResult(null));
         dispatch(setShowStep1(true));
-        setShowStep2(false);
-        setShowStep3(false);
+        dispatch(setShowStep2(false));
+        dispatch(setShowStep3(false));
     };
 
     useEffect(() => {
@@ -59,7 +62,7 @@ const Steps = () => {
                                 STEP1_TESTIDS.STEP1_CONTAINER
                         ) {
                             dispatch(setShowStep1(false));
-                            setShowStep2(true);
+                            dispatch(setShowStep2(true));
                         }
                     }}
                 />
@@ -67,8 +70,8 @@ const Steps = () => {
             {showStep2 && (
                 <Step2
                     handleTransitionEnd={() => {
-                        setShowStep2(false);
-                        setShowStep3(true);
+                        dispatch(setShowStep2(false));
+                        dispatch(setShowStep3(true));
                     }}
                 />
             )}
