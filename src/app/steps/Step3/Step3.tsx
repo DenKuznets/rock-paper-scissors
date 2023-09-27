@@ -20,6 +20,31 @@ export const STEP3_TESTIDS = {
     STEP3_CONTAINER: "step3-container",
 };
 
+const stepSx = {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    mt: { xs: "6.3rem", md: "4.1rem" },
+    ml: "auto",
+    mr: "auto",
+    maxWidth: {
+        xs: "24rem",
+    },
+    position: "relative",
+    animationName: "width-change",
+    animationDuration: "1s",
+    animationFillMode: "forwards",
+    "@keyframes width-change": {
+        md: {
+            "0%": {
+                maxWidth: "41rem",
+            },
+            "100%": {
+                maxWidth: "60rem",
+            },
+        },
+    },
+};
 const Step3: React.FC<Props> = ({ stepRef }) => {
     // const [showResult, setShowResult] = useState(false);
     const showResult = useAppSelector(selectShowResult);
@@ -37,31 +62,7 @@ const Step3: React.FC<Props> = ({ stepRef }) => {
     return (
         <Box
             data-testid={STEP3_TESTIDS.STEP3_CONTAINER}
-            sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-                mt: { xs: "6.3rem", md: "4.1rem" },
-                ml: "auto",
-                mr: "auto",
-                maxWidth: {
-                    xs: "24rem",
-                },
-                position: "relative",
-                animationName: "width-change",
-                animationDuration: "1s",
-                animationFillMode: "forwards",
-                "@keyframes width-change": {
-                    md: {
-                        "0%": {
-                            maxWidth: "41rem",
-                        },
-                        "100%": {
-                            maxWidth: "60rem",
-                        },
-                    },
-                },
-            }}
+            sx={stepSx}
             ref={stepRef}
         >
             <UserPick />
