@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Step1, { STEP1_TESTIDS } from "./Step1/Step1";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
@@ -6,12 +6,9 @@ import {
     selectShowStep2,
     selectShowStep3,
     selectUserChoice,
-    setHouseChoice,
-    setResult,
     setShowStep1,
     setShowStep2,
     setShowStep3,
-    setUserChoice,
 } from "../appSlice";
 import Step2 from "./Step2/Step2";
 import Step3 from "./Step3/Step3";
@@ -27,15 +24,6 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const showStep3 = useAppSelector(selectShowStep3);
-
-    const playAgain = () => {
-        dispatch(setUserChoice(null));
-        dispatch(setHouseChoice(null));
-        dispatch(setResult(null));
-        dispatch(setShowStep1(true));
-        dispatch(setShowStep2(false));
-        dispatch(setShowStep3(false));
-    };
 
     useEffect(() => {
         const step1 = step1ref.current;
@@ -75,7 +63,7 @@ const Steps = () => {
                     }}
                 />
             )}
-            {showStep3 && <Step3 playAgain={playAgain} />}
+            {showStep3 && <Step3 />}
         </div>
     );
 };

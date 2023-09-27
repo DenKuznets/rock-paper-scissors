@@ -12,14 +12,13 @@ type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
     handleTransitionEnd?: () => void;
-    playAgain: () => void;
 };
 
 export const STEP3_TESTIDS = {
     STEP3_CONTAINER: "step3-container",
 };
 
-const Step3: React.FC<Props> = ({ playAgain, stepRef }) => {
+const Step3: React.FC<Props> = ({ stepRef }) => {
     const [showResult, setShowResult] = useState(false);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -64,7 +63,6 @@ const Step3: React.FC<Props> = ({ playAgain, stepRef }) => {
                             translate: "-50%",
                             marginTop: { xs: "14.5rem", md: "9.8rem" },
                         }}
-                        playAgain={playAgain}
                     />
                 </FadeIn>
             )}

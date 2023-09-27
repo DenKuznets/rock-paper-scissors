@@ -50,6 +50,14 @@ export const appSlice = createSlice({
         setShowStep3: (state, action: PayloadAction<boolean>) => {
             state.showStep3 = action.payload;
         },
+        playAgain: (state) => {
+            state.userChoice = null;
+            state.houseChoice = null;
+            state.result = null;
+            state.showStep1 = true;
+            state.showStep2 = false;
+            state.showStep3 = false;
+        },
     },
 });
 
@@ -63,6 +71,7 @@ export const {
     setShowStep1,
     setShowStep2,
     setShowStep3,
+    playAgain
 } = appSlice.actions;
 
 // прописываем селектор здесь, что бы не пришлось каждый раз в компонентах писать const userChoice = useSelector((state: RootState) => state.choice.userChoice);

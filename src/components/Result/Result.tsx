@@ -1,8 +1,9 @@
 import { Box, Button } from "@mui/material";
-import { useAppSelector } from "../../app/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
 import { selectResult } from "../../app/appSlice";
 import { colors } from "../../ts/theme";
 import { SxProps, Theme } from "@mui/material/styles";
+import { playAgain } from "../../app/appSlice";
 
 export const RESULT_TESTIDS = {
     RESULT_CONTAINER: "result-container",
@@ -16,19 +17,13 @@ export const RESULT_OPTIONS = {
     DRAW: "draw",
 };
 
-const Result = ({
-    sx,
-    playAgain,
-}: {
-    sx?: SxProps<Theme> | undefined;
-    playAgain?: () => void;
-}) => {
+const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
     const result = useAppSelector(selectResult);
+    const dispatch = useAppDispatch();
     return (
         <Box
             data-testid={RESULT_TESTIDS.RESULT_CONTAINER}
             sx={{
-                
                 width: { xs: "100%", md: "unset" },
                 display: "flex",
                 flexDirection: "column",
@@ -62,7 +57,7 @@ const Result = ({
                     },
                     backgroundColor: "#fff",
                 }}
-                onClick={playAgain}
+                onClick={() => dispatch(playAgain())}
             >
                 play again
             </Button>
