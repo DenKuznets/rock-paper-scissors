@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import Step1, { STEP1_TESTIDS } from "../../app/steps/Step1/Step1";
-import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
+import Step1, { STEP1_TESTIDS } from "./Step1/Step1";
+import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectUserChoice,
     setHouseChoice,
     setResult,
     setUserChoice,
-} from "../../app/appSlice";
-import Step2 from "../../app/steps/Step2/Step2";
-import Step3 from "../../app/steps/Step3/Step3";
+} from "../appSlice";
+import Step2 from "./Step2/Step2";
+import Step3 from "./Step3/Step3";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",

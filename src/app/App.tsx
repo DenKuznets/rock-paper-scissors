@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { gradients } from "../ts/theme";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import { useEffect, useState } from "react";
-import Main from "../components/Main/Main";
+import Main from "./steps/Steps";
 import ShowRules from "../components/ShowRules/ShowRules";
 import Rules from "../components/Rules/Rules";
 import { Roles } from "../ts/roles";
