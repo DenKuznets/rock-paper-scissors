@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Step1, { STEP1_TESTIDS } from "../../app/steps/Step1/Step1";
-import { useAppSelector } from "../../app/reduxHooks";
-import { selectUserChoice } from "../../app/appSlice";
+import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
+import {
+    selectUserChoice,
+    setHouseChoice,
+    setResult,
+    setUserChoice,
+} from "../../app/appSlice";
 import Step2 from "../../app/steps/Step2/Step2";
 import Step3 from "../../app/steps/Step3/Step3";
 
@@ -10,11 +15,22 @@ export const MAIN_TESTIDS = {
 };
 
 const Main = () => {
+    const dispatch = useAppDispatch();
     const step1ref = useRef<HTMLDivElement | null>(null);
     const [showStep1, setShowStep1] = useState(true);
     const [showStep2, setShowStep2] = useState(false);
     const [showStep3, setShowStep3] = useState(false);
     const userChoiceState = useAppSelector(selectUserChoice);
+
+    const playAgain = () => {
+        dispatch(setUserChoice(null));
+        dispatch(setHouseChoice(null));
+        dispatch(setResult(null));
+        setShowStep1(true);
+        setShowStep2(false);
+        setShowStep3(false);
+    };
+
     useEffect(() => {
         const step1 = step1ref.current;
         // choiceList smooth fade out
@@ -53,7 +69,7 @@ const Main = () => {
                     }}
                 />
             )}
-            {showStep3 && <Step3 />}
+            {showStep3 && <Step3 playAgain={playAgain} />}
         </div>
     );
 };

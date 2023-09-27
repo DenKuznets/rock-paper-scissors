@@ -1,7 +1,6 @@
 import App from "./App";
 import { SCORETAB_TESTIDS } from "../components/ScoreTab/ScoreTab";
 import { RULES_TESTIDS } from "../components/Rules/Rules";
-import { APP_TESTIDS } from "./App";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders, screen } from "../ts/utils-for-tests";
 import { Roles } from "../ts/roles";
