@@ -2,7 +2,6 @@ import { ForwardedRef, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
-
 import HousePick, {
     HOUSE_OPTIONS,
 } from "../../../components/HousePick/HousePick";
