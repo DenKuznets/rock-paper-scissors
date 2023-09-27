@@ -18,7 +18,13 @@ const stepSx = {
     opacity: "1",
     transition: "opacity 1s",
 };
-const Step1: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
+const childrenLocal = <ChoiceList />;
+
+const Step1: React.FC<Props> = ({
+    children = childrenLocal,
+    stepRef,
+    handleTransitionEnd,
+}) => {
     return (
         <FadeIn>
             <Box
@@ -29,7 +35,7 @@ const Step1: React.FC<Props> = ({ stepRef, handleTransitionEnd }) => {
                 }
                 ref={stepRef}
             >
-                <ChoiceList />
+                {children}
             </Box>
         </FadeIn>
     );
