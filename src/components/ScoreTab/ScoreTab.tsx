@@ -3,6 +3,8 @@ import { colors } from "../../ts/theme";
 import type { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../app/reduxHooks";
+import { selectShowResult } from "../../app/appSlice";
 
 export const SCORETAB_TESTIDS = {
     SCORETAB_CONTAINER: "scoretab-container",
@@ -15,15 +17,10 @@ export const SCORETAB_TESTIDS = {
 const ScoreTab = () => {
     const score = useSelector((state: RootState) => state.app.score);
     const [scoreToShow, setScoreToShow] = useState(score);
+    const showResult = useAppSelector(selectShowResult);
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setScoreToShow(score);
-        }, 5000);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, [score]);
+        if (showResult) setScoreToShow(score);
+    }, [showResult, score]);
 
     return (
         <Box

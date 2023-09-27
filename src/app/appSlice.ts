@@ -62,6 +62,7 @@ export const appSlice = createSlice({
             state.showStep1 = true;
             state.showStep2 = false;
             state.showStep3 = false;
+            state.showResult = false;
         },
     },
 });
