@@ -88,11 +88,3 @@ export enum steps {
     two,
     three,
 }
-
-const useGetStep = () => {
-    const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
-    if (showStep2) return steps.two;
-    if (showStep3) return steps.three;
-    return steps.one;
-};
