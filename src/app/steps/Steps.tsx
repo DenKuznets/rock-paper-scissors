@@ -4,6 +4,7 @@ import {
     selectShowStep1,
     selectShowStep2,
     selectUserChoice,
+    setShowStep1,
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
@@ -11,7 +12,6 @@ import FadeIn from "../../components/FadeIn";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import useGetStepChildren from "./stepsChildren";
-import { step1Transition } from "./transitionsFn";
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
@@ -62,9 +62,17 @@ const Steps = () => {
                 data-testid={STEP_TESTIDS.STEP_CONTAINER}
                 sx={useGetStepSx()}
                 ref={stepRef}
-                onTransitionEnd={(e) =>
-                    showStep1 && step1Transition(dispatch, e)
-                }
+                onTransitionEnd={(e) => {
+                    if (
+                        showStep1 &&
+                        e.target instanceof HTMLDivElement &&
+                        e.target.getAttribute("data-testid") ===
+                            STEP_TESTIDS.STEP_CONTAINER
+                    ) {
+                        dispatch(setShowStep1(false));
+                        dispatch(setShowStep2(true));
+                    }
+                }}
             >
                 {useGetStepChildren()}
             </Box>
