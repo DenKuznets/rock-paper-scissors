@@ -12,7 +12,6 @@ import {
 } from "../appSlice";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
-import { StepChild } from "./stepChild";
 import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
@@ -67,6 +66,7 @@ const Steps = () => {
         };
     }, [showStep2]);
 
+    // animations for steps 2 and 3
     useEffect(() => {
         let timeout: NodeJS.Timeout;
         if (showStep2) {
