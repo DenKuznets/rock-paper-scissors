@@ -6,8 +6,8 @@ import { SxProps, Theme } from "@mui/material/styles";
 type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
     stepSx?: SxProps<Theme> | undefined;
+    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
     handleOnMount?: () => void;
 };
 

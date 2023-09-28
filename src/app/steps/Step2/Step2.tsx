@@ -1,15 +1,18 @@
-import { ForwardedRef, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import UserPick from "../../../components/UserPick/UserPick";
 import HousePick, {
     HOUSE_OPTIONS,
 } from "../../../components/HousePick/HousePick";
+import { ForwardedRef, useEffect, TransitionEvent, useState } from "react";
+import { SxProps, Theme } from "@mui/material/styles";
 
 type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: () => void;
+    stepSx?: SxProps<Theme> | undefined;
+    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+    handleOnMount?: () => void;
 };
 
 export const STEP2_TESTIDS = {
@@ -57,12 +60,13 @@ const Step2: React.FC<Props> = ({
     children = <ChildrenLocal />,
     stepRef,
     handleTransitionEnd,
+    handleOnMount,
 }) => {
     useEffect(() => {
-        if (handleTransitionEnd) {
-            handleTransitionEnd();
+        if (handleOnMount) {
+            handleOnMount();
         }
-    }, [handleTransitionEnd]);
+    }, [handleOnMount]);
 
     return (
         <FadeIn>
