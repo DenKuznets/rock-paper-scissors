@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import Step1, { STEP_TESTIDS } from "./Step1/Step1";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
+    selectShowResult,
     selectShowStep1,
     selectShowStep2,
     selectShowStep3,
     selectUserChoice,
+    setShowResult,
     setShowStep1,
     setShowStep2,
     setShowStep3,
@@ -15,6 +17,8 @@ import Step3 from "./Step3/Step3";
 import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import UserPick from "../../components/UserPick/UserPick";
+import FadeIn from "../../components/FadeIn";
+import Result from "../../components/Result/Result";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -87,10 +91,40 @@ const Steps = () => {
                         }, 3500);
                     }}
                 >
-                    {<Step2Child/>}
+                    {<Step2Child />}
                 </Step2>
             )}
-            {showStep3 && <Step3 />}
+            {showStep3 && (
+                <Step3
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        mt: { xs: "6.3rem", md: "4.1rem" },
+                        ml: "auto",
+                        mr: "auto",
+                        maxWidth: {
+                            xs: "24rem",
+                        },
+                        position: "relative",
+                        animationName: "width-change",
+                        animationDuration: "1s",
+                        animationFillMode: "forwards",
+                        "@keyframes width-change": {
+                            md: {
+                                "0%": {
+                                    maxWidth: "41rem",
+                                },
+                                "100%": {
+                                    maxWidth: "60rem",
+                                },
+                            },
+                        },
+                    }}
+                >
+                    {<Step3Child />}
+                </Step3>
+            )}
         </div>
     );
 };
@@ -116,6 +150,42 @@ const Step2Child = () => {
         <>
             <UserPick />
             <HousePick view={housePickView} />
+        </>
+    );
+};
+
+const Step3Child = () => {
+    const showResult = useAppSelector(selectShowResult);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            dispatch(setShowResult(true));
+        }, 500);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
+
+    return (
+        <>
+            <UserPick />
+            {showResult && (
+                <FadeIn duration={3}>
+                    <Result
+                        sx={{
+                            position: {
+                                xs: "absolute",
+                                // md: "relative",
+                            },
+                            left: "50%",
+                            translate: "-50%",
+                            marginTop: { xs: "14.5rem", md: "9.8rem" },
+                        }}
+                    />
+                </FadeIn>
+            )}
+            <HousePick view={HOUSE_OPTIONS.choice} />
         </>
     );
 };
