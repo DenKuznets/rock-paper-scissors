@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
     selectShowStep2,
-    selectShowStep3,
     selectUserChoice,
     setShowStep2,
     setShowStep3,
@@ -19,7 +18,6 @@ const Steps = () => {
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
     const dispatch = useAppDispatch();
     useEffect(() => {
         const stepElement = stepRef.current;
@@ -37,8 +35,12 @@ const Steps = () => {
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        
+
         if (showStep2) {
+            const stepElement = stepRef.current;
+            if (stepElement) {
+                stepElement.style.opacity = "1";
+            }
             timeout = setTimeout(() => {
                 dispatch(setShowStep2(false));
                 dispatch(setShowStep3(true));
@@ -52,11 +54,7 @@ const Steps = () => {
 
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
-            {showStep1 && <Step stepRef={stepRef} />}
-            {showStep2 && <Step stepRef={stepRef} />}
-            {showStep3 && <Step stepRef={stepRef} />}
-            {/* {(showStep1 || showStep2 || showStep3) && <Step stepRef={stepRef} />} */}
-            {/* <Step stepRef={stepRef} /> */}
+            <Step stepRef={stepRef} />
         </div>
     );
 };
