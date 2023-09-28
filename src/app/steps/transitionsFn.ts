@@ -4,9 +4,17 @@ import {
     Dispatch,
     ThunkDispatch,
 } from "@reduxjs/toolkit";
-import { appState, setShowStep1, setShowStep2 } from "../appSlice";
-import { STEP_TESTIDS, steps } from "./Step/Step";
+import {
+    appState,
+    selectShowStep1,
+    selectShowStep2,
+    selectShowStep3,
+    setShowStep1,
+    setShowStep2,
+} from "../appSlice";
 import { TransitionEvent } from "react";
+import { STEP_TESTIDS, steps } from "./Steps";
+import { useAppSelector } from "../reduxHooks";
 
 const step1Transition = (
     dispatch: ThunkDispatch<
@@ -28,13 +36,16 @@ const step1Transition = (
     }
 };
 
-export const getStepTransitionEnd = (step: steps) => {
-    switch (step) {
-        case steps.one:
+export const useGetStepTransitionEnd = () => {
+    const showStep1 = useAppSelector(selectShowStep1);
+    const showStep2 = useAppSelector(selectShowStep2);
+    const showStep3 = useAppSelector(selectShowStep3);
+    switch (true) {
+        case showStep1:
             return step1Transition;
-        case steps.two:
+        case showStep2:
             return null;
-        case steps.three:
+        case showStep3:
             return null;
         default:
             return null;

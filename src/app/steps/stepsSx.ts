@@ -1,4 +1,9 @@
-import { steps } from "./Step/Step";
+import {
+    selectShowStep1,
+    selectShowStep2,
+    selectShowStep3,
+} from "../appSlice";
+import { useAppSelector } from "../reduxHooks";
 
 const step1sx = {
     mt: { xs: "6.5rem", md: "4rem" },
@@ -44,15 +49,18 @@ const step3sx = {
     },
 };
 
-export const getStepSx = (step: steps) => {
-     switch (step) {
-         case steps.one:
-             return step1sx;
-         case steps.two:
-             return step2sx;
-         case steps.three:
-             return step3sx;
-         default:
-             return {};
-     }
-}
+export const useGetStepSx = () => {
+    const showStep1 = useAppSelector(selectShowStep1);
+    const showStep2 = useAppSelector(selectShowStep2);
+    const showStep3 = useAppSelector(selectShowStep3);
+    switch (true) {
+        case showStep1:
+            return step1sx;
+        case showStep2:
+            return step2sx;
+        case showStep3:
+            return step3sx;
+        default:
+            return {};
+    }
+};

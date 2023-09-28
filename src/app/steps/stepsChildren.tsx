@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import { selectShowResult, setShowResult } from "../appSlice";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
-import { steps } from "./Step/Step";
+import { steps } from "./Steps";
 
 
 const getStepChildren = (step: steps) => {
