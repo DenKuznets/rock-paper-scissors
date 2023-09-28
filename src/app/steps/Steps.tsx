@@ -42,6 +42,11 @@ const Steps = () => {
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
             {showStep1 && (
                 <Step1
+                    sx={{
+                        mt: { xs: "6.5rem", md: "4rem" },
+                        opacity: "1",
+                        transition: "opacity 1s",
+                    }}
                     stepRef={step1ref}
                     handleTransitionEnd={(e) => {
                         if (

@@ -6,7 +6,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 type Props = {
     children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
-    stepSx?: SxProps<Theme> | undefined;
+    sx?: SxProps<Theme> | undefined;
     handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
     handleOnMount?: () => void;
 };
@@ -19,7 +19,7 @@ const Step2: React.FC<Props> = ({
     children,
     stepRef,
     handleTransitionEnd,
-    stepSx,
+    sx,
     handleOnMount,
 }) => {
     useEffect(() => {
@@ -32,7 +32,7 @@ const Step2: React.FC<Props> = ({
         <FadeIn>
             <Box
                 data-testid={STEP_TESTIDS.STEP_CONTAINER}
-                sx={stepSx}
+                sx={{ ...sx }}
                 ref={stepRef}
                 onTransitionEnd={(e) =>
                     handleTransitionEnd && handleTransitionEnd(e)
