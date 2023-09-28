@@ -30,6 +30,12 @@ const Result = ({ sx }: { sx?: SxProps<Theme> | undefined }) => {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "0.2rem",
+                position: {
+                    xs: "absolute",
+                },
+                left: "50%",
+                translate: "-50%",
+                marginTop: { xs: "14.5rem", md: "9.8rem" },
                 ...sx,
             }}
         >

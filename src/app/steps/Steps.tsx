@@ -112,16 +112,7 @@ const Steps = () => {
                     <UserPick />
                     {showResult && (
                         <FadeIn duration={3}>
-                            <Result
-                                sx={{
-                                    position: {
-                                        xs: "absolute",
-                                    },
-                                    left: "50%",
-                                    translate: "-50%",
-                                    marginTop: { xs: "14.5rem", md: "9.8rem" },
-                                }}
-                            />
+                            <Result />
                         </FadeIn>
                     )}
                     <HousePick view={housePickView} />
