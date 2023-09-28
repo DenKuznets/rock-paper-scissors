@@ -13,8 +13,8 @@ import { useGetStepSx } from "./stepsSx";
 import useGetStepChildren from "./stepsChildren";
 import { useGetStepTransitionEnd } from "./transitionsFn";
 
-export const MAIN_TESTIDS = {
-    MAIN_CONTAINER: "main-container",
+export const STEP_TESTIDS = {
+    STEP_CONTAINER: "step-container",
 };
 
 const Steps = () => {
@@ -58,26 +58,19 @@ const Steps = () => {
     }, [showStep2]);
 
     return (
-        <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
-            <FadeIn>
-                <Box
-                    data-testid={STEP_TESTIDS.STEP_CONTAINER}
-                    sx={useGetStepSx()}
-                    ref={stepRef}
-                    onTransitionEnd={(e) =>
-                        transitionEndFunc && transitionEndFunc(dispatch, e)
-                    }
-                >
-                    {useGetStepChildren()}
-                </Box>
-            </FadeIn>
-        </div>
+        <FadeIn>
+            <Box
+                data-testid={STEP_TESTIDS.STEP_CONTAINER}
+                sx={useGetStepSx()}
+                ref={stepRef}
+                onTransitionEnd={(e) =>
+                    transitionEndFunc && transitionEndFunc(dispatch, e)
+                }
+            >
+                {useGetStepChildren()}
+            </Box>
+        </FadeIn>
     );
 };
 
 export default Steps;
-
-export const STEP_TESTIDS = {
-    STEP_CONTAINER: "step-container",
-};
-
