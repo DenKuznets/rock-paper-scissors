@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
     selectShowStep2,
-    selectShowStep3,
     selectUserChoice,
     setShowStep2,
     setShowStep3,
@@ -25,7 +24,6 @@ const Steps = () => {
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
     const transitionEndFunc = useGetStepTransitionEnd();
-    const stepSx = useGetStepSx();
     useEffect(() => {
         const stepElement = stepRef.current;
         // choiceList smooth fade out
@@ -83,8 +81,3 @@ export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
 };
 
-export enum steps {
-    one = 1,
-    two,
-    three,
-}

@@ -13,7 +13,7 @@ import {
     setShowStep2,
 } from "../appSlice";
 import { TransitionEvent } from "react";
-import { STEP_TESTIDS, steps } from "./Steps";
+import { STEP_TESTIDS } from "./Steps";
 import { useAppSelector } from "../reduxHooks";
 
 const step1Transition = (
