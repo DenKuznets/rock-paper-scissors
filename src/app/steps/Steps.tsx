@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Step1, { STEP_TESTIDS } from "./Step1/Step1";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowResult,
@@ -12,14 +11,12 @@ import {
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import Step2 from "./Step2/Step2";
-import Step3 from "./Step3/Step3";
 import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
-import { Step } from './Step/Step'
+import { STEP_TESTIDS, Step } from './Step/Step'
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
