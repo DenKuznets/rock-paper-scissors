@@ -3,11 +3,16 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
     selectShowStep2,
+    selectShowStep3,
     selectUserChoice,
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import Step from "./Step/Step";
+import FadeIn from "../../components/FadeIn";
+import { Box } from "@mui/material";
+import { getStepSx } from "./stepsSx";
+import getStepChildren from "./stepsChildren";
+import { getStepTransitionEnd } from "./transitionsFn";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -19,6 +24,8 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
+    const step = useGetStep();
+    const transitionEndFunc = getStepTransitionEnd(step);
     useEffect(() => {
         const stepElement = stepRef.current;
         // choiceList smooth fade out
@@ -54,9 +61,38 @@ const Steps = () => {
 
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
-            <Step stepRef={stepRef} />
+            <FadeIn>
+                <Box
+                    data-testid={STEP_TESTIDS.STEP_CONTAINER}
+                    sx={getStepSx(step)}
+                    ref={stepRef}
+                    onTransitionEnd={(e) =>
+                        transitionEndFunc && transitionEndFunc(dispatch, e)
+                    }
+                >
+                    {getStepChildren(step)}
+                </Box>
+            </FadeIn>
         </div>
     );
 };
 
 export default Steps;
+
+export const STEP_TESTIDS = {
+    STEP_CONTAINER: "step-container",
+};
+
+export enum steps {
+    one = 1,
+    two,
+    three,
+}
+
+const useGetStep = () => {
+    const showStep2 = useAppSelector(selectShowStep2);
+    const showStep3 = useAppSelector(selectShowStep3);
+    if (showStep2) return steps.two;
+    if (showStep3) return steps.three;
+    return steps.one;
+};
