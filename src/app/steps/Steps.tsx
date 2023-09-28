@@ -11,7 +11,7 @@ import FadeIn from "../../components/FadeIn";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import useGetStepChildren from "./stepsChildren";
-import { useGetStepTransitionEnd } from "./transitionsFn";
+import { step1Transition } from "./transitionsFn";
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
@@ -23,7 +23,6 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
-    const transitionEndFunc = useGetStepTransitionEnd();
     useEffect(() => {
         const stepElement = stepRef.current;
         // choiceList smooth fade out
@@ -64,7 +63,7 @@ const Steps = () => {
                 sx={useGetStepSx()}
                 ref={stepRef}
                 onTransitionEnd={(e) =>
-                    transitionEndFunc && transitionEndFunc(dispatch, e)
+                    showStep1 && step1Transition(dispatch, e)
                 }
             >
                 {useGetStepChildren()}

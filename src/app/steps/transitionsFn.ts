@@ -35,19 +35,3 @@ export const step1Transition = (
         dispatch(setShowStep2(true));
     }
 };
-
-export const useGetStepTransitionEnd = () => {
-    const showStep1 = useAppSelector(selectShowStep1);
-    const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
-    switch (true) {
-        case showStep1:
-            return step1Transition;
-        case showStep2:
-            return null;
-        case showStep3:
-            return null;
-        default:
-            return null;
-    }
-};
