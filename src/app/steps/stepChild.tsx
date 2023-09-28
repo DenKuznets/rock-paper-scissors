@@ -7,55 +7,42 @@ import {
     selectShowResult,
     selectShowStep1,
     selectShowStep2,
-    selectShowStep3,
     setShowResult,
 } from "../appSlice";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
 
-const useGetStepChildren = () => {
-    const showStep1 = useAppSelector(selectShowStep1);
-    const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
-    switch (true) {
-        case showStep1:
-            return <ChoiceList />;
-        case showStep2:
-            return <Step2Child />;
-        case showStep3:
-            return <Step2Child />;
-        default:
-            return <div>default child</div>;
-    }
-};
-
-export default useGetStepChildren;
-
-const Step2Child = () => {
+export const StepChild = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
     const showResult = useAppSelector(selectShowResult);
     const dispatch = useAppDispatch();
+    const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (showStep2) {
-                setHousePickView(HOUSE_OPTIONS.animation);
-            }
-            setTimeout(() => {
-                setHousePickView(HOUSE_OPTIONS.choice);
+        let timeout: NodeJS.Timeout;
+        if (showStep2) {
+            timeout = setTimeout(() => {
+                if (showStep2) {
+                    setHousePickView(HOUSE_OPTIONS.animation);
+                }
                 setTimeout(() => {
-                    dispatch(setShowResult(true));
-                }, 500);
-            }, 2000);
-        }, 1000);
+                    setHousePickView(HOUSE_OPTIONS.choice);
+                    setTimeout(() => {
+                        dispatch(setShowResult(true));
+                    }, 500);
+                }, 2000);
+            }, 1000);
+        }
 
         return () => {
             clearTimeout(timeout);
         };
     });
 
-    return (
+    return showStep1 ? (
+        <ChoiceList />
+    ) : (
         <>
             <UserPick />
             {showResult && (
@@ -64,7 +51,6 @@ const Step2Child = () => {
                         sx={{
                             position: {
                                 xs: "absolute",
-                                // md: "relative",
                             },
                             left: "50%",
                             translate: "-50%",

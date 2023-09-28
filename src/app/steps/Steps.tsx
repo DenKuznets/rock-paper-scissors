@@ -10,7 +10,7 @@ import {
 } from "../appSlice";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
-import useGetStepChildren from "./stepsChildren";
+import { StepChild } from "./stepChild";
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
@@ -75,7 +75,7 @@ const Steps = () => {
                 }
             }}
         >
-            {useGetStepChildren()}
+            {<StepChild />}
         </Box>
     );
 };
