@@ -1,12 +1,10 @@
 import { useEffect, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../reduxHooks";
+import { useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
     selectShowStep2,
     selectShowStep3,
     selectUserChoice,
-    setShowStep2,
-    setShowStep3,
 } from "../appSlice";
 import Step, { steps } from "./Step/Step";
 
@@ -15,7 +13,6 @@ export const MAIN_TESTIDS = {
 };
 
 const Steps = () => {
-    const dispatch = useAppDispatch();
     const step1ref = useRef<HTMLDivElement | null>(null);
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
