@@ -19,8 +19,8 @@ export const STEP_TESTIDS = {
 
 export enum steps {
     one = 1,
-    two = 2,
-    three = 3,
+    two,
+    three,
 }
 
 export const Step: React.FC<Props> = ({
