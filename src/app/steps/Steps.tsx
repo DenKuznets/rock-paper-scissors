@@ -34,9 +34,9 @@ const Steps = () => {
 
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
-            {showStep1 && <Step stepRef={stepRef} step={steps.one} />}
-            {showStep2 && <Step stepRef={stepRef} step={steps.two} />}
-            {showStep3 && <Step stepRef={stepRef} step={steps.three} />}
+            {showStep1 && <Step stepRef={stepRef} />}
+            {showStep2 && <Step stepRef={stepRef} />}
+            {showStep3 && <Step stepRef={stepRef} />}
         </div>
     );
 };
