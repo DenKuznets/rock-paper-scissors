@@ -71,7 +71,7 @@ const Steps = () => {
                 </Step>
             )}
             {showStep2 && (
-                <Step2
+                <Step
                     sx={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -93,7 +93,7 @@ const Steps = () => {
                     }}
                 >
                     {<Step2Child />}
-                </Step2>
+                </Step>
             )}
             {showStep3 && (
                 <Step3
