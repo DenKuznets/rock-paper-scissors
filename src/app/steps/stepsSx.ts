@@ -1,11 +1,11 @@
 import { steps } from "./Step/Step";
 
-export const step1sx = {
+const step1sx = {
     mt: { xs: "6.5rem", md: "4rem" },
     opacity: "1",
     transition: "opacity 1s",
 };
-export const step2sx = {
+const step2sx = {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
@@ -18,7 +18,7 @@ export const step2sx = {
     },
     position: "relative",
 };
-export const step3sx = {
+const step3sx = {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
