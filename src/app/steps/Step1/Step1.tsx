@@ -1,5 +1,4 @@
 import { ForwardedRef, TransitionEvent } from "react";
-import ChoiceList from "../../../components/ChoiceList/ChoiceList";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import { SxProps, Theme } from "@mui/material/styles";
@@ -13,13 +12,12 @@ type Props = {
     sx?: SxProps<Theme> | undefined;
 };
 
-export const STEP1_TESTIDS = {
-    STEP1_CONTAINER: "step1-container",
+export const STEP_TESTIDS = {
+    STEP_CONTAINER: "step-container",
 };
-const childrenLocal = <ChoiceList />;
 
 const Step1: React.FC<Props> = ({
-    children = childrenLocal,
+    children,
     stepRef,
     handleTransitionEnd,
     handleOnMount,
@@ -28,7 +26,7 @@ const Step1: React.FC<Props> = ({
     return (
         <FadeIn>
             <Box
-                data-testid={STEP1_TESTIDS.STEP1_CONTAINER}
+                data-testid={STEP_TESTIDS.STEP_CONTAINER}
                 sx={{...sx}}
                 onTransitionEnd={(e) =>
                     handleTransitionEnd && handleTransitionEnd(e)

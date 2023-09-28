@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Step1, { STEP1_TESTIDS } from "./Step1/Step1";
+import Step1, { STEP_TESTIDS } from "./Step1/Step1";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
@@ -12,6 +12,7 @@ import {
 } from "../appSlice";
 import Step2 from "./Step2/Step2";
 import Step3 from "./Step3/Step3";
+import ChoiceList from "../../components/ChoiceList/ChoiceList";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -52,13 +53,15 @@ const Steps = () => {
                         if (
                             e.target instanceof HTMLDivElement &&
                             e.target.getAttribute("data-testid") ===
-                                STEP1_TESTIDS.STEP1_CONTAINER
+                                STEP_TESTIDS.STEP_CONTAINER
                         ) {
                             dispatch(setShowStep1(false));
                             dispatch(setShowStep2(true));
                         }
                     }}
-                />
+                >
+                    <ChoiceList />
+                </Step1>
             )}
             {showStep2 && (
                 <Step2
