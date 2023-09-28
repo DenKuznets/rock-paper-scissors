@@ -5,7 +5,6 @@ import { SxProps, Theme } from "@mui/material/styles";
 import getChildren from "../stepsChildren";
 
 type Props = {
-    children?: React.ReactNode;
     stepRef?: ForwardedRef<HTMLDivElement>;
     sx?: SxProps<Theme> | undefined;
     handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
@@ -25,7 +24,6 @@ export enum steps {
 
 export const Step: React.FC<Props> = ({
     step,
-    children,
     stepRef,
     handleTransitionEnd,
     sx,
@@ -36,6 +34,7 @@ export const Step: React.FC<Props> = ({
             handleOnMount();
         }
     }, [handleOnMount]);
+
     let child;
     if (step) {
         child = getChildren(step);
