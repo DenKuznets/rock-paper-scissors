@@ -38,7 +38,7 @@ export const StepChild = () => {
         return () => {
             clearTimeout(timeout);
         };
-    });
+    }, [showStep2]);
 
     return showStep1 ? (
         <ChoiceList />

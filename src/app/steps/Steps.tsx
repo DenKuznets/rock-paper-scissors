@@ -1,9 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
+    selectShowResult,
     selectShowStep1,
     selectShowStep2,
     selectUserChoice,
+    setShowResult,
     setShowStep1,
     setShowStep2,
     setShowStep3,
@@ -11,6 +13,11 @@ import {
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import { StepChild } from "./stepChild";
+import ChoiceList from "../../components/ChoiceList/ChoiceList";
+import UserPick from "../../components/UserPick/UserPick";
+import FadeIn from "../../components/FadeIn";
+import Result from "../../components/Result/Result";
+import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
@@ -22,6 +29,8 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
+    const showResult = useAppSelector(selectShowResult);
+    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
 
     // choiceList smooth fade out
     useEffect(() => {
@@ -58,6 +67,27 @@ const Steps = () => {
         };
     }, [showStep2]);
 
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        if (showStep2) {
+            timeout = setTimeout(() => {
+                if (showStep2) {
+                    setHousePickView(HOUSE_OPTIONS.animation);
+                }
+                setTimeout(() => {
+                    setHousePickView(HOUSE_OPTIONS.choice);
+                    setTimeout(() => {
+                        dispatch(setShowResult(true));
+                    }, 500);
+                }, 2000);
+            }, 1000);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [showStep2]);
+
     return (
         <Box
             data-testid={STEP_TESTIDS.STEP_CONTAINER}
@@ -75,7 +105,28 @@ const Steps = () => {
                 }
             }}
         >
-            {<StepChild />}
+            {showStep1 ? (
+                <ChoiceList />
+            ) : (
+                <>
+                    <UserPick />
+                    {showResult && (
+                        <FadeIn duration={3}>
+                            <Result
+                                sx={{
+                                    position: {
+                                        xs: "absolute",
+                                    },
+                                    left: "50%",
+                                    translate: "-50%",
+                                    marginTop: { xs: "14.5rem", md: "9.8rem" },
+                                }}
+                            />
+                        </FadeIn>
+                    )}
+                    <HousePick view={housePickView} />
+                </>
+            )}
         </Box>
     );
 };
