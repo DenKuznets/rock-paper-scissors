@@ -38,7 +38,7 @@ const Steps = () => {
         };
     }, [userChoiceState, showStep1]);
 
-    // on step2 show step element again
+    // on step2 show step element again, then play housepick animation for 3500ms and switch to step 3
     useEffect(() => {
         let timeout: NodeJS.Timeout;
 
