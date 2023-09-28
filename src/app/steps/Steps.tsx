@@ -22,9 +22,11 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
+
+    // choiceList smooth fade out
     useEffect(() => {
         const stepElement = stepRef.current;
-        // choiceList smooth fade out
+
         if (showStep1 && userChoiceState && stepElement) {
             stepElement.style.opacity = "0";
         }
@@ -36,6 +38,7 @@ const Steps = () => {
         };
     }, [userChoiceState, showStep1]);
 
+    // on step2 show step element again
     useEffect(() => {
         let timeout: NodeJS.Timeout;
 
