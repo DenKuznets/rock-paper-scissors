@@ -38,17 +38,7 @@ const Steps = () => {
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
             {showStep1 && <Step stepRef={step1ref} step={steps.one} />}
-            {showStep2 && (
-                <Step
-                    handleOnMount={() => {
-                        setTimeout(() => {
-                            dispatch(setShowStep2(false));
-                            dispatch(setShowStep3(true));
-                        }, 3500);
-                    }}
-                    step={steps.two}
-                />
-            )}
+            {showStep2 && <Step step={steps.two} />}
             {showStep3 && <Step step={steps.three} />}
         </div>
     );

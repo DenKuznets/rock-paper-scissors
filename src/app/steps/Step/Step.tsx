@@ -9,11 +9,10 @@ import { getStepMountFn } from "../mountFn";
 
 type Props = {
     stepRef?: ForwardedRef<HTMLDivElement>;
-    handleOnMount?: () => void;
     step: steps;
 };
 
-const Step: React.FC<Props> = ({ step, stepRef, handleOnMount }) => {
+const Step: React.FC<Props> = ({ step, stepRef }) => {
     const dispatch = useAppDispatch();
     const onMountFn = getStepMountFn(step);
     const transitionEndFunc = getStepTransitionEnd(step);
