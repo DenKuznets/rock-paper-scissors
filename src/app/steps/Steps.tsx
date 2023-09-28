@@ -19,6 +19,7 @@ import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
+import { Step } from "@mui/material";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
