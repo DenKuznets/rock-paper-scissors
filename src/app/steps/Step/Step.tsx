@@ -1,11 +1,10 @@
-import { ForwardedRef, useEffect } from "react";
+import { ForwardedRef } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import getStepChildren from "../stepsChildren";
 import { getStepSx } from "../stepsSx";
 import { getStepTransitionEnd } from "../transitionsFn";
 import { useAppDispatch, useAppSelector } from "../../reduxHooks";
-import { getStepMountFn } from "../mountFn";
 import {
     selectShowStep2,
     selectShowStep3,
@@ -19,14 +18,7 @@ const Step: React.FC<Props> = ({
     stepRef }) => {
     const step = useGetStep();
     const dispatch = useAppDispatch();
-    const onMountFn = getStepMountFn(step);
     const transitionEndFunc = getStepTransitionEnd(step);
-
-    useEffect(() => {
-        if (onMountFn) {
-            onMountFn(dispatch);
-        }
-    }, []);
 
     return (
         <FadeIn>

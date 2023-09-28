@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
-import { useAppSelector } from "../reduxHooks";
+import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
     selectShowStep2,
     selectShowStep3,
     selectUserChoice,
+    setShowStep2,
+    setShowStep3,
 } from "../appSlice";
 import Step from "./Step/Step";
 
@@ -18,6 +20,7 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const showStep3 = useAppSelector(selectShowStep3);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         const stepElement = stepRef.current;
         // choiceList smooth fade out
@@ -31,6 +34,21 @@ const Steps = () => {
                 stepElement.style.opacity = "1";
         };
     }, [userChoiceState, showStep1]);
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        
+        if (showStep2) {
+            timeout = setTimeout(() => {
+                dispatch(setShowStep2(false));
+                dispatch(setShowStep3(true));
+            }, 3500);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [showStep2]);
 
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
