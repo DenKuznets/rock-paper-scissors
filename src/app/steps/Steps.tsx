@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Step1, { STEP_TESTIDS } from "./Step1/Step1";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
@@ -13,6 +13,8 @@ import {
 import Step2 from "./Step2/Step2";
 import Step3 from "./Step3/Step3";
 import ChoiceList from "../../components/ChoiceList/ChoiceList";
+import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
+import UserPick from "../../components/UserPick/UserPick";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -65,13 +67,28 @@ const Steps = () => {
             )}
             {showStep2 && (
                 <Step2
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        mt: { xs: "6.3rem", md: "4.1rem" },
+                        ml: "auto",
+                        mr: "auto",
+                        maxWidth: {
+                            xs: "24rem",
+                            md: "41rem",
+                        },
+                        position: "relative",
+                    }}
                     handleOnMount={() => {
                         setTimeout(() => {
                             dispatch(setShowStep2(false));
                             dispatch(setShowStep3(true));
                         }, 3500);
                     }}
-                />
+                >
+                    {<Step2Child/>}
+                </Step2>
             )}
             {showStep3 && <Step3 />}
         </div>
@@ -79,3 +96,26 @@ const Steps = () => {
 };
 
 export default Steps;
+
+const Step2Child = () => {
+    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setHousePickView(HOUSE_OPTIONS.animation);
+            setTimeout(() => {
+                setHousePickView(HOUSE_OPTIONS.choice);
+            }, 2000);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    });
+
+    return (
+        <>
+            <UserPick />
+            <HousePick view={housePickView} />
+        </>
+    );
+};
