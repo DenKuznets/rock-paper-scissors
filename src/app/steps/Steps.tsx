@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
-    selectShowResult,
     selectShowStep1,
     selectShowStep2,
     selectUserChoice,
-    setShowResult,
     setShowStep1,
     setShowStep2,
     setShowStep3,
@@ -23,13 +21,15 @@ export const STEP_TESTIDS = {
 };
 
 const Steps = () => {
+    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
+    const [showResult, setShowResult] = useState(false);
+
     const stepRef = useRef<HTMLDivElement | null>(null);
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
-    const showResult = useAppSelector(selectShowResult);
-    const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
+    // const showResult = useAppSelector(selectShowResult);
 
     // choiceList smooth fade out
     useEffect(() => {
@@ -77,7 +77,7 @@ const Steps = () => {
                 setTimeout(() => {
                     setHousePickView(HOUSE_OPTIONS.choice);
                     setTimeout(() => {
-                        dispatch(setShowResult(true));
+                        setShowResult(true);
                     }, 500);
                 }, 2000);
             }, 1000);
