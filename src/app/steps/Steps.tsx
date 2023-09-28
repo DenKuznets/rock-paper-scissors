@@ -19,7 +19,7 @@ import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
-import { Step } from "@mui/material";
+import { Step } from './Step/Step'
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -49,7 +49,7 @@ const Steps = () => {
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
             {showStep1 && (
-                <Step1
+                <Step
                     sx={{
                         mt: { xs: "6.5rem", md: "4rem" },
                         opacity: "1",
@@ -68,7 +68,7 @@ const Steps = () => {
                     }}
                 >
                     <ChoiceList />
-                </Step1>
+                </Step>
             )}
             {showStep2 && (
                 <Step2

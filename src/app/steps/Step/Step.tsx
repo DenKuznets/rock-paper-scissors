@@ -15,7 +15,7 @@ export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
 };
 
-const Step2: React.FC<Props> = ({
+export const Step: React.FC<Props> = ({
     children,
     stepRef,
     handleTransitionEnd,
@@ -44,4 +44,4 @@ const Step2: React.FC<Props> = ({
     );
 };
 
-export default Step2;
+export default Step;
