@@ -9,7 +9,7 @@ type Props = {
     sx?: SxProps<Theme> | undefined;
     handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
     handleOnMount?: () => void;
-    step?: steps;
+    step: steps;
 };
 
 export const STEP_TESTIDS = {
@@ -34,11 +34,7 @@ export const Step: React.FC<Props> = ({
             handleOnMount();
         }
     }, [handleOnMount]);
-
-    let child;
-    if (step) {
-        child = getChildren(step);
-    }
+    
     return (
         <FadeIn>
             <Box
@@ -49,7 +45,7 @@ export const Step: React.FC<Props> = ({
                     handleTransitionEnd && handleTransitionEnd(e)
                 }
             >
-                {child}
+                {getChildren(step)}
             </Box>
         </FadeIn>
     );
