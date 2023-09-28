@@ -11,7 +11,7 @@ import {
 import FadeIn from "../../components/FadeIn";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
-import getStepChildren from "./stepsChildren";
+import useGetStepChildren from "./stepsChildren";
 import { useGetStepTransitionEnd } from "./transitionsFn";
 
 export const MAIN_TESTIDS = {
@@ -24,7 +24,6 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
-    const step = useGetStep();
     const transitionEndFunc = useGetStepTransitionEnd();
     const stepSx = useGetStepSx();
     useEffect(() => {
@@ -65,13 +64,13 @@ const Steps = () => {
             <FadeIn>
                 <Box
                     data-testid={STEP_TESTIDS.STEP_CONTAINER}
-                    sx={stepSx}
+                    sx={useGetStepSx()}
                     ref={stepRef}
                     onTransitionEnd={(e) =>
                         transitionEndFunc && transitionEndFunc(dispatch, e)
                     }
                 >
-                    {getStepChildren(step)}
+                    {useGetStepChildren()}
                 </Box>
             </FadeIn>
         </div>

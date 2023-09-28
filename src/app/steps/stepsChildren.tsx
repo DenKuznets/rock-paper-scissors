@@ -3,26 +3,33 @@ import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import UserPick from "../../components/UserPick/UserPick";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
-import { selectShowResult, setShowResult } from "../appSlice";
+import {
+    selectShowResult,
+    selectShowStep1,
+    selectShowStep2,
+    selectShowStep3,
+    setShowResult,
+} from "../appSlice";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
-import { steps } from "./Steps";
 
-
-const getStepChildren = (step: steps) => {
-    switch (step) {
-        case steps.one:
+const useGetStepChildren = () => {
+    const showStep1 = useAppSelector(selectShowStep1);
+    const showStep2 = useAppSelector(selectShowStep2);
+    const showStep3 = useAppSelector(selectShowStep3);
+    switch (true) {
+        case showStep1:
             return <ChoiceList />;
-        case steps.two:
+        case showStep2:
             return <Step2Child />;
-        case steps.three:
+        case showStep3:
             return <Step3Child />;
         default:
-            return <div>default child</div>
+            return <div>default child</div>;
     }
 };
 
-export default getStepChildren;
+export default useGetStepChildren;
 
 const Step2Child = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
