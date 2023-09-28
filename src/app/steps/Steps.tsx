@@ -6,7 +6,7 @@ import {
     selectShowStep3,
     selectUserChoice,
 } from "../appSlice";
-import Step, { steps } from "./Step/Step";
+import Step from "./Step/Step";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -37,6 +37,8 @@ const Steps = () => {
             {showStep1 && <Step stepRef={stepRef} />}
             {showStep2 && <Step stepRef={stepRef} />}
             {showStep3 && <Step stepRef={stepRef} />}
+            {/* {(showStep1 || showStep2 || showStep3) && <Step stepRef={stepRef} />} */}
+            {/* <Step stepRef={stepRef} /> */}
         </div>
     );
 };
