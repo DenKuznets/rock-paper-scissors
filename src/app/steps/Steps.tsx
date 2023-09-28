@@ -8,7 +8,6 @@ import {
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import FadeIn from "../../components/FadeIn";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import useGetStepChildren from "./stepsChildren";
@@ -57,26 +56,24 @@ const Steps = () => {
     }, [showStep2]);
 
     return (
-        <FadeIn>
-            <Box
-                data-testid={STEP_TESTIDS.STEP_CONTAINER}
-                sx={useGetStepSx()}
-                ref={stepRef}
-                onTransitionEnd={(e) => {
-                    if (
-                        showStep1 &&
-                        e.target instanceof HTMLDivElement &&
-                        e.target.getAttribute("data-testid") ===
-                            STEP_TESTIDS.STEP_CONTAINER
-                    ) {
-                        dispatch(setShowStep1(false));
-                        dispatch(setShowStep2(true));
-                    }
-                }}
-            >
-                {useGetStepChildren()}
-            </Box>
-        </FadeIn>
+        <Box
+            data-testid={STEP_TESTIDS.STEP_CONTAINER}
+            sx={useGetStepSx()}
+            ref={stepRef}
+            onTransitionEnd={(e) => {
+                if (
+                    showStep1 &&
+                    e.target instanceof HTMLDivElement &&
+                    e.target.getAttribute("data-testid") ===
+                        STEP_TESTIDS.STEP_CONTAINER
+                ) {
+                    dispatch(setShowStep1(false));
+                    dispatch(setShowStep2(true));
+                }
+            }}
+        >
+            {useGetStepChildren()}
+        </Box>
     );
 };
 
