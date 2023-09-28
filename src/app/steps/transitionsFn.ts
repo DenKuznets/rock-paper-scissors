@@ -16,7 +16,7 @@ import { TransitionEvent } from "react";
 import { STEP_TESTIDS } from "./Steps";
 import { useAppSelector } from "../reduxHooks";
 
-const step1Transition = (
+export const step1Transition = (
     dispatch: ThunkDispatch<
         CombinedState<{
             app: appState;
