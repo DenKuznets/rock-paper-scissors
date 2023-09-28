@@ -13,9 +13,9 @@ const getChildren = (step: steps) => {
     switch (step) {
         case steps.one:
             return <ChoiceList />;
-        case 2:
+        case steps.two:
             return <Step2Child />;
-        case 3:
+        case steps.three:
             return <Step3Child />;
         default:
             return <div>default child</div>
