@@ -11,17 +11,7 @@ type Props = {
     step: steps;
 };
 
-export const STEP_TESTIDS = {
-    STEP_CONTAINER: "step-container",
-};
-
-export enum steps {
-    one = 1,
-    two,
-    three,
-}
-
-export const Step: React.FC<Props> = ({
+const Step: React.FC<Props> = ({
     step,
     stepRef,
     handleTransitionEnd,
@@ -50,3 +40,14 @@ export const Step: React.FC<Props> = ({
 };
 
 export default Step;
+
+
+export const STEP_TESTIDS = {
+    STEP_CONTAINER: "step-container",
+};
+
+export enum steps {
+    one = 1,
+    two,
+    three,
+}

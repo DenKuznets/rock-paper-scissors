@@ -9,7 +9,7 @@ import {
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import { STEP_TESTIDS, Step, steps } from "./Step/Step";
+import Step, { STEP_TESTIDS, steps } from "./Step/Step";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
