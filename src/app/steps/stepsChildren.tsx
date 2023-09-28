@@ -23,7 +23,7 @@ const useGetStepChildren = () => {
         case showStep2:
             return <Step2Child />;
         case showStep3:
-            return <Step3Child />;
+            return <Step2Child />;
         default:
             return <div>default child</div>;
     }
@@ -33,11 +33,20 @@ export default useGetStepChildren;
 
 const Step2Child = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
+    const showResult = useAppSelector(selectShowResult);
+    const dispatch = useAppDispatch();
+    const showStep2 = useAppSelector(selectShowStep2);
+
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setHousePickView(HOUSE_OPTIONS.animation);
+            if (showStep2) {
+                setHousePickView(HOUSE_OPTIONS.animation);
+            }
             setTimeout(() => {
                 setHousePickView(HOUSE_OPTIONS.choice);
+                setTimeout(() => {
+                    dispatch(setShowResult(true));
+                }, 500);
             }, 2000);
         }, 1000);
 
@@ -45,27 +54,6 @@ const Step2Child = () => {
             clearTimeout(timeout);
         };
     });
-
-    return (
-        <>
-            <UserPick />
-            <HousePick view={housePickView} />
-        </>
-    );
-};
-
-const Step3Child = () => {
-    const showResult = useAppSelector(selectShowResult);
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            dispatch(setShowResult(true));
-        }, 500);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
 
     return (
         <>
@@ -85,7 +73,7 @@ const Step3Child = () => {
                     />
                 </FadeIn>
             )}
-            <HousePick view={HOUSE_OPTIONS.choice} />
+            <HousePick view={housePickView} />
         </>
     );
 };
