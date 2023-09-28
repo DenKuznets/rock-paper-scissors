@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
+    selectResult,
     selectShowStep1,
     selectShowStep2,
     selectUserChoice,
@@ -15,6 +16,7 @@ import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
+import { setScore } from "./stepsutils";
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
@@ -24,6 +26,7 @@ const Steps = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
     const [showResult, setShowResult] = useState(false);
 
+    const resultState = useAppSelector(selectResult);
     const stepRef = useRef<HTMLDivElement | null>(null);
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
@@ -34,6 +37,10 @@ const Steps = () => {
     // choiceList smooth fade out
     useEffect(() => {
         const stepElement = stepRef.current;
+
+        if (!userChoiceState) {
+            setShowResult(false);
+        }
 
         if (showStep1 && userChoiceState && stepElement) {
             stepElement.style.opacity = "0";
@@ -78,6 +85,7 @@ const Steps = () => {
                     setHousePickView(HOUSE_OPTIONS.choice);
                     setTimeout(() => {
                         setShowResult(true);
+                        setScore(resultState, dispatch);
                     }, 500);
                 }, 2000);
             }, 1000);
