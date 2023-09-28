@@ -1,3 +1,5 @@
+import { steps } from "./Step/Step";
+
 export const step1sx = {
     mt: { xs: "6.5rem", md: "4rem" },
     opacity: "1",
@@ -41,3 +43,16 @@ export const step3sx = {
         },
     },
 };
+
+export const getStepSx = (step: steps) => {
+     switch (step) {
+         case steps.one:
+             return step1sx;
+         case steps.two:
+             return step2sx;
+         case steps.three:
+             return step3sx;
+         default:
+             return {};
+     }
+}

@@ -1,12 +1,11 @@
 import { ForwardedRef, useEffect, TransitionEvent } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
-import { SxProps, Theme } from "@mui/material/styles";
-import getChildren from "../stepsChildren";
+import getStepChildren from "../stepsChildren";
+import { getStepSx } from "../stepsSx";
 
 type Props = {
     stepRef?: ForwardedRef<HTMLDivElement>;
-    sx?: SxProps<Theme> | undefined;
     handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
     handleOnMount?: () => void;
     step: steps;
@@ -26,7 +25,6 @@ export const Step: React.FC<Props> = ({
     step,
     stepRef,
     handleTransitionEnd,
-    sx,
     handleOnMount,
 }) => {
     useEffect(() => {
@@ -34,18 +32,18 @@ export const Step: React.FC<Props> = ({
             handleOnMount();
         }
     }, [handleOnMount]);
-    
+
     return (
         <FadeIn>
             <Box
                 data-testid={STEP_TESTIDS.STEP_CONTAINER}
-                sx={{ ...sx }}
+                sx={getStepSx(step)}
                 ref={stepRef}
                 onTransitionEnd={(e) =>
                     handleTransitionEnd && handleTransitionEnd(e)
                 }
             >
-                {getChildren(step)}
+                {getStepChildren(step)}
             </Box>
         </FadeIn>
     );

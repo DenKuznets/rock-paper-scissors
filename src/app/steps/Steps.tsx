@@ -10,8 +10,6 @@ import {
     setShowStep3,
 } from "../appSlice";
 import { STEP_TESTIDS, Step, steps } from "./Step/Step";
-import { step1sx, step2sx, step3sx } from "./stepsSx";
-import getChildren from "./stepsChildren";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -42,7 +40,6 @@ const Steps = () => {
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
             {showStep1 && (
                 <Step
-                    sx={step1sx}
                     stepRef={step1ref}
                     handleTransitionEnd={(e) => {
                         if (
@@ -59,7 +56,6 @@ const Steps = () => {
             )}
             {showStep2 && (
                 <Step
-                    sx={step2sx}
                     handleOnMount={() => {
                         setTimeout(() => {
                             dispatch(setShowStep2(false));
@@ -69,7 +65,7 @@ const Steps = () => {
                     step={steps.two}
                 />
             )}
-            {showStep3 && <Step sx={step3sx} step={steps.three}/>}
+            {showStep3 && <Step step={steps.three} />}
         </div>
     );
 };

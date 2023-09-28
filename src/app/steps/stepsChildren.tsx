@@ -9,7 +9,7 @@ import Result from "../../components/Result/Result";
 import { steps } from "./Step/Step";
 
 
-const getChildren = (step: steps) => {
+const getStepChildren = (step: steps) => {
     switch (step) {
         case steps.one:
             return <ChoiceList />;
@@ -22,7 +22,7 @@ const getChildren = (step: steps) => {
     }
 };
 
-export default getChildren;
+export default getStepChildren;
 
 const Step2Child = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
