@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useAppSelector } from "../reduxHooks";
 import {
     selectShowStep1,
@@ -13,7 +13,6 @@ export const MAIN_TESTIDS = {
 };
 
 const Steps = () => {
-    const [step, setStep] = useState(steps.one);
     const stepRef = useRef<HTMLDivElement | null>(null);
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
@@ -22,16 +21,16 @@ const Steps = () => {
     useEffect(() => {
         const stepElement = stepRef.current;
         // choiceList smooth fade out
-        if (step === steps.one && userChoiceState && stepElement) {
+        if (showStep1 && userChoiceState && stepElement) {
             stepElement.style.opacity = "0";
         }
 
         return () => {
             // cleanup for strict mode
-            if (step === steps.one && !userChoiceState && stepElement)
+            if (showStep1 && !userChoiceState && stepElement)
                 stepElement.style.opacity = "1";
         };
-    }, [userChoiceState, step]);
+    }, [userChoiceState, showStep1]);
 
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
