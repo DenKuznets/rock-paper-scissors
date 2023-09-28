@@ -5,11 +5,10 @@ import {
     selectShowStep2,
     selectShowStep3,
     selectUserChoice,
-    setShowStep1,
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import Step, { STEP_TESTIDS, steps } from "./Step/Step";
+import Step, { steps } from "./Step/Step";
 
 export const MAIN_TESTIDS = {
     MAIN_CONTAINER: "main-container",
@@ -38,22 +37,7 @@ const Steps = () => {
 
     return (
         <div data-testid={MAIN_TESTIDS.MAIN_CONTAINER}>
-            {showStep1 && (
-                <Step
-                    stepRef={step1ref}
-                    handleTransitionEnd={(e) => {
-                        if (
-                            e.target instanceof HTMLDivElement &&
-                            e.target.getAttribute("data-testid") ===
-                                STEP_TESTIDS.STEP_CONTAINER
-                        ) {
-                            dispatch(setShowStep1(false));
-                            dispatch(setShowStep2(true));
-                        }
-                    }}
-                    step={steps.one}
-                />
-            )}
+            {showStep1 && <Step stepRef={step1ref} step={steps.one} />}
             {showStep2 && (
                 <Step
                     handleOnMount={() => {

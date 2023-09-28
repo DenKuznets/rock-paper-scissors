@@ -1,12 +1,13 @@
-import { ForwardedRef, useEffect, TransitionEvent } from "react";
+import { ForwardedRef, useEffect } from "react";
 import { Box } from "@mui/material";
 import FadeIn from "../../../components/FadeIn";
 import getStepChildren from "../stepsChildren";
 import { getStepSx } from "../stepsSx";
+import { getStepTransitionEnd } from "../transitionsFn";
+import { useAppDispatch } from "../../reduxHooks";
 
 type Props = {
     stepRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
     handleOnMount?: () => void;
     step: steps;
 };
@@ -14,14 +15,16 @@ type Props = {
 const Step: React.FC<Props> = ({
     step,
     stepRef,
-    handleTransitionEnd,
     handleOnMount,
 }) => {
+    const dispatch = useAppDispatch();
     useEffect(() => {
         if (handleOnMount) {
             handleOnMount();
         }
     }, [handleOnMount]);
+
+    const transitionEndFunc = getStepTransitionEnd(step);
 
     return (
         <FadeIn>
@@ -30,7 +33,7 @@ const Step: React.FC<Props> = ({
                 sx={getStepSx(step)}
                 ref={stepRef}
                 onTransitionEnd={(e) =>
-                    handleTransitionEnd && handleTransitionEnd(e)
+                    transitionEndFunc && transitionEndFunc(dispatch, e)
                 }
             >
                 {getStepChildren(step)}
@@ -40,7 +43,6 @@ const Step: React.FC<Props> = ({
 };
 
 export default Step;
-
 
 export const STEP_TESTIDS = {
     STEP_CONTAINER: "step-container",
