@@ -5,6 +5,7 @@ import getStepChildren from "../stepsChildren";
 import { getStepSx } from "../stepsSx";
 import { getStepTransitionEnd } from "../transitionsFn";
 import { useAppDispatch } from "../../reduxHooks";
+import { getStepMountFn } from "../mountFn";
 
 type Props = {
     stepRef?: ForwardedRef<HTMLDivElement>;
@@ -12,19 +13,18 @@ type Props = {
     step: steps;
 };
 
-const Step: React.FC<Props> = ({
-    step,
-    stepRef,
-    handleOnMount,
-}) => {
+const Step: React.FC<Props> = ({ step, stepRef, handleOnMount }) => {
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (handleOnMount) {
-            handleOnMount();
-        }
-    }, [handleOnMount]);
-
+    const onMountFn = getStepMountFn(step);
     const transitionEndFunc = getStepTransitionEnd(step);
+
+
+    useEffect(() => {
+        if (onMountFn) {
+            onMountFn(dispatch);
+        }
+    }, []);
+
 
     return (
         <FadeIn>

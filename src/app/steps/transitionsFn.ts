@@ -8,7 +8,7 @@ import { appState, setShowStep1, setShowStep2 } from "../appSlice";
 import { STEP_TESTIDS, steps } from "./Step/Step";
 import { TransitionEvent } from "react";
 
-const useStep1Transition = (
+const step1Transition = (
     dispatch: ThunkDispatch<
         CombinedState<{
             app: appState;
@@ -31,7 +31,7 @@ const useStep1Transition = (
 export const getStepTransitionEnd = (step: steps) => {
     switch (step) {
         case steps.one:
-            return useStep1Transition;
+            return step1Transition;
         case steps.two:
             return null;
         case steps.three:
