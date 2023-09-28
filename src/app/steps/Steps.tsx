@@ -66,11 +66,10 @@ const Steps = () => {
                             dispatch(setShowStep3(true));
                         }, 3500);
                     }}
-                >
-                    {getChildren(steps.two)}
-                </Step>
+                    step={steps.two}
+                />
             )}
-            {showStep3 && <Step sx={step3sx}>{getChildren(steps.three)}</Step>}
+            {showStep3 && <Step sx={step3sx} step={steps.three}/>}
         </div>
     );
 };
