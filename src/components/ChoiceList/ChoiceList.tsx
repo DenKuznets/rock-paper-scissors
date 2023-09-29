@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
 import { selectUserChoice, setUserChoice } from "../../app/appSlice";
-import { Box } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
 import Choice from "../Choice/Choice";
 import { useAppSelector } from "../../app/reduxHooks";
-import { ForwardedRef, AnimationEvent, TransitionEvent } from "react";
+import { ForwardedRef, AnimationEvent, TransitionEvent, FC } from "react";
 
 const choicePos = [
     {
@@ -23,18 +23,20 @@ const choicePos = [
     },
 ];
 
+export interface ChoiceListProps extends BoxProps {
+    sx?: SxProps<Theme> | undefined;
+    choiceListRef?: ForwardedRef<HTMLDivElement>;
+    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+}
+
 export const CHOICE_LIST_TESTIDS = {
     CHOICE_LIST_CONTAINER: "choice-list-container",
 };
 
-const ChoiceList = ({
+const ChoiceList: FC<ChoiceListProps> = ({
     sx,
     choiceListRef,
     handleTransitionEnd,
-}: {
-    sx?: SxProps<Theme> | undefined;
-    choiceListRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
 }) => {
     const userChoice = useAppSelector(selectUserChoice);
     const dispatch = useDispatch();
