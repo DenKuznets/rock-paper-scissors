@@ -61,6 +61,7 @@ function App() {
     return (
         <Box data-testid={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
             <ScoreTab />
+
             <Steps />
             <ShowRulesBtn
                 testid={APP_TESTIDS.APP_RULES_BUTTON}
