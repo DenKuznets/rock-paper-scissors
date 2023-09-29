@@ -85,7 +85,6 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                     e.target.getAttribute("data-testid") ===
                         CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
                 ) {
-                    console.log("choicelist trans end");
                     dispatch(setShowStep1(false));
                     dispatch(setShowStep2(true));
                 }

@@ -37,21 +37,6 @@ const Steps = () => {
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
 
-    // choiceList smooth fade out
-    useEffect(() => {
-        const stepElement = stepRef.current;
-
-        if (showStep1 && userChoiceState && stepElement) {
-            stepElement.style.opacity = "0";
-        }
-
-        return () => {
-            // cleanup for strict mode
-            if (showStep1 && !userChoiceState && stepElement)
-                stepElement.style.opacity = "1";
-        };
-    }, [userChoiceState, showStep1]);
-
     // on step2 show step element again, then play housepick animation for 3500ms and switch to step 3
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -105,7 +90,9 @@ const Steps = () => {
                 <ChoiceList />
             ) : (
                 <>
-                    <UserPick />
+                    <FadeIn>
+                        <UserPick />
+                    </FadeIn>
                     {showResult && (
                         <FadeIn duration={3}>
                             <Box
@@ -126,7 +113,9 @@ const Steps = () => {
                             </Box>
                         </FadeIn>
                     )}
-                    <HousePick view={housePickView} />
+                    <FadeIn>
+                        <HousePick view={housePickView} />
+                    </FadeIn>
                 </>
             )}
         </Box>
