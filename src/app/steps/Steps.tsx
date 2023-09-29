@@ -37,7 +37,7 @@ const Steps = () => {
     // choiceList smooth fade out
     useEffect(() => {
         const stepElement = stepRef.current;
-
+        // если userChoice null, значит начата новая игра и нужно скрыть результат
         if (!userChoiceState) {
             setShowResult(false);
         }
