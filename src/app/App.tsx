@@ -53,7 +53,7 @@ function App() {
             const result = determineWinner(userChoiceState, houseChoiceState);
             dispatch(setResult(result));
         }
-    }, [userChoiceState, houseChoiceState]);
+    }, [userChoiceState, houseChoiceState, resultState]);
 
     return (
         <Box data-testid={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
