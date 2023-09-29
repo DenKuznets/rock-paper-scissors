@@ -92,7 +92,6 @@ const HousePick: React.FC<HousePickType> = ({
             </Box>
             <Box
                 sx={{
-                    // scale: { md: "1.5" },
                     margin: "0 auto",
                     mt: {
                         xs: view === HOUSE_OPTIONS.stub ? "0.5rem" : "unset",
