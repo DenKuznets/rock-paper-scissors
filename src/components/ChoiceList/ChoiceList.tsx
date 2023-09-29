@@ -1,10 +1,5 @@
 import { useDispatch } from "react-redux";
-import {
-    selectUserChoice,
-    setShowStep1,
-    setShowStep2,
-    setUserChoice,
-} from "../../app/appSlice";
+import { selectUserChoice, setUserChoice } from "../../app/appSlice";
 import { Box, BoxProps } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
