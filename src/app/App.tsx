@@ -19,7 +19,6 @@ import ChoiceList from "../components/ChoiceList/ChoiceList";
 
 export const APP_TESTIDS = {
     APP_CONTAINER: "app-container",
-    APP_CHOICES_CONTAINER: "app-choices-container",
     APP_RULES_BUTTON: "app-rules-button",
 };
 
