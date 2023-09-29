@@ -100,17 +100,6 @@ const Steps = () => {
             data-testid={STEP_TESTIDS.STEPS_CONTAINER}
             sx={useGetStepSx()}
             ref={stepRef}
-            onTransitionEnd={(e) => {
-                if (
-                    showStep1 &&
-                    e.target instanceof HTMLDivElement &&
-                    e.target.getAttribute("data-testid") ===
-                        STEP_TESTIDS.STEPS_CONTAINER
-                ) {
-                    dispatch(setShowStep1(false));
-                    dispatch(setShowStep2(true));
-                }
-            }}
         >
             {showStep1 ? (
                 <ChoiceList />

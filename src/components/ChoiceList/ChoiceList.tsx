@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { selectUserChoice, setUserChoice } from "../../app/appSlice";
+import { selectUserChoice, setShowStep1, setShowStep2, setUserChoice } from "../../app/appSlice";
 import { Box, BoxProps } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
@@ -86,6 +86,8 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                         CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
                 ) {
                     console.log("choicelist trans end");
+                    dispatch(setShowStep1(false));
+                    dispatch(setShowStep2(true));
                 }
             }}
         >
