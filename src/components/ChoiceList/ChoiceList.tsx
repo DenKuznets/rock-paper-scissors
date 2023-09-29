@@ -5,7 +5,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
 import Choice from "../Choice/Choice";
 import { useAppSelector } from "../../app/reduxHooks";
-import { ForwardedRef, AnimationEvent, TransitionEvent, FC } from "react";
+import { ForwardedRef, FC, useState } from "react";
 
 const choicePos = [
     {
@@ -26,18 +26,14 @@ const choicePos = [
 export interface ChoiceListProps extends BoxProps {
     sx?: SxProps<Theme> | undefined;
     choiceListRef?: ForwardedRef<HTMLDivElement>;
-    // handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
 }
 
 export const CHOICE_LIST_TESTIDS = {
     CHOICE_LIST_CONTAINER: "choice-list-container",
 };
 
-const ChoiceList: FC<ChoiceListProps> = ({
-    sx,
-    choiceListRef,
-    // handleTransitionEnd,
-}) => {
+const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
+    const [choiceRole, setChoiceRole] = useState<string | null>(null);
     const userChoice = useAppSelector(selectUserChoice);
     const dispatch = useDispatch();
     const choiceList = Object.keys(Roles).map((role, index) => {
@@ -55,7 +51,11 @@ const ChoiceList: FC<ChoiceListProps> = ({
                 }}
                 key={role}
                 role={role}
-                onClick={() => !userChoice && dispatch(setUserChoice(role))} //only set userChoice on the first click
+                //only set userChoice on the first click
+                onClick={() => {
+                    !userChoice && dispatch(setUserChoice(role));
+                    setChoiceRole(role);
+                }}
             />
         );
     });
