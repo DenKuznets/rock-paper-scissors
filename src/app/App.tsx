@@ -43,21 +43,17 @@ function App() {
         document.body.style.overflow = showRules ? "hidden" : "auto";
     }, [showRules]);
 
-    // set house choice
+    // set house choice and result
     useEffect(() => {
         if (userChoiceState) {
             const houseChoice = Object.values(Roles)[getRandomIndex()];
             houseChoiceState === null && dispatch(setHouseChoice(houseChoice));
         }
-    }, [userChoiceState]);
-
-    // set result
-    useEffect(() => {
         if (!resultState && houseChoiceState && userChoiceState) {
             const result = determineWinner(userChoiceState, houseChoiceState);
             dispatch(setResult(result));
         }
-    }, [houseChoiceState]);
+    }, [userChoiceState, houseChoiceState]);
 
     return (
         <Box data-testid={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
