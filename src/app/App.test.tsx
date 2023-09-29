@@ -1,11 +1,11 @@
-import App from "./App";
+import App, { APP_TESTIDS } from "./App";
 import { SCORETAB_TESTIDS } from "../components/ScoreTab/ScoreTab";
 import { RULES_TESTIDS } from "../components/Rules/Rules";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders, screen } from "../ts/utils-for-tests";
 import { Roles } from "../ts/roles";
 import { getRandomIndex } from "../ts/utils";
-import { SHOWRULES_TESTIDS } from "../components/ShowRules/ShowRules";
+import { SHOWRULES_TESTIDS } from "../components/CustomButton/CustomButton";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
@@ -23,9 +23,7 @@ test("renders correctly", () => {
 test("rules button click displays rules component and prevents document scroll", async () => {
     const user = userEvent.setup();
     renderWithProviders(<App />);
-    const rulesButton = screen.getByTestId(
-        SHOWRULES_TESTIDS.SHOWRULES_CONTAINER
-    );
+    const rulesButton = screen.getByTestId(APP_TESTIDS.APP_RULES_BUTTON);
     await user.click(rulesButton);
     const rulesComponent = screen.getByTestId(RULES_TESTIDS.RULES_CONTAINER);
     expect(rulesComponent).toBeInTheDocument();

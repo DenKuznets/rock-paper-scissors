@@ -1,18 +1,18 @@
-import { Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 import React, { FC } from "react";
 
 export const SHOWRULES_TESTIDS = {
     SHOWRULES_CONTAINER: "showrules-container",
 };
 
-interface Props {
-    onClick?: () => void;
+interface CustomButtonProps extends ButtonProps {
+    testid: string;
 }
 
-const ShowRules: FC<Props> = ({ onClick }) => {
+export const ShowRules: FC<CustomButtonProps> = ({ onClick, testid }) => {
     return (
         <Button
-            data-testid={SHOWRULES_TESTIDS.SHOWRULES_CONTAINER}
+            data-testid={testid}
             sx={{
                 fontSize: "1.075rem",
                 position: "absolute",
@@ -21,11 +21,9 @@ const ShowRules: FC<Props> = ({ onClick }) => {
                 translate: { xs: "50%", md: "unset" },
             }}
             variant="outlined"
-            onClick={() => onClick && onClick()}
+            onClick={onClick}
         >
             RULES
         </Button>
     );
 };
-
-export default ShowRules;

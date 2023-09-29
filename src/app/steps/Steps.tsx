@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
+    playAgain,
     selectResult,
     selectShowStep1,
     selectShowStep2,
@@ -9,7 +10,7 @@ import {
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import UserPick from "../../components/UserPick/UserPick";
@@ -17,9 +18,12 @@ import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import { setScore } from "./stepsutils";
+import { colors } from "../../ts/theme";
 
 export const STEP_TESTIDS = {
-    STEP_CONTAINER: "step-container",
+    STEPS_CONTAINER: "steps-container",
+    STEPS_RESULT_PLAYAGAIN_CONTAINER: "step-result-playagain-container",
+    STEPS_PLAYAGAIN_BTN: "step-playagain-btn",
 };
 
 const Steps = () => {
@@ -37,10 +41,6 @@ const Steps = () => {
     // choiceList smooth fade out
     useEffect(() => {
         const stepElement = stepRef.current;
-        // если userChoice null, значит начата новая игра и нужно скрыть результат
-        if (!userChoiceState) {
-            setShowResult(false);
-        }
 
         if (showStep1 && userChoiceState && stepElement) {
             stepElement.style.opacity = "0";
@@ -98,7 +98,7 @@ const Steps = () => {
 
     return (
         <Box
-            data-testid={STEP_TESTIDS.STEP_CONTAINER}
+            data-testid={STEP_TESTIDS.STEPS_CONTAINER}
             sx={useGetStepSx()}
             ref={stepRef}
             onTransitionEnd={(e) => {
@@ -106,7 +106,7 @@ const Steps = () => {
                     showStep1 &&
                     e.target instanceof HTMLDivElement &&
                     e.target.getAttribute("data-testid") ===
-                        STEP_TESTIDS.STEP_CONTAINER
+                        STEP_TESTIDS.STEPS_CONTAINER
                 ) {
                     dispatch(setShowStep1(false));
                     dispatch(setShowStep2(true));
@@ -120,7 +120,50 @@ const Steps = () => {
                     <UserPick />
                     {showResult && (
                         <FadeIn duration={3}>
-                            <Result />
+                            <Box
+                                data-testid={
+                                    STEP_TESTIDS.STEPS_RESULT_PLAYAGAIN_CONTAINER
+                                }
+                                sx={{
+                                    width: { xs: "100%", md: "unset" },
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    gap: "0.2rem",
+                                    position: {
+                                        xs: "absolute",
+                                    },
+                                    left: "50%",
+                                    translate: "-50%",
+                                    marginTop: { xs: "14.5rem", md: "9.8rem" },
+                                }}
+                            >
+                                <Result />
+                                <Button
+                                    data-testid={
+                                        STEP_TESTIDS.STEPS_PLAYAGAIN_BTN
+                                    }
+                                    variant="contained"
+                                    sx={{
+                                        color: colors.darkText,
+                                        padding: "0.67rem 3.9rem",
+                                        fontSize: "1.05rem",
+                                        fontWeight: "800",
+                                        ":hover": {
+                                            backgroundColor: "#fff",
+                                            color: "red",
+                                        },
+                                        backgroundColor: "#fff",
+                                    }}
+                                    onClick={() => {
+                                        dispatch(playAgain());
+                                        setShowResult(false);
+                                    }}
+                                >
+                                    play again
+                                </Button>
+                            </Box>
                         </FadeIn>
                     )}
                     <HousePick view={housePickView} />

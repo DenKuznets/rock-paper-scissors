@@ -10,14 +10,9 @@ test("Renders correctly", async () => {
         preloadedState: gameEndState,
     });
     const resultContainer = screen.getByTestId(RESULT_TESTIDS.RESULT_CONTAINER);
-    const playAgainButton = screen.getByTestId(
-        RESULT_TESTIDS.RESULT_PLAY_AGAIN
-    );
-    const resultText = screen.getByTestId(RESULT_TESTIDS.RESULT_TEXT);
+    
 
     expect(resultContainer).toBeInTheDocument();
-    expect(resultText).toBeInTheDocument();
-    expect(playAgainButton).toBeInTheDocument();
 });
 
 describe("correctly displays result", () => {
