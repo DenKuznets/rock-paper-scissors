@@ -26,7 +26,7 @@ const choicePos = [
 export interface ChoiceListProps extends BoxProps {
     sx?: SxProps<Theme> | undefined;
     choiceListRef?: ForwardedRef<HTMLDivElement>;
-    handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
+    // handleTransitionEnd?: (e: TransitionEvent<HTMLDivElement>) => void;
 }
 
 export const CHOICE_LIST_TESTIDS = {
@@ -36,7 +36,7 @@ export const CHOICE_LIST_TESTIDS = {
 const ChoiceList: FC<ChoiceListProps> = ({
     sx,
     choiceListRef,
-    handleTransitionEnd,
+    // handleTransitionEnd,
 }) => {
     const userChoice = useAppSelector(selectUserChoice);
     const dispatch = useDispatch();
@@ -78,9 +78,9 @@ const ChoiceList: FC<ChoiceListProps> = ({
                 margin: "0 auto",
                 ...sx,
             }}
-            onTransitionEnd={(e) =>
-                handleTransitionEnd && handleTransitionEnd(e)
-            }
+            // onTransitionEnd={(e) =>
+            //     // handleTransitionEnd && handleTransitionEnd(e)
+            // }
         >
             {choiceList}
         </Box>
