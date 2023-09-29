@@ -22,6 +22,7 @@ const Steps = () => {
     const resultState = useAppSelector(selectResult);
     const dispatch = useAppDispatch();
 
+    // animate house choice on mount
     useEffect(() => {
         let timeout: NodeJS.Timeout;
         timeout = setTimeout(() => {
