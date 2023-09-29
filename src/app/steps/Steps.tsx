@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     playAgain,
     selectResult,
     selectShowStep2,
     selectShowStep3,
-    selectUserChoice,
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
@@ -27,33 +26,10 @@ export const STEP_TESTIDS = {
 const Steps = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
     const [showResult, setShowResult] = useState(false);
-
     const resultState = useAppSelector(selectResult);
-    const stepRef = useRef<HTMLDivElement | null>(null);
-    const userChoiceState = useAppSelector(selectUserChoice);
     const showStep2 = useAppSelector(selectShowStep2);
     const showStep3 = useAppSelector(selectShowStep3);
     const dispatch = useAppDispatch();
-
-    // on step2 show step element again, then play housepick animation for 3500ms and switch to step 3
-    useEffect(() => {
-        let timeout: NodeJS.Timeout;
-
-        if (showStep2) {
-            const stepElement = stepRef.current;
-            if (stepElement) {
-                stepElement.style.opacity = "1";
-            }
-            timeout = setTimeout(() => {
-                dispatch(setShowStep2(false));
-                dispatch(setShowStep3(true));
-            }, 3500);
-        }
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, [showStep2]);
 
     // animations for steps 2 and 3
     useEffect(() => {
@@ -67,6 +43,8 @@ const Steps = () => {
                 setTimeout(() => {
                     setHousePickView(HOUSE_OPTIONS.choice);
                     setTimeout(() => {
+                        dispatch(setShowStep2(false));
+                        dispatch(setShowStep3(true));
                         setShowResult(true);
                         setScore(resultState, dispatch);
                     }, 500);
@@ -80,11 +58,7 @@ const Steps = () => {
     }, [showStep2, showStep3]);
 
     return (
-        <Box
-            data-testid={STEP_TESTIDS.STEPS_CONTAINER}
-            sx={useGetStepSx()}
-            ref={stepRef}
-        >
+        <Box data-testid={STEP_TESTIDS.STEPS_CONTAINER} sx={useGetStepSx()}>
             <FadeIn>
                 <UserPick />
             </FadeIn>
