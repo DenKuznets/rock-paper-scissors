@@ -10,7 +10,7 @@ import {
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import UserPick from "../../components/UserPick/UserPick";
@@ -18,7 +18,7 @@ import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import { setScore } from "./stepsutils";
-import { colors } from "../../ts/theme";
+import { PlayAgain } from "../../components/CustomButton/CustomButton";
 
 export const STEP_TESTIDS = {
     STEPS_CONTAINER: "steps-container",
@@ -140,29 +140,15 @@ const Steps = () => {
                                 }}
                             >
                                 <Result />
-                                <Button
-                                    data-testid={
-                                        STEP_TESTIDS.STEPS_PLAYAGAIN_BTN
-                                    }
-                                    variant="contained"
-                                    sx={{
-                                        color: colors.darkText,
-                                        padding: "0.67rem 3.9rem",
-                                        fontSize: "1.05rem",
-                                        fontWeight: "800",
-                                        ":hover": {
-                                            backgroundColor: "#fff",
-                                            color: "red",
-                                        },
-                                        backgroundColor: "#fff",
-                                    }}
+                                <PlayAgain
+                                    testid={STEP_TESTIDS.STEPS_PLAYAGAIN_BTN}
                                     onClick={() => {
                                         dispatch(playAgain());
                                         setShowResult(false);
                                     }}
                                 >
                                     play again
-                                </Button>
+                                </PlayAgain>
                             </Box>
                         </FadeIn>
                     )}

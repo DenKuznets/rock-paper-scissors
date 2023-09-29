@@ -5,7 +5,6 @@ import userEvent from "@testing-library/user-event";
 import { renderWithProviders, screen } from "../ts/utils-for-tests";
 import { Roles } from "../ts/roles";
 import { getRandomIndex } from "../ts/utils";
-import { SHOWRULES_TESTIDS } from "../components/CustomButton/CustomButton";
 
 test("renders correctly", () => {
     renderWithProviders(<App />);
