@@ -3,17 +3,14 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import {
     playAgain,
     selectResult,
-    selectShowStep1,
     selectShowStep2,
     selectShowStep3,
     selectUserChoice,
-    setShowStep1,
     setShowStep2,
     setShowStep3,
 } from "../appSlice";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
-import ChoiceList from "../../components/ChoiceList/ChoiceList";
 import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
@@ -34,7 +31,6 @@ const Steps = () => {
     const resultState = useAppSelector(selectResult);
     const stepRef = useRef<HTMLDivElement | null>(null);
     const userChoiceState = useAppSelector(selectUserChoice);
-    const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const showStep3 = useAppSelector(selectShowStep3);
     const dispatch = useAppDispatch();
@@ -89,10 +85,6 @@ const Steps = () => {
             sx={useGetStepSx()}
             ref={stepRef}
         >
-            {/* {showStep1 ? (
-                <ChoiceList />
-            ) : (
-                <> */}
             <FadeIn>
                 <UserPick />
             </FadeIn>
@@ -119,8 +111,6 @@ const Steps = () => {
             <FadeIn>
                 <HousePick view={housePickView} />
             </FadeIn>
-            {/* </>
-            )} */}
         </Box>
     );
 };

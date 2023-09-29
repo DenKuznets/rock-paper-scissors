@@ -54,8 +54,8 @@ export const appSlice = createSlice({
             state.userChoice = null;
             state.houseChoice = null;
             state.result = null;
-            state.showStep1 = true;
-            state.showStep2 = false;
+            state.showStep1 = false;
+            state.showStep2 = true;
             state.showStep3 = false;
         },
     },

@@ -91,8 +91,6 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                         CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
                 ) {
                     !userChoice && dispatch(setUserChoice(choiceRole));
-                    dispatch(setShowStep1(false));
-                    dispatch(setShowStep2(true));
                 }
             }}
         >

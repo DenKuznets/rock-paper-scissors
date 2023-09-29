@@ -1,8 +1,7 @@
-import { selectShowStep1, selectShowStep2, selectShowStep3 } from "../appSlice";
+import { selectShowStep2, selectShowStep3 } from "../appSlice";
 import { useAppSelector } from "../reduxHooks";
 
 export const useGetStepSx = () => {
-    const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const showStep3 = useAppSelector(selectShowStep3);
 
@@ -15,12 +14,10 @@ export const useGetStepSx = () => {
         width: "100%",
         ml: "auto",
         mr: "auto",
-        maxWidth: showStep1
-            ? "unset"
-            : {
-                  xs: "24rem",
-                  md: showStep2 ? "41rem" : "unset",
-              },
+        maxWidth: {
+            xs: "24rem",
+            md: showStep2 ? "41rem" : "unset",
+        },
         position: "relative",
         animationName: showStep3 ? "width-change" : "",
         animationDuration: "1s",
