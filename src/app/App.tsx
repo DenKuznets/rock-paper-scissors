@@ -3,7 +3,7 @@ import { gradients } from "../ts/theme";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import { useEffect, useState } from "react";
 import Steps from "./steps/Steps";
-import { ShowRules } from "../components/CustomButton/CustomButton";
+import { ShowRulesBtn } from "../components/CustomButton/CustomButton";
 import Rules from "../components/Rules/Rules";
 import { Roles } from "../ts/roles";
 import { determineWinner, getRandomIndex } from "../ts/utils";
@@ -62,9 +62,10 @@ function App() {
         <Box data-testid={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
             <ScoreTab />
             <Steps />
-            <ShowRules
+            <ShowRulesBtn
                 testid={APP_TESTIDS.APP_RULES_BUTTON}
                 onClick={() => setShowRules(true)}
+                text="rules"
             />
             {showRules && (
                 <Rules onCloseButtonClick={() => setShowRules(false)} />

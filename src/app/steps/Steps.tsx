@@ -18,7 +18,7 @@ import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import { setScore } from "./stepsutils";
-import { PlayAgain } from "../../components/CustomButton/CustomButton";
+import { PlayAgainBtn } from "../../components/CustomButton/CustomButton";
 
 export const STEP_TESTIDS = {
     STEPS_CONTAINER: "steps-container",
@@ -36,7 +36,6 @@ const Steps = () => {
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
     const dispatch = useAppDispatch();
-    // const showResult = useAppSelector(selectShowResult);
 
     // choiceList smooth fade out
     useEffect(() => {
@@ -140,15 +139,14 @@ const Steps = () => {
                                 }}
                             >
                                 <Result />
-                                <PlayAgain
+                                <PlayAgainBtn
                                     testid={STEP_TESTIDS.STEPS_PLAYAGAIN_BTN}
                                     onClick={() => {
                                         dispatch(playAgain());
                                         setShowResult(false);
                                     }}
-                                >
-                                    play again
-                                </PlayAgain>
+                                    text="play again"
+                                />
                             </Box>
                         </FadeIn>
                     )}

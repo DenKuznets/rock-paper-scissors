@@ -4,9 +4,14 @@ import { colors } from "../../ts/theme";
 
 interface CustomButtonProps extends ButtonProps {
     testid: string;
+    text?: string;
 }
 
-export const ShowRules: FC<CustomButtonProps> = ({ onClick, testid }) => {
+export const ShowRulesBtn: FC<CustomButtonProps> = ({
+    onClick,
+    testid,
+    text,
+}) => {
     return (
         <Button
             data-testid={testid}
@@ -20,12 +25,16 @@ export const ShowRules: FC<CustomButtonProps> = ({ onClick, testid }) => {
             variant="outlined"
             onClick={onClick}
         >
-            RULES
+            {text}
         </Button>
     );
 };
 
-export const PlayAgain: FC<CustomButtonProps> = ({ onClick, testid }) => {
+export const PlayAgainBtn: FC<CustomButtonProps> = ({
+    onClick,
+    testid,
+    text,
+}) => {
     return (
         <Button
             data-testid={testid}
@@ -43,7 +52,7 @@ export const PlayAgain: FC<CustomButtonProps> = ({ onClick, testid }) => {
             variant="outlined"
             onClick={onClick}
         >
-            play again
+            {text}
         </Button>
     );
 };
