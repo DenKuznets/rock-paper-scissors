@@ -65,7 +65,8 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
             ref={choiceListRef}
             data-testid={CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER}
             sx={{
-                opacity: 1,
+                opacity: choiceRole ? 0 : 1,
+                transition: "opacity 1s",
                 backgroundImage: `url("./images/bg-triangle.svg")`,
                 backgroundSize: "65%",
                 backgroundRepeat: "no-repeat",
