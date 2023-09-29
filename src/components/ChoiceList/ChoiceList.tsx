@@ -1,5 +1,10 @@
 import { useDispatch } from "react-redux";
-import { selectUserChoice, setShowStep1, setShowStep2, setUserChoice } from "../../app/appSlice";
+import {
+    selectUserChoice,
+    setShowStep1,
+    setShowStep2,
+    setUserChoice,
+} from "../../app/appSlice";
 import { Box, BoxProps } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { Roles } from "../../ts/roles";
@@ -53,7 +58,6 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                 role={role}
                 //only set userChoice on the first click
                 onClick={() => {
-                    !userChoice && dispatch(setUserChoice(role));
                     setChoiceRole(role);
                 }}
             />
@@ -85,6 +89,7 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                     e.target.getAttribute("data-testid") ===
                         CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
                 ) {
+                    !userChoice && dispatch(setUserChoice(choiceRole));
                     dispatch(setShowStep1(false));
                     dispatch(setShowStep2(true));
                 }

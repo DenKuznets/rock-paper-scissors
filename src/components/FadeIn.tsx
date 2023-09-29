@@ -28,6 +28,7 @@ const FadeIn: React.FC<Props> = ({ duration = 1, delay = 10, children }) => {
                 opacity: opacity,
                 transitionProperty: "opacity",
                 transitionDuration: `${duration}s`,
+                width: "100%",
             }}
         >
             {children}
