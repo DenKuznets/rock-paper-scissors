@@ -5,6 +5,7 @@ import {
     selectResult,
     selectShowStep1,
     selectShowStep2,
+    selectShowStep3,
     selectUserChoice,
     setShowStep1,
     setShowStep2,
@@ -35,6 +36,7 @@ const Steps = () => {
     const userChoiceState = useAppSelector(selectUserChoice);
     const showStep1 = useAppSelector(selectShowStep1);
     const showStep2 = useAppSelector(selectShowStep2);
+    const showStep3 = useAppSelector(selectShowStep3);
     const dispatch = useAppDispatch();
 
     // on step2 show step element again, then play housepick animation for 3500ms and switch to step 3
@@ -60,6 +62,7 @@ const Steps = () => {
     // animations for steps 2 and 3
     useEffect(() => {
         let timeout: NodeJS.Timeout;
+        if (!showStep2 && !showStep3) setHousePickView(HOUSE_OPTIONS.stub);
         if (showStep2) {
             timeout = setTimeout(() => {
                 if (showStep2) {
@@ -78,7 +81,7 @@ const Steps = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [showStep2]);
+    }, [showStep2, showStep3]);
 
     return (
         <Box
