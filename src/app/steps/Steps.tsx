@@ -112,20 +112,7 @@ const Steps = () => {
                                 data-testid={
                                     STEP_TESTIDS.STEPS_RESULT_PLAYAGAIN_CONTAINER
                                 }
-                                sx={{
-                                    width: { xs: "100%", md: "unset" },
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    gap: "0.2rem",
-                                    position: {
-                                        xs: "absolute",
-                                    },
-                                    left: "50%",
-                                    translate: "-50%",
-                                    marginTop: { xs: "14.5rem", md: "9.8rem" },
-                                }}
+                                sx={resultplayagainsx}
                             >
                                 <Result />
                                 <PlayAgainBtn
@@ -147,3 +134,18 @@ const Steps = () => {
 };
 
 export default Steps;
+
+const resultplayagainsx = {
+    width: { xs: "100%", md: "unset" },
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.2rem",
+    position: {
+        xs: "absolute",
+    },
+    left: "50%",
+    translate: "-50%",
+    marginTop: { xs: "14.5rem", md: "9.8rem" },
+};
