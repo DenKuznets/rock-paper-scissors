@@ -79,9 +79,15 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                 margin: "0 auto",
                 ...sx,
             }}
-            // onTransitionEnd={(e) =>
-            //     // handleTransitionEnd && handleTransitionEnd(e)
-            // }
+            onTransitionEnd={(e) => {
+                if (
+                    e.target instanceof HTMLDivElement &&
+                    e.target.getAttribute("data-testid") ===
+                        CHOICE_LIST_TESTIDS.CHOICE_LIST_CONTAINER
+                ) {
+                    console.log("choicelist trans end");
+                }
+            }}
         >
             {choiceList}
         </Box>
