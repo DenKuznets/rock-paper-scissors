@@ -1,10 +1,4 @@
-import { selectShowStep2, selectShowStep3 } from "../appSlice";
-import { useAppSelector } from "../reduxHooks";
-
-export const useGetStepSx = () => {
-    const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
-
+export const useGetStepSx = (showResult: boolean) => {
     return {
         opacity: "1",
         transition: "opacity 1s",
@@ -16,10 +10,10 @@ export const useGetStepSx = () => {
         mr: "auto",
         maxWidth: {
             xs: "24rem",
-            md: showStep2 ? "41rem" : "unset",
+            md: showResult ? "unset" : "41rem",
         },
         position: "relative",
-        animationName: showStep3 ? "width-change" : "",
+        animationName: showResult ? "width-change" : "",
         animationDuration: "1s",
         animationFillMode: "forwards",
         "@keyframes width-change": {

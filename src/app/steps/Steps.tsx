@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
-import {
-    playAgain,
-    selectResult,
-    selectShowStep2,
-    selectShowStep3,
-    setShowStep2,
-    setShowStep3,
-} from "../appSlice";
+import { playAgain, selectResult } from "../appSlice";
 import { Box } from "@mui/material";
 import { useGetStepSx } from "./stepsSx";
 import UserPick from "../../components/UserPick/UserPick";
@@ -27,38 +20,34 @@ const Steps = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
     const [showResult, setShowResult] = useState(false);
     const resultState = useAppSelector(selectResult);
-    const showStep2 = useAppSelector(selectShowStep2);
-    const showStep3 = useAppSelector(selectShowStep3);
     const dispatch = useAppDispatch();
 
-    // animations for steps 2 and 3
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        if (!showStep2 && !showStep3) setHousePickView(HOUSE_OPTIONS.stub);
-        if (showStep2) {
-            timeout = setTimeout(() => {
-                if (showStep2) {
-                    setHousePickView(HOUSE_OPTIONS.animation);
-                }
+        timeout = setTimeout(() => {
+            setHousePickView(HOUSE_OPTIONS.animation);
+            setTimeout(() => {
+                setHousePickView(HOUSE_OPTIONS.choice);
                 setTimeout(() => {
-                    setHousePickView(HOUSE_OPTIONS.choice);
-                    setTimeout(() => {
-                        dispatch(setShowStep2(false));
-                        dispatch(setShowStep3(true));
-                        setShowResult(true);
-                        setScore(resultState, dispatch);
-                    }, 500);
-                }, 2000);
-            }, 1000);
-        }
-
+                    setShowResult(true);
+                }, 500);
+            }, 2000);
+        }, 1000);
         return () => {
             clearTimeout(timeout);
         };
-    }, [showStep2, showStep3]);
+    }, []);
+
+    // score нужно установить не раньше чем показать результат, что бы не спойлерить результат раньше времени
+    useEffect(() => {
+        if (showResult) setScore(resultState, dispatch);
+    }, [resultState, showResult, dispatch]);
 
     return (
-        <Box data-testid={STEP_TESTIDS.STEPS_CONTAINER} sx={useGetStepSx()}>
+        <Box
+            data-testid={STEP_TESTIDS.STEPS_CONTAINER}
+            sx={useGetStepSx(showResult)}
+        >
             <FadeIn>
                 <UserPick />
             </FadeIn>

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { colors } from "../../ts/theme";
-import type { RootState } from "../../app/store";
-import { useSelector } from "react-redux";
+import { selectScore } from "../../app/appSlice";
+import { useAppSelector } from "../../app/reduxHooks";
 
 export const SCORETAB_TESTIDS = {
     SCORETAB_CONTAINER: "scoretab-container",
@@ -12,7 +12,7 @@ export const SCORETAB_TESTIDS = {
 };
 // 3500
 const ScoreTab = () => {
-    const score = useSelector((state: RootState) => state.app.score);
+    const score = useAppSelector(selectScore);
 
     return (
         <Box

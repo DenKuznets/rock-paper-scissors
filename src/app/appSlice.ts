@@ -73,5 +73,6 @@ export const selectHouseChoice = (state: RootState) => state.app.houseChoice;
 export const selectResult = (state: RootState) => state.app.result;
 export const selectShowStep2 = (state: RootState) => state.app.showStep2;
 export const selectShowStep3 = (state: RootState) => state.app.showStep3;
+export const selectScore = (state: RootState) => state.app.score;
 
 export default appSlice.reducer;
