@@ -89,38 +89,38 @@ const Steps = () => {
             sx={useGetStepSx()}
             ref={stepRef}
         >
-            {showStep1 ? (
+            {/* {showStep1 ? (
                 <ChoiceList />
             ) : (
-                <>
-                    <FadeIn>
-                        <UserPick />
-                    </FadeIn>
-                    {showResult && (
-                        <FadeIn duration={3}>
-                            <Box
-                                data-testid={
-                                    STEP_TESTIDS.STEPS_RESULT_PLAYAGAIN_CONTAINER
-                                }
-                                sx={resultplayagainsx}
-                            >
-                                <Result />
-                                <PlayAgainBtn
-                                    testid={STEP_TESTIDS.STEPS_PLAYAGAIN_BTN}
-                                    onClick={() => {
-                                        dispatch(playAgain());
-                                        setShowResult(false);
-                                    }}
-                                    text="play again"
-                                />
-                            </Box>
-                        </FadeIn>
-                    )}
-                    <FadeIn>
-                        <HousePick view={housePickView} />
-                    </FadeIn>
-                </>
+                <> */}
+            <FadeIn>
+                <UserPick />
+            </FadeIn>
+            {showResult && (
+                <FadeIn duration={3}>
+                    <Box
+                        data-testid={
+                            STEP_TESTIDS.STEPS_RESULT_PLAYAGAIN_CONTAINER
+                        }
+                        sx={resultplayagainsx}
+                    >
+                        <Result />
+                        <PlayAgainBtn
+                            testid={STEP_TESTIDS.STEPS_PLAYAGAIN_BTN}
+                            onClick={() => {
+                                dispatch(playAgain());
+                                setShowResult(false);
+                            }}
+                            text="play again"
+                        />
+                    </Box>
+                </FadeIn>
             )}
+            <FadeIn>
+                <HousePick view={housePickView} />
+            </FadeIn>
+            {/* </>
+            )} */}
         </Box>
     );
 };

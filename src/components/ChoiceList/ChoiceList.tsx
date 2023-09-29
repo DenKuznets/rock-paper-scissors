@@ -81,6 +81,7 @@ const ChoiceList: FC<ChoiceListProps> = ({ sx, choiceListRef }) => {
                 minWidth: "16.5rem",
                 minHeight: { xs: "17.3rem", md: "26rem" },
                 margin: "0 auto",
+                mt: { xs: "6.5rem", md: "4rem" },
                 ...sx,
             }}
             onTransitionEnd={(e) => {

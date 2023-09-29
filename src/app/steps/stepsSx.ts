@@ -9,9 +9,7 @@ export const useGetStepSx = () => {
     return {
         opacity: "1",
         transition: "opacity 1s",
-        mt: showStep1
-            ? { xs: "6.5rem", md: "4rem" }
-            : { xs: "6.3rem", md: "4.1rem" },
+        mt: { xs: "6.3rem", md: "4.1rem" },
         display: "flex",
         justifyContent: "space-between",
         width: "100%",
