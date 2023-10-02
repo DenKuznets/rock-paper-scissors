@@ -12,7 +12,7 @@ export interface Props {
     sx?: SxProps<Theme> | undefined;
 }
 
-const Animation: FC<Props> = ({ sx }) => {
+const ChoiceAnimation: FC<Props> = ({ sx }) => {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
@@ -36,4 +36,4 @@ const Animation: FC<Props> = ({ sx }) => {
     );
 };
 
-export default Animation;
+export default ChoiceAnimation;

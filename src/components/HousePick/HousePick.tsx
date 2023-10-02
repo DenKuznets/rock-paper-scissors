@@ -3,7 +3,7 @@ import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 import { SxProps, Theme } from "@mui/material/styles";
 import Choice from "../Choice/Choice";
-import Animation from "../Animation/Animation";
+import ChoiceAnimation from "../Animation/ChoiceAnimation";
 
 export const HOUSE_PICK_TESTIDS = {
     HOUSE_PICK_CONTAINER: "house-pick-container",
@@ -51,7 +51,7 @@ const HousePick: React.FC<HousePickType> = ({
 
             case HOUSE_OPTIONS.animation:
                 return (
-                    <Animation
+                    <ChoiceAnimation
                         sx={{ margin: "0 auto", scale: { md: "1.5" } }}
                     />
                 );

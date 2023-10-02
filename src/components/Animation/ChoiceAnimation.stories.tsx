@@ -1,20 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Animation from "./Animation";
+import ChoiceAnimation from "./ChoiceAnimation";
 
-const meta: Meta<typeof Animation> = {
+const meta: Meta<typeof ChoiceAnimation> = {
     title: "Animation",
-    component: Animation,
+    component: ChoiceAnimation,
     parameters: {
         // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
         layout: "centered",
-    },
-    argTypes: {
-        // role: {
-        //     options: [Roles.PAPER, Roles.ROCK, Roles.SCISSORS],
-        //     control: {
-        //         type: "select",
-        //     },
-        // },
     },
     decorators: [
         (Story) => (
@@ -39,6 +31,6 @@ const meta: Meta<typeof Animation> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Animation>;
+type Story = StoryObj<typeof ChoiceAnimation>;
 
 export const Main: Story = {};
