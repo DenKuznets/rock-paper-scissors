@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { gradients } from "../ts/theme";
 import ScoreTab from "../components/ScoreTab/ScoreTab";
 import { useEffect, useState } from "react";
-import Steps from "./steps/Steps";
+import AnimatedResult from "./steps/AnimatedResult";
 import { ShowRulesBtn } from "../components/CustomButton/CustomButton";
 import Rules from "../components/Rules/Rules";
 import { Roles } from "../ts/roles";
@@ -57,7 +57,7 @@ function App() {
     return (
         <Box data-testid={APP_TESTIDS.APP_CONTAINER} sx={appContainerSx}>
             <ScoreTab />
-            {userChoiceState ? <Steps /> : <ChoiceList />}
+            {userChoiceState ? <AnimatedResult /> : <ChoiceList />}
             <ShowRulesBtn
                 testid={APP_TESTIDS.APP_RULES_BUTTON}
                 onClick={() => setShowRules(true)}

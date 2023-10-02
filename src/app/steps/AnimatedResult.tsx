@@ -10,13 +10,13 @@ import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
 import { setScore } from "./stepsutils";
 import { PlayAgainBtn } from "../../components/CustomButton/CustomButton";
 
-export const STEP_TESTIDS = {
-    STEPS_CONTAINER: "steps-container",
-    STEPS_RESULT_PLAYAGAIN_CONTAINER: "step-result-playagain-container",
-    STEPS_PLAYAGAIN_BTN: "step-playagain-btn",
+export const ANIMATED_RESULT_TESTIDS = {
+    ANIMATED_RESULT_CONTAINER: "steps-container",
+    ANIMATED_RESULT_PLAYAGAIN_CONTAINER: "step-result-playagain-container",
+    ANIMATED_RESULT_PLAYAGAIN_BTN: "step-playagain-btn",
 };
 
-const Steps = () => {
+const AnimatedResult = () => {
     const [housePickView, setHousePickView] = useState(HOUSE_OPTIONS.stub);
     const [showResult, setShowResult] = useState(false);
     const resultState = useAppSelector(selectResult);
@@ -46,7 +46,7 @@ const Steps = () => {
 
     return (
         <Box
-            data-testid={STEP_TESTIDS.STEPS_CONTAINER}
+            data-testid={ANIMATED_RESULT_TESTIDS.ANIMATED_RESULT_CONTAINER}
             sx={useGetStepSx(showResult)}
         >
             <FadeIn>
@@ -56,7 +56,7 @@ const Steps = () => {
                 <FadeIn duration={3}>
                     <Box
                         data-testid={
-                            STEP_TESTIDS.STEPS_RESULT_PLAYAGAIN_CONTAINER
+                            ANIMATED_RESULT_TESTIDS.ANIMATED_RESULT_PLAYAGAIN_CONTAINER
                         }
                         sx={{
                             width: { xs: "100%", md: "unset" },
@@ -75,7 +75,7 @@ const Steps = () => {
                     >
                         <Result />
                         <PlayAgainBtn
-                            testid={STEP_TESTIDS.STEPS_PLAYAGAIN_BTN}
+                            testid={ANIMATED_RESULT_TESTIDS.ANIMATED_RESULT_PLAYAGAIN_BTN}
                             onClick={() => {
                                 dispatch(playAgain());
                                 setShowResult(false);
@@ -92,4 +92,4 @@ const Steps = () => {
     );
 };
 
-export default Steps;
+export default AnimatedResult;
