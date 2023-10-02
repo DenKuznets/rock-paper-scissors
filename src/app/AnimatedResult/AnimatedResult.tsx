@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 import { playAgain, selectResult } from "../appSlice";
 import { Box } from "@mui/material";
-import { useGetStepSx } from "./stepsSx";
+import { useGetStepSx } from "./sx";
 import UserPick from "../../components/UserPick/UserPick";
 import FadeIn from "../../components/FadeIn";
 import Result from "../../components/Result/Result";
 import HousePick, { HOUSE_OPTIONS } from "../../components/HousePick/HousePick";
-import { setScore } from "./stepsutils";
+import { setScore } from "./utils";
 import { PlayAgainBtn } from "../../components/CustomButton/CustomButton";
 
 export const ANIMATED_RESULT_TESTIDS = {
-    ANIMATED_RESULT_CONTAINER: "steps-container",
-    ANIMATED_RESULT_PLAYAGAIN_CONTAINER: "step-result-playagain-container",
-    ANIMATED_RESULT_PLAYAGAIN_BTN: "step-playagain-btn",
+    ANIMATED_RESULT_CONTAINER: "animated-result-container",
+    ANIMATED_RESULT_PLAYAGAIN_CONTAINER: "animated-result-playagain-container",
+    ANIMATED_RESULT_PLAYAGAIN_BTN: "animated-result-playagain-btn",
 };
 
 const AnimatedResult = () => {
