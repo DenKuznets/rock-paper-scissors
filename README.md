@@ -1,3 +1,5 @@
+frontend-mentor ROCK PAPER SCISSORS challenge completed with react, ts, mui, jest, react testing library
+
 Заготовки для редми:
     сложности с которыми я столкнулся при разработке приложения:
         1. Как правильно оборачивать storybook preview в mui и redux провайдеры (способ указанный в документации storybook не подходил):
