@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Roles } from "../../ts/roles";
-import HousePick from "./HousePick";
+import HousePick, { HOUSE_OPTIONS } from "./HousePick";
 import { gradients } from "../../ts/theme";
 import { initialState } from "../../app/appSlice";
 import { Provider } from "react-redux";
@@ -54,5 +54,16 @@ export const SCISSORS: Story = {
         (story) => (
             <Provider store={mockedStore(Roles.SCISSORS)}>{story()}</Provider>
         ),
+    ],
+};
+export const PLACEHOLDER: Story = {
+    args: {
+        view:HOUSE_OPTIONS.stub 
+    },
+    decorators: [
+        (story) => (
+            <Provider store={mockedStore(Roles.SCISSORS)}>{story()}</Provider>
+        ),
+        
     ],
 };

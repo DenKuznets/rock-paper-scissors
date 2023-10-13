@@ -73,7 +73,7 @@ const HousePick: React.FC<HousePickType> = ({
                 position: "relative",
                 minWidth: { xs: "9rem", md: "18.3rem" },
                 ...sx,
-                minHeight: { xs: "11rem", md: "unset" },
+                height: { xs: "11rem", md: "unset" },
             }}
         >
             <Box
@@ -94,7 +94,6 @@ const HousePick: React.FC<HousePickType> = ({
                 sx={{
                     margin: "0 auto",
                     mt: {
-                        xs: view === HOUSE_OPTIONS.stub ? "0.5rem" : "unset",
                         md: view === HOUSE_OPTIONS.stub ? "8.7rem" : "6.7rem",
                     },
                 }}
