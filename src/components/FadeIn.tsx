@@ -32,12 +32,6 @@ const FadeIn: React.FC<Props> = ({
     return (
         <Box
             data-testid={FADEIN_TESTIDS.FADEIN_CONTAINER}
-            // style={{
-            //     opacity: opacity,
-            //     transitionProperty: "opacity",
-            //     transitionDuration: `${duration}s`,
-            //     width: "100%",
-            // }}
             sx={{
                 opacity: opacity,
                 transitionProperty: "opacity",
