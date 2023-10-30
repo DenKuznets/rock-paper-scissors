@@ -1,16 +1,24 @@
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { SxProps, Theme } from "@mui/material/styles";
 
 type Props = {
     duration?: number;
     delay?: number;
     children: React.ReactNode;
+    sx?: SxProps<Theme> | undefined;
 };
 
 export const FADEIN_TESTIDS = {
     FADEIN_CONTAINER: "fadein-container",
 };
 
-const FadeIn: React.FC<Props> = ({ duration = 1, delay = 10, children }) => {
+const FadeIn: React.FC<Props> = ({
+    sx,
+    duration = 1,
+    delay = 10,
+    children,
+}) => {
     const [opacity, setOpacity] = useState(0);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -22,17 +30,24 @@ const FadeIn: React.FC<Props> = ({ duration = 1, delay = 10, children }) => {
     }, []);
 
     return (
-        <div
+        <Box
             data-testid={FADEIN_TESTIDS.FADEIN_CONTAINER}
-            style={{
+            // style={{
+            //     opacity: opacity,
+            //     transitionProperty: "opacity",
+            //     transitionDuration: `${duration}s`,
+            //     width: "100%",
+            // }}
+            sx={{
                 opacity: opacity,
                 transitionProperty: "opacity",
                 transitionDuration: `${duration}s`,
                 width: "100%",
+                ...sx,
             }}
         >
             {children}
-        </div>
+        </Box>
     );
 };
 

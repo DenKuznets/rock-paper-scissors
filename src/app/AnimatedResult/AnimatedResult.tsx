@@ -53,7 +53,7 @@ const AnimatedResult = () => {
                 <UserPick />
             </FadeIn>
             {showResult && (
-                <FadeIn duration={3}>
+                <FadeIn sx={{ width: { xs: 'unset', md: '100%' } }} duration={3}>
                     <Box
                         data-testid={
                             ANIMATED_RESULT_TESTIDS.ANIMATED_RESULT_PLAYAGAIN_CONTAINER
